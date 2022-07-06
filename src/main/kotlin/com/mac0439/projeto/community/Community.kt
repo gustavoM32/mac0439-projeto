@@ -32,11 +32,11 @@ data class Community(
     @Field(name = "creation_date")
     val creationDate: Date? = null,
 
-    @DocumentReference(lazy=true)
+    // @DocumentReference(lazy=true)
     @Field(name = "events") // community has many events
     val events: List<String> = emptyList(), // TODO: Event
 
-    @DocumentReference(lazy=true)
+    // @DocumentReference(lazy=true)
     @Field(name = "publications") // community has many publications
     val publications: List<String> = emptyList(), // TODO: Publications
 

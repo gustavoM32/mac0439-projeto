@@ -1,7 +1,11 @@
 # Projeto de MAC0439 - Laboratório de Banco de Dados
 
 ## Comandos
-* Criar container para o MongoDB
-	```sudo docker run -d --name projeto -p 27017:27017 mongo```
+* Iniciar containers com Spring Boot os BDs
+	```docker-compose up -d```
+* Parar containers
+	```docker-compose stop```
+* Remover containers
+	```docker-compose down```
 * Abrir mongosh no container
-	```sudo docker exec -it projeto mongosh```
+	```sudo docker exec -it <container-do-mongo> mongosh```
