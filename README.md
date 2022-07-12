@@ -13,6 +13,9 @@
 * Abre mongosh no container do mongo\
 `sudo docker exec -it <container-do-mongo> mongosh`
 
+* Abre interface do Neo4J\
+`http://localhost:7474/`
+
 * Configurar IDE (Intellij) para recarregar o spring automaticamente:
   1. Em `Edit Configurations...`
      1. Em `Add New Configuration -> Gradle`, colocar `build --continuous` em `Run`
