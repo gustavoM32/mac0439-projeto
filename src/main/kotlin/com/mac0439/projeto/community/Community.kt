@@ -1,51 +1,26 @@
 package com.mac0439.projeto.community
 
+import com.mac0439.projeto.event.Event
+import com.mac0439.projeto.publication.Publication
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.DocumentReference
 import org.springframework.data.mongodb.core.mapping.Field
-import java.util.Date
-
-data class Project(
-    @Field(name = "id")
-    val id: String,
-    @Field(name = "name")
-    val name: String?)
-
-data class Member(
-    @Field(name = "id")
-    val id: String,
-    @Field(name = "entry_date")
-    val entryDate: Date?)
+import java.time.LocalDateTime
 
 @Document("communities")
 data class Community(
-    @Id
-    val id: String,
+    @Id val id: String? = null,
+    @Field val name: String? = null,
+    @Field val description: String? = null,
+    @Field val creator: String? = null, // community has one creator=user
+    @Field val creationDate: LocalDateTime? = null,
+    @Field val projects: List<Project>? = null, // community has many projects
+    @Field val members: List<Member>? = null, // community has many members
 
-    @Field(name = "name")
-    val name: String? = null,
+    @DocumentReference(lazy=true)
+    @Field val events: List<Event>? = null, // community has many events
 
-    @Field(name = "description")
-    val description: String? = null,
-
-    @Field(name = "creation_date")
-    val creationDate: Date? = null,
-
-    // @DocumentReference(lazy=true)
-    @Field(name = "events") // community has many events
-    val events: List<String> = emptyList(), // TODO: Event
-
-    // @DocumentReference(lazy=true)
-    @Field(name = "publications") // community has many publications
-    val publications: List<String> = emptyList(), // TODO: Publications
-
-    @Field(name = "creator")
-    val creator: String? = null,
-
-    @Field(name = "projects") // community has many projects
-    var projects: List<Project> = emptyList(),
-
-    @Field(name = "members") // community has many members
-    val members: List<Member> = emptyList()
+    @DocumentReference(lazy=true)
+    @Field val publications: List<Publication>? = null // community has many publications
 )
