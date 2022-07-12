@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <title>Comunidades</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Comunidades</h1>
+    <ul th:each="c : ${communities}">
+        <li>
+            <a th:text="${c.name}" th:href="|communities/${c.id}|">Nome de comunidade</a>
+        </li>
+    </ul>
+    <p><a href="/">Back</a></p>
+</body>
+</html>
