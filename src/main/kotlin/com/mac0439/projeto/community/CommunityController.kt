@@ -16,11 +16,11 @@ class CommunityController(private val service: CommunityService) {
     @GetMapping("/communities/{id}")
     fun getCommunity(@PathVariable id: String, model: Model): String {
         model.addAttribute("hello", id)
-        var community = service.findById(id)
+        val community = service.findById(id)
         if (community.isEmpty) {
             return "error"
         }
         model.addAttribute("community", community.get())
-        return "community"
+        return "communities/community"
     }
 }
