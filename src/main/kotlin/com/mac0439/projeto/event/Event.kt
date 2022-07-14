@@ -16,6 +16,5 @@ data class Event(
     @Field val date: LocalDateTime? = null,
     @Field val estimatedDuration: String? = null,
     @Field val notes: List<String>? = null,
-    @Field val viewers: List<Viewer>? = null, // event has many viewers=user
-    @Field var community: String? = null // event has one community
+    @Field val participants: List<Participant>? = null, // event has many participants=user
 )
