@@ -10,7 +10,8 @@ data class Event(
     @Id val id: String? = null,
     @Field val title: String? = null,
     @Field val description: String? = null,
-    @Field val creator: Creator? = null, // event has one creator=user|team|project
+    @Field val creator: String? = null, // event has one creator=user
+    @Field val context: Context? = null, // event has one context=team/project/community
     @Field val status: Status? = null,
     @Field val date: LocalDateTime? = null,
     @Field val estimatedDuration: String? = null,
