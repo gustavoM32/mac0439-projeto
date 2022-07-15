@@ -1,7 +1,7 @@
-package com.mac0439.projeto.community
+package com.mac0439.projeto.event
 
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface CommunityRepository : MongoRepository<Community, String>
+interface EventRepository : MongoRepository<Event, String>

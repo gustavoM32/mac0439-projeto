@@ -8,4 +8,8 @@ class CommunityService(private val repository: CommunityRepository) {
     fun findById(id: String): Optional<Community> {
         return repository.findById(id)
     }
+
+    fun findAll(): List<Community> {
+        return repository.findAll()
+    }
 }

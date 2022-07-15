@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Comunidade</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="box">
+  <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
+  <p th:text="${community.description}">Descrição</p>
+  <p th:text="|Criada por ${community.creator} em ${community.creationDate}|">Criado por alguém em 00/00/0000 às 00:00</p>
+
+  <div class="box">
+    <h2>Publicações</h2>
+    <div class="box" th:each="p : ${community.publications}">
+      <p th:text="${p.title}">Título</p>
+      <p th:text="${p.text}">Texto</p>
+      <p th:text="|Publicado por ${p.author} em ${p.creationDate}|">Publicado por alguém em 00/00/0000 às 00:00</p>
+
+      <div class="box">
+        <h3>Comentários</h3>
+        <div class="box" th:each="c : ${p.comments}">
+          <p th:text="${c.author}">Autor</p>
+          <p th:text="${c.text}">Texto</p>
+          <p th:text="${c.creationDate}">Data</p>
+          <p th:text="|Curtidas: ${c.likes.size}|">Curtidas: 10</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Projetos</h2>
+    <div class="box" th:each="p : ${community.projects}">
+      <p th:text="${p.name}">Projeto</p>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Membros</h2>
+    <div class="box" th:each="m : ${community.members}">
+      <p th:text="${m.id}">Membro</p>
+      <p th:text="|Entrou em ${m.entryDate}|">Data de entrada</p>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Eventos</h2>
+    <div class="box" th:each="e : ${community.events}">
+      <p th:text="${e.title}">Título</p>
+      <p th:text="|Estado: ${e.status}|">Estado: indefinido</p>
+      <p th:text="${e.description}">Descrição</p>
+      <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
+      <p th:text="|Agendado para ${e.date}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
+      <div class="box">
+        <h3>Notas</h3>
+        <div th:each="n : ${e.notes}">
+          <p th:text="${n}">Nota</p>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Participantes</h3>
+        <div th:each="v : ${e.participants}">
+          <p th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${v.confirmationDate}|">Participante confirmado em 00/00/0000 às 00:00</p>
+          <p th:unless="${v.confirmationDate}" th:text="|${v.id} não confirmado|">Participante não confirmado</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p><a href="/communities">Back</a></p>
+</div>
+</body>
+</html>
