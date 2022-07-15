@@ -1,6 +1,27 @@
 version: '3.8'
 
 services:
+  spring:
+    extends:
+      file: docker-compose-common.yml
+      service: spring
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - 8080:8080
+      - 35729:35729
+    command: ./gradlew bootRun
+
+  dev:
+    extends:
+      file: docker-compose-common.yml
+      service: spring
+    container_name: lbd_dev
+    profiles:
+      - dev
+      - all
+    command: ./gradlew build --continuous -x test
+
   mongo:
     image: mongo
     ports:
@@ -19,8 +40,8 @@ services:
 #    volumes:
 #      - neo4j:/data
 
-
-#volumes:
+volumes:
+  build:
 #  mongodb:
 #  mongodb_config:
 #  neo4j:
