@@ -1,5 +1,6 @@
-package com.mac0439.projeto.publication
+package com.mac0439.projeto.domain.mongo.repositories
 
+import com.mac0439.projeto.domain.mongo.publication.Publication
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 

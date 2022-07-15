@@ -1,5 +1,7 @@
-package com.mac0439.projeto.community
+package com.mac0439.projeto.services
 
+import com.mac0439.projeto.domain.mongo.community.Community
+import com.mac0439.projeto.domain.mongo.repositories.CommunityRepository
 import org.springframework.stereotype.Service
 import java.util.*
 

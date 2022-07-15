@@ -1,4 +1,4 @@
-package com.mac0439.projeto.publication
+package com.mac0439.projeto.domain.mongo.publication
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Field
