@@ -11,6 +11,9 @@ services:
       - 8080:8080
       - 35729:35729
     container_name: lbd_spring
+    profiles:
+      - dev
+      - all
     command: ./gradlew bootRun
 
   dev:
@@ -31,6 +34,9 @@ services:
 #      - mongodb:/data/db
 #      - mongodb_config:/data/configdb
     container_name: lbd_mongo
+    profiles:
+      - dbs
+      - all
 
   neo4j:
     image: neo4j
@@ -42,6 +48,9 @@ services:
 #    volumes:
 #      - neo4j:/data
     container_name: lbd_neo4j
+    profiles:
+      - dbs
+      - all
 
 volumes:
   build:
