@@ -1,8 +1,18 @@
 # Projeto de MAC0439 - Laboratório de Banco de Dados
 
 ## Comandos
+
+* Constrói as imagens necessárias\
+`docker-compose build`
+
 * Inicia os containers com os BDs\
-`docker-compose up -d`
+`docker-compose --profile dbs up -d`
+
+* Inicia os containers com o spring\
+`docker-compose --profile dev up -d`
+
+* Inicia todos os containers\
+`docker-compose --profile all up -d`
 
 * Para os containers\
 `docker-compose stop`
@@ -11,10 +21,19 @@
 `docker-compose down`
 
 * Abre mongosh no container do mongo\
-`sudo docker exec -it <container-do-mongo> mongosh`
+`sudo docker exec -it lbd_mongo mongosh`
 
 * Abre interface do Neo4J\
 `http://localhost:7474/`
+
+* Abre logs de um container\
+`docker-compose logs -f <serviço>`
+
+* Recompila com qualquer mudança\
+`./gradlew build --continuous`
+
+* Abre servidor\
+`./gradlew bootRun`
 
 * Configurar IDE (Intellij) para recarregar o spring automaticamente:
   1. Em `Edit Configurations...`
