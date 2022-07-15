@@ -1,4 +1,4 @@
-package com.mac0439.projeto.community
+package com.mac0439.projeto.domain.mongo.community
 
 import org.springframework.data.mongodb.core.mapping.Field
 

@@ -1,5 +1,6 @@
-package com.mac0439.projeto.community
+package com.mac0439.projeto.controllers
 
+import com.mac0439.projeto.services.CommunityService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping

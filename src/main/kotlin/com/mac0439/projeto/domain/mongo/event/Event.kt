@@ -1,4 +1,4 @@
-package com.mac0439.projeto.event
+package com.mac0439.projeto.domain.mongo.event
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

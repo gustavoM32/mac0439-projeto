@@ -1,7 +1,7 @@
-package com.mac0439.projeto.community
+package com.mac0439.projeto.domain.mongo.community
 
-import com.mac0439.projeto.event.Event
-import com.mac0439.projeto.publication.Publication
+import com.mac0439.projeto.domain.mongo.event.Event
+import com.mac0439.projeto.domain.mongo.publication.Publication
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.DocumentReference
