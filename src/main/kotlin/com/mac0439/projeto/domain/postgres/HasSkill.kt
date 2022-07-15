@@ -1,4 +1,4 @@
-package com.mac0439.projeto.user
+package com.mac0439.projeto.domain.postgres
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
