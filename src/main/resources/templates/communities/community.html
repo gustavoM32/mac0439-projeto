@@ -13,6 +13,11 @@
 
   <a href="/communities"><button>Voltar</button></a>
 
+  <form action="#" th:action="@{/communities/}" method="post">
+    <input type="hidden" name="cid" th:value="${community.id}">
+    <button type="submit" name="remove">Remover comunidade</button>
+  </form>
+
   <div class="box">
     <h2>Publicações</h2>
     <div class="box" th:each="p : ${community.publications}">

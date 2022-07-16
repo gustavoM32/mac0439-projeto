@@ -18,4 +18,8 @@ class CommunityService(private val repository: CommunityRepository) {
     fun addCommunity(community: Community): Community {
         return repository.save(community)
     }
+
+    fun deleteCommunity(id: String) {
+        repository.deleteById(id)
+    }
 }

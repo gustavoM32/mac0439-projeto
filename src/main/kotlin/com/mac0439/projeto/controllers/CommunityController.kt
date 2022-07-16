@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import java.time.LocalDateTime
+import javax.servlet.http.HttpServletRequest
 
 @Controller
 class CommunityController(
@@ -57,5 +58,23 @@ class CommunityController(
         }
         model.addAttribute("community", community.get())
         return "communities/community"
+    }
+
+    // Delete
+    @PostMapping("/communities", params = ["cid", "remove"]) // TODO: indirect way to delete
+    fun deleteCommunities(req: HttpServletRequest): String {
+        val cid: String = req.getParameter("cid")
+        logger.info("delete /communities (cid=${cid} remove)")
+        val community = communityService.findById(cid)
+        if (community.isEmpty) {
+            return "error" // TODO: temporary, change that
+        }
+
+        for (p: Publication in community.get().publications!!) {
+            publicationService.deleteById(p.id!!) // TODO: maybe this should be in communityService
+        }
+
+        communityService.deleteCommunity(cid)
+        return "redirect:/communities"
     }
 }
