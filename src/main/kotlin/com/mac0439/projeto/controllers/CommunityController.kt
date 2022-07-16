@@ -66,7 +66,7 @@ class CommunityController(
 
     // Delete
     @PostMapping("/communities", params = ["cid", "remove"]) // TODO: indirect way to delete
-    fun deleteCommunities(req: HttpServletRequest): String {
+    fun deleteCommunity(req: HttpServletRequest): String {
         val cid: String = req.getParameter("cid")
         logger.info("delete /communities (cid=${cid} remove)")
         val community = communityService.findById(cid)
@@ -110,8 +110,8 @@ class CommunityController(
     }
 
     // Delete
-    @PostMapping("/communities", params = ["pid", "cid", "remove"]) // TODO: indirect way to delete
-    fun deletePublications(req: HttpServletRequest): String {
+    @PostMapping("/communities", params = ["cid", "pid", "remove"]) // TODO: indirect way to delete
+    fun deletePublication(req: HttpServletRequest): String {
         val pid: String = req.getParameter("pid")
         val cid: String = req.getParameter("cid")
 
@@ -138,9 +138,8 @@ class CommunityController(
         return "communities/add_comment"
     }
 
-    // Delete
-    @PostMapping("/communities/{cid}/publications/{pid}/add-comment")
-    fun postCommentnAdd(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute comment: Comment): String {
+    @PostMapping("/communities/{cid}/publications/{pid}/add-comment") // TODO: make delete method and this the same (path variables or params)
+    fun postCommentAdd(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute comment: Comment): String {
         logger.info("post /communities/${cid}/publications/${pid}/add-comment")
 
         comment.author = "gustavo_m32" // TODO: add the current logged in user
@@ -148,5 +147,17 @@ class CommunityController(
         publicationService.addComment(pid, comment)
 
         return "redirect:/communities/{cid}"
+    }
+
+    // Delete
+    @PostMapping("/communities", params = ["cid", "pid", "cmid", "remove"]) // TODO: indirect way to delete
+    fun deleteComment(req: HttpServletRequest): String {
+        val cid: String = req.getParameter("cid")
+        val pid: String = req.getParameter("pid")
+        val cmid: String = req.getParameter("cmid")
+
+        logger.info("post /communities (cid=${cid}, pid=${pid}, cmid=${cmid}, remove)")
+        publicationService.deleteCommentById(pid, cmid)
+        return "redirect:/communities/${cid}"
     }
 }

@@ -23,4 +23,8 @@ class PublicationService(private val repository: PublicationRepository) {
     fun addComment(pid: String, comment: Comment) {
         repository.addComment(pid, comment)
     }
+
+    fun deleteCommentById(pid: String, cmid: String) {
+        repository.deleteCommentById(pid, cmid)
+    }
 }
