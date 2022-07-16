@@ -11,6 +11,8 @@
   <p th:text="${community.description}">Descrição</p>
   <p th:text="|Criada por ${community.creator} em ${community.creationDate}|">Criado por alguém em 00/00/0000 às 00:00</p>
 
+  <a href="/communities"><button>Voltar</button></a>
+
   <div class="box">
     <h2>Publicações</h2>
     <div class="box" th:each="p : ${community.publications}">
@@ -68,7 +70,6 @@
       </div>
     </div>
   </div>
-  <p><a href="/communities">Back</a></p>
 </div>
 </body>
 </html>
