@@ -1,6 +1,7 @@
 package com.mac0439.projeto.controllers
 
 import com.mac0439.projeto.domain.mongo.community.Community
+import com.mac0439.projeto.domain.mongo.publication.Comment
 import com.mac0439.projeto.domain.mongo.publication.Publication
 import com.mac0439.projeto.services.CommunityService
 import com.mac0439.projeto.services.PublicationService
@@ -117,5 +118,35 @@ class CommunityController(
         logger.info("post /communities (cid=${cid}, pid=${pid}, remove)")
         publicationService.deleteById(pid)
         return "redirect:/communities/${cid}"
+    }
+
+    // Comment
+    // Create
+    @GetMapping("/communities/{cid}/publications/{pid}/add-comment")
+    fun getCommentAdd(@PathVariable cid: String, @PathVariable pid: String, model: Model, @ModelAttribute comment: Comment): String {
+        logger.info("get /communities/${cid}/publications/${pid}/add-comment")
+
+        val community = communityService.findById(cid)
+        val publication = publicationService.findById(pid)
+
+        if (community.isEmpty || publication.isEmpty) {
+            return "error" // TODO: temporary, change that
+        }
+        model.addAttribute("community", community.get())
+        model.addAttribute("publication", publication.get())
+
+        return "communities/add_comment"
+    }
+
+    // Delete
+    @PostMapping("/communities/{cid}/publications/{pid}/add-comment")
+    fun postCommentnAdd(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute comment: Comment): String {
+        logger.info("post /communities/${cid}/publications/${pid}/add-comment")
+
+        comment.author = "gustavo_m32" // TODO: add the current logged in user
+        comment.creationDate = LocalDateTime.now()
+        publicationService.addComment(pid, comment)
+
+        return "redirect:/communities/{cid}"
     }
 }

@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="dialog">
+  <h1>Adicionar comentário</h1>
+
+  <form action="#" th:action="@{/communities/{cid}/publications/{pid}/add-comment(cid=${community.id}, pid=${publication.id})}" th:object="${comment}" method="post">
+<!--    <p>Título: <input type="text" th:field="*{title}" /></p>-->
+    <p>Texto:<br>
+		<textarea rows="10" cols="60" th:field="*{text}">Texto</textarea>
+	</p>
+    <p><input type="submit" value="Comentar" /></p>
+  </form>
+</div>
