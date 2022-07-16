@@ -1,7 +1,9 @@
 package com.mac0439.projeto.controllers
 
 import com.mac0439.projeto.domain.mongo.community.Community
+import com.mac0439.projeto.domain.mongo.publication.Publication
 import com.mac0439.projeto.services.CommunityService
+import com.mac0439.projeto.services.PublicationService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
@@ -15,7 +17,8 @@ import javax.servlet.http.HttpServletRequest
 
 @Controller
 class CommunityController(
-    private val communityService: CommunityService
+    private val communityService: CommunityService,
+    private val publicationService: PublicationService
 ) {
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
@@ -76,5 +79,32 @@ class CommunityController(
 
         communityService.deleteCommunity(cid)
         return "redirect:/communities"
+    }
+
+    // Publication
+    // Create
+    @GetMapping("/communities/{cid}/add-publication")
+    fun getPublicationAdd(@PathVariable cid: String, model: Model, @ModelAttribute publication: Publication): String {
+        logger.info("get /communities/${cid}/add-publication")
+
+        val community = communityService.findById(cid)
+        if (community.isEmpty) {
+            return "error" // TODO: temporary, change that
+        }
+        model.addAttribute("community", community.get())
+
+        return "communities/add_publication"
+    }
+
+    @PostMapping("/communities/{cid}/add-publication")
+    fun postPublicationAdd(@PathVariable cid: String, @ModelAttribute publication: Publication): String {
+        logger.info("post /communities/${cid}/add-publication")
+
+        publication.author = "gustavo_m32" // TODO: add the current logged in user
+        publication.creationDate = LocalDateTime.now()
+        val publication = publicationService.addPublication(publication)
+        communityService.addPublication(cid, publication)
+
+        return "redirect:/communities/{cid}"
     }
 }

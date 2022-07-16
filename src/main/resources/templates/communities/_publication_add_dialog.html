@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="dialog">
+  <h1>Adicionar publicação</h1>
+
+  <form action="#" th:action="@{/communities/{cid}/add-publication(cid=${community.id})}" th:object="${publication}" method="post">
+    <p>Título: <input type="text" th:field="*{title}" /></p>
+    <p>Texto:<br>
+		<textarea rows="10" cols="60" th:field="*{text}">Texto da publicação</textarea>
+	</p>
+    <p><input type="submit" value="Publicar" /></p>
+  </form>
+</div>

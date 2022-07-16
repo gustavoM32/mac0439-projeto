@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Adicionar publicação</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <div th:insert="~{communities/_publication_add_dialog :: dialog}"></div>
+  <a th:href="|/communities/${community.id}|"><button>Cancelar</button></a>
+</body>
+</html>
