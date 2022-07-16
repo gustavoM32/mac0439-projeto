@@ -14,4 +14,8 @@ class CommunityService(private val repository: CommunityRepository) {
     fun findAll(): List<Community> {
         return repository.findAll()
     }
+
+    fun addCommunity(community: Community): Community {
+        return repository.save(community)
+    }
 }

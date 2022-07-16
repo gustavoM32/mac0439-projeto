@@ -13,8 +13,8 @@ data class Community(
     @Id val id: String? = null,
     @Field val name: String? = null,
     @Field val description: String? = null,
-    @Field val creator: String? = null, // community has one creator=user
-    @Field val creationDate: LocalDateTime? = null,
+    @Field var creator: String? = null, // community has one creator=user
+    @Field var creationDate: LocalDateTime? = null,
     @Field val projects: List<Project>? = null, // community has many projects
     @Field val members: List<Member>? = null, // community has many members
 

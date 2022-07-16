@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="dialog">
+  <h1>Adicionar comunidade</h1>
+
+  <form action="#" th:action="@{/communities/add}" th:object="${community}" method="post">
+    <p>Nome: <input type="text" th:field="*{name}" /></p>
+    <p>Descrição: <input type="text" th:field="*{description}" /></p>
+    <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
+    <p><input type="submit" value="Adicionar" /></p>
+  </form>
+</div>
