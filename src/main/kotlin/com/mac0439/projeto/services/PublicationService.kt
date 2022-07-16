@@ -9,4 +9,8 @@ class PublicationService(private val repository: PublicationRepository) {
     fun addPublication(publication: Publication): Publication {
         return repository.save(publication)
     }
+
+    fun deleteById(id: String) {
+        repository.deleteById(id)
+    }
 }

@@ -23,6 +23,13 @@
     <a th:href="|/communities/${community.id}/add-publication|"><button>Adicionar publicação</button></a>
 
     <div class="box" th:each="p : ${community.publications}">
+
+      <form action="#" th:action="@{/communities}" method="post">
+        <input type="hidden" name="cid" th:value="${community.id}">
+        <input type="hidden" name="pid" th:value="${p.id}">
+        <button type="submit" name="remove">Remover publicação</button>
+      </form>
+
       <p th:text="${p.title}">Título</p>
       <p th:text="${p.text}">Texto</p>
       <p th:text="|Publicado por ${p.author} em ${p.creationDate}|">Publicado por alguém em 00/00/0000 às 00:00</p>

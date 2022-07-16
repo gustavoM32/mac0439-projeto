@@ -107,4 +107,15 @@ class CommunityController(
 
         return "redirect:/communities/{cid}"
     }
+
+    // Delete
+    @PostMapping("/communities", params = ["pid", "cid", "remove"]) // TODO: indirect way to delete
+    fun deletePublications(req: HttpServletRequest): String {
+        val pid: String = req.getParameter("pid")
+        val cid: String = req.getParameter("cid")
+
+        logger.info("post /communities (cid=${cid}, pid=${pid}, remove)")
+        publicationService.deleteById(pid)
+        return "redirect:/communities/${cid}"
+    }
 }
