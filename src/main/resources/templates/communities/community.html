@@ -4,6 +4,7 @@
   <title>Comunidade</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="/style.css">
+ <script type="text/javascript" src="/js/community.js"></script>
 </head>
 <body>
 <div class="box">
@@ -15,7 +16,7 @@
 
   <form action="#" th:action="@{/communities/}" method="post">
     <input type="hidden" name="cid" th:value="${community.id}">
-    <button type="submit" name="remove">Remover comunidade</button>
+    <button type="submit" name="remove" onClick="return confirmSubmit('Você tem certeza que deseja remover comunidade?')">Remover comunidade</button>
   </form>
 
   <div class="box">
@@ -27,7 +28,7 @@
       <form action="#" th:action="@{/communities}" method="post">
         <input type="hidden" name="cid" th:value="${community.id}">
         <input type="hidden" name="pid" th:value="${p.id}">
-        <button type="submit" name="remove">Remover publicação</button>
+        <button type="submit" name="remove" onClick="return confirmSubmit('Você tem certeza que deseja remover publicação?')">Remover publicação</button>
       </form>
 
       <p th:text="${p.title}">Título</p>
