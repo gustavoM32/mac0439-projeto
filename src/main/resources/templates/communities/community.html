@@ -17,6 +17,8 @@
   <p class="replace-nl" th:text="${community.description}">Descrição</p>
   <p th:text="|Criada por ${community.creator} em ${community.creationDate}|">Criado por alguém em 00/00/0000 às 00:00</p>
 
+  <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}"><button>Editar informações</button></a>
+
   <a href="/communities"><button>Voltar</button></a>
 
   <button th:onclick="deleteCommunity(this.dataset)"

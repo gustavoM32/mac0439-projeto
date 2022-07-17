@@ -59,6 +59,37 @@ class CommunityController(
         return "communities/community"
     }
 
+    // Edit
+    @GetMapping("/communities/{id}/edit-community")
+    fun getCommunityEdit(@PathVariable id: String, model: Model): String {
+        logger.info("get /communities/${id}/edit")
+        val community: Community
+
+        try {
+            community = communityService.findById(id)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
+        }
+
+        model.addAttribute("community", community)
+        return "communities/edit_community"
+    }
+
+    @PostMapping("/communities/{id}", params = ["update"])
+    fun postCommunityUpdate(@PathVariable id: String, @ModelAttribute community: Community): String {
+        logger.info("post /communities/${id} update")
+
+        try {
+            communityService.updateCommunity(community)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
+        }
+
+        return "redirect:/communities/$id"
+    }
+
     // Delete
     @DeleteMapping("/communities/{cid}")
     @ResponseBody

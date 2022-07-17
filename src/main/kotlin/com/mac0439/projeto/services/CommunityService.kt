@@ -30,6 +30,10 @@ class CommunityService(
         return repository.save(community)
     }
 
+    fun updateCommunity(community: Community) {
+        repository.updateCommunity(community)
+    }
+
     @Throws(Exception::class)
     fun deleteCommunity(id: String) {
         val community: Community
