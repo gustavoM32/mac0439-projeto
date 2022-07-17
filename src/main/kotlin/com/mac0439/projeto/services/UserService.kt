@@ -11,7 +11,7 @@ class UserService(private val repository: UserRepository) {
         return repository.findById(id)
     }
 
-    fun findAll(): List<User> {
+    fun findAll(): MutableIterable<User> {
         return repository.findAll()
     }
 }

@@ -21,7 +21,7 @@ class UserController(private val service: UserService) {
         if (user.isEmpty) {
             return "error"
         }
-        user.addAttribute("user", user.get())
+        model.addAttribute("user", user.get())
         return "users/user"
     }
 }
