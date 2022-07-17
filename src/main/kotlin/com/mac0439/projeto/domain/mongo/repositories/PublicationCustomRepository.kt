@@ -7,7 +7,11 @@ interface PublicationCustomRepository {
     @Throws(Exception::class)
     fun updatePublication(publication: Publication)
     @Throws(Exception::class)
+    fun findCommentById(pid: String, comment: String): Comment
+    @Throws(Exception::class)
     fun addComment(publication: String, comment: Comment)
+    @Throws(Exception::class)
+    fun updateComment(publication: String, comment: Comment)
     @Throws(Exception::class)
     fun deleteComment(pid: String, cmid: String)
 }

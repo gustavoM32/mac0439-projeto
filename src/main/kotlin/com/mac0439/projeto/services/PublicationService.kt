@@ -27,9 +27,17 @@ class PublicationService(private val repository: PublicationRepository) {
         repository.deleteById(id)
     }
 
+    fun findCommentById(pid: String, cmid: String): Comment {
+        return repository.findCommentById(pid, cmid)
+    }
+
     fun addComment(pid: String, comment: Comment) {
         comment.creationDate = LocalDateTime.now()
         repository.addComment(pid, comment)
+    }
+
+    fun updateComment(pid: String, comment: Comment) {
+        repository.updateComment(pid, comment)
     }
 
     fun deleteComment(pid: String, cmid: String) {

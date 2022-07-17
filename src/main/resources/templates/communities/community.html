@@ -56,6 +56,9 @@
           <p th:if="${c.likes}" th:text="|Curtidas: ${c.likes.size}|">Curtidas: 10</p>
           <p th:unless="${c.likes}">Curtidas: 0</p>
 
+          <a th:href="@{/communities/{cid}/publications/{pid}/comments/{cmid}/edit-comment(cid=${community.id},pid=${p.id},cmid=${c.id})}">
+            <button>Editar comentário</button>
+          </a>
           <button th:onclick="deleteComment(this.dataset)"
                   th:data-cid="${community.id}"
                   th:data-pid="${p.id}"
@@ -64,7 +67,7 @@
       </div>
     </div>
   </div>
-
+<!---->
   <div class="box">
     <h2>Projetos</h2>
     <div class="box" th:each="p : ${community.projects}">
