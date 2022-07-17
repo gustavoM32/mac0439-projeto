@@ -38,3 +38,15 @@ function deleteComment(data) {
         `/communities/${data.cid}`
     )
 }
+
+function replaceNewLineWithBR(text) {
+    return text.replaceAll("\n", "<br>")
+}
+
+$(document).ready(function() {
+    $(".replace-nl").each(function() {
+        let oldText = $( this ).html()
+        let newText = replaceNewLineWithBR(oldText)
+        $( this ).html(newText)
+    })
+});

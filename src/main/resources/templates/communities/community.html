@@ -4,12 +4,17 @@
   <title>Comunidade</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="/style.css">
+  <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
  <script type="text/javascript" src="/js/community.js"></script>
 </head>
 <body>
 <div class="box">
   <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
-  <p th:text="${community.description}">Descrição</p>
+
+  <p class="replace-nl" th:text="${community.description}">Descrição</p>
   <p th:text="|Criada por ${community.creator} em ${community.creationDate}|">Criado por alguém em 00/00/0000 às 00:00</p>
 
   <a href="/communities"><button>Voltar</button></a>
@@ -26,7 +31,7 @@
     <div class="box" th:each="p : ${community.publications}">
 
       <p th:text="${p.title}">Título</p>
-      <p th:text="${p.text}">Texto</p>
+      <p class="replace-nl" th:text="${p.text}">Texto</p>
       <p th:text="|Publicado por ${p.author} em ${p.creationDate}|">Publicado por alguém em 00/00/0000 às 00:00</p>
 
       <button th:onclick="deletePublication(this.dataset)"
@@ -39,7 +44,7 @@
 
         <div class="box" th:each="c : ${p.comments}">
           <p th:text="${c.author}">Autor</p>
-          <p th:text="${c.text}">Texto</p>
+          <p class="replace-nl" th:text="${c.text}">Texto</p>
           <p th:text="${c.creationDate}">Data</p>
           <p th:if="${c.likes}" th:text="|Curtidas: ${c.likes.size}|">Curtidas: 10</p>
           <p th:unless="${c.likes}">Curtidas: 0</p>
