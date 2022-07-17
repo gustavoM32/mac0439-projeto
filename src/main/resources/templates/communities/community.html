@@ -41,26 +41,19 @@
 
   <div class="box">
     <h2>Eventos</h2>
-    <div class="box" th:each="e : ${community.events}">
-      <b><p th:text="${e.title}">Título</p></b>
-      <p th:text="|Estado: ${eventStatus.getOrDefault(e.status, 'indefinido')}|">Estado: indefinido</p>
-      <p th:text="${e.description}">Descrição</p>
-      <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
-      <p th:text="|Agendado para ${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
-      <div class="box">
-        <h3>Notas</h3>
-        <div th:each="n : ${e.notes}">
-          <p th:text="${n}">Nota</p>
-        </div>
-      </div>
-      <div class="box">
-        <h3>Participantes</h3>
-        <div th:each="v : ${e.participants}">
-          <p th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${#temporals.format(v.confirmationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Participante confirmado em 00/00/0000 às 00:00</p>
-          <p th:unless="${v.confirmationDate}" th:text="|${v.id} não confirmado|">Participante não confirmado</p>
-        </div>
-      </div>
-    </div>
+    <ul>
+      <li class="replace-nl" th:each="e : ${community.events}" th:text="|${e.title}${nl}${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">
+      </li>
+    </ul>
+    <!--TODO: event addition page-->
+    <a th:href="@{/communities/{cid}/add-event(cid=${community.id})}">
+      <button>Adicionar evento</button>
+    </a>
+    <a th:href="@{/communities/{cid}/events(cid=${community.id})}">
+      <button>Ver todos</button>
+    </a>
+  </div>
+</div>
   </div>
 </div>
 </body>

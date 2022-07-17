@@ -340,4 +340,23 @@ class CommunityController(
         model.addAttribute("community", community)
         return "communities/members"
     }
+
+    // Events
+    // Read all
+    @GetMapping("/communities/{cid}/events")
+    fun getEvents(@PathVariable cid: String, model: Model): String {
+        logger.info("get /communities/$cid/events")
+        val community: Community
+
+        try {
+            community = communityService.findById(cid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
+        }
+
+        model.addAttribute("community", community)
+        model.addAttribute("eventStatus", eventStatus)
+        return "communities/events"
+    }
 }
