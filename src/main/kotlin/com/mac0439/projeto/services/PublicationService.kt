@@ -14,6 +14,10 @@ class PublicationService(private val repository: PublicationRepository) {
         return publication.get()
     }
 
+    fun deleteById(id: String) {
+        repository.deleteById(id)
+    }
+
     fun addPublication(publication: Publication): Publication {
         publication.creationDate = LocalDateTime.now()
         return repository.save(publication)
@@ -21,10 +25,6 @@ class PublicationService(private val repository: PublicationRepository) {
 
     fun updatePublication(publication: Publication) {
         repository.updatePublication(publication)
-    }
-
-    fun deletePublication(id: String) {
-        repository.deleteById(id)
     }
 
     fun findCommentById(pid: String, cmid: String): Comment {

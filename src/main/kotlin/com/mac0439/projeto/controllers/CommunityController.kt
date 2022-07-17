@@ -184,7 +184,7 @@ class CommunityController(
     @ResponseBody
     fun deletePublication(@PathVariable cid: String, @PathVariable pid: String) {
         logger.info("delete /communities/${cid}/publications/${pid}")
-        publicationService.deletePublication(pid)
+        communityService.deletePublication(cid, pid)
     }
 
     // Comment

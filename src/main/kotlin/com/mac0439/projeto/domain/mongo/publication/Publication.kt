@@ -10,7 +10,7 @@ data class Publication(
     @Id val id: String? = null,
     @Field val title: String? = null,
     @Field val text: String? = null,
-    @Field var author: String? = null, // publication has one author=user
+    @Field var author: String? = null, // publication has one author=user that may no longer exist
     @Field var creationDate: LocalDateTime? = null,
     @Field val images: List<String>? = null, // TODO: manage images
     @Field val comments: List<Comment>? = null // publication has many comments

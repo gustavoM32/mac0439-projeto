@@ -7,7 +7,7 @@ import java.util.*
 
 data class Comment(
     @Id val id: String? = UUID.randomUUID().toString(),
-    @Field var author: String? = null,
+    @Field var author: String? = null, // comment has one author=user that may no longer exist
     @Field var creationDate: LocalDateTime? = null,
     @Field val text: String? = null,
     @Field val likes: Set<String>? = null

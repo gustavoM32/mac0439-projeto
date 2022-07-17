@@ -7,5 +7,7 @@ interface CommunityCustomRepository {
     @Throws(Exception::class)
     fun updateCommunity(community: Community)
     @Throws(Exception::class)
-    fun addPublication(community: String, publication: Publication)
+    fun addPublication(cid: String, publication: Publication)
+    @Throws(Exception::class)
+    fun deletePublication(cid: String, pid: String)
 }

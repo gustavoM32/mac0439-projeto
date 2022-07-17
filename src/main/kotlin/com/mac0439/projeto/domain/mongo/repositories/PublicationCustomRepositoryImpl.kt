@@ -83,7 +83,7 @@ class PublicationCustomRepositoryImpl(private val mongoOperations: MongoOperatio
         val update = Update().pull("comments", BasicDBObject("_id", cmid))
         val result = mongoOperations.updateFirst(query, update, Publication::class.java)
         if (result.modifiedCount != 1L) {
-            throw Exception("Comment addition caused ${result.modifiedCount} modifications")
+            throw Exception("Comment deletion caused ${result.modifiedCount} modifications")
         }
     }
 }
