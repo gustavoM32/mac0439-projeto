@@ -1,5 +1,6 @@
 package com.mac0439.projeto.domain.mongo.repositories
 
+import com.mac0439.projeto.domain.mongo.community.Community
 import com.mac0439.projeto.domain.mongo.publication.Comment
 import com.mac0439.projeto.domain.mongo.publication.Publication
 import com.mongodb.BasicDBObject
@@ -12,6 +13,16 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class PublicationCustomRepositoryImpl(private val mongoOperations: MongoOperations) : PublicationCustomRepository {
+    override fun updatePublication(publication: Publication) {
+        val query = Query().addCriteria((Criteria.where("_id")).isEqualTo(publication.id))
+        val update = Update()
+            .set("title", publication.title)
+            .set("text", publication.text)
+        val result = mongoOperations.updateFirst(query, update, Publication::class.java)
+        if (result.matchedCount != 1L) {
+            throw Exception("Publication update had ${result.matchedCount} matches")
+        }
+    }
     override fun addComment(publication: String, comment: Comment) {
         val query = Query().addCriteria((Criteria.where("_id")).isEqualTo(publication))
         val update = Update().push("comments", comment)

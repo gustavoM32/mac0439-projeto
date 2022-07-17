@@ -19,6 +19,10 @@ class PublicationService(private val repository: PublicationRepository) {
         return repository.save(publication)
     }
 
+    fun updatePublication(publication: Publication) {
+        repository.updatePublication(publication)
+    }
+
     fun deletePublication(id: String) {
         repository.deleteById(id)
     }

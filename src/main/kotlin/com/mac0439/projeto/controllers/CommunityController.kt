@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*
 class CommunityController(
     private val communityService: CommunityService,
     private val publicationService: PublicationService
-) {
+) { // TODO: Break this class down
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     // Communities
@@ -128,6 +128,46 @@ class CommunityController(
         publication.author = "gustavo_m32" // TODO: add the current logged in user
         communityService.addPublication(cid, publication)
         return "redirect:/communities/${cid}"
+    }
+
+    // Edit
+    @GetMapping("/communities/{cid}/publications/{pid}/edit-publication")
+    fun getPublicationEdit(@PathVariable cid: String, @PathVariable pid: String, model: Model): String {
+        logger.info("get /communities/${cid}/publications/${pid}/edit-publication")
+        val community: Community
+        val publication: Publication
+
+        try {
+            community = communityService.findById(cid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
+        }
+
+        try {
+            publication = publicationService.findById(pid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities/$cid"
+        }
+
+        model.addAttribute("community", community)
+        model.addAttribute("publication", publication)
+        return "communities/edit_publication"
+    }
+
+    @PostMapping("/communities/{cid}/publications/{pid}", params = ["update"])
+    fun postPublicationUpdate(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute publication: Publication): String {
+        logger.info("post /communities/$cid/publications/$pid update")
+
+        try {
+            publicationService.updatePublication(publication)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
+        }
+
+        return "redirect:/communities/$cid"
     }
 
     // Delete
