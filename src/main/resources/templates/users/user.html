@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Usuário</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="box">
+      <h1 th:text="|Usuário / ${user.nome}|">Usuário</h1>
+      <p th:text="${user.biografia}">Biografia</p>
+      <p th:text="|${user.email}|">Email</p>
+
+      <p><a href="/users">Back</a></p>
+    </div>
+  </body>
+</html>

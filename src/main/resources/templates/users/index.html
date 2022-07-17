@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Usuários</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <h1>Usuários</h1>
+    <ul th:each="u : ${users}">
+      <li>
+        <a th:text="${u.nome}" th:href="|users/${u.nome_usuario}|"
+          >Nome do usuario</a
+        >
+      </li>
+    </ul>
+    <p><a href="/">Back</a></p>
+  </body>
+</html>

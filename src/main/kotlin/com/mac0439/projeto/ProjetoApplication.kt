@@ -5,13 +5,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import com.mac0439.projeto.user.User
-import com.mac0439.projeto.user.UserRepository
-import com.mac0439.projeto.user.Skill
-import com.mac0439.projeto.user.SkillRepository
-import com.mac0439.projeto.user.HasSkill
-import com.mac0439.projeto.user.HasSkillRepository
-import org.springframework.boot.CommandLineRunner
+import com.mac0439.projeto.domain.postgres.User
+import com.mac0439.projeto.domain.postgres.repositories.UserRepository
+import com.mac0439.projeto.domain.postgres.Skill
+import com.mac0439.projeto.domain.postgres.repositories.SkillRepository
+import com.mac0439.projeto.domain.postgres.HasSkill
+import com.mac0439.projeto.domain.postgres.repositories.HasSkillRepository
 import java.time.LocalDate
 
 @SpringBootApplication
