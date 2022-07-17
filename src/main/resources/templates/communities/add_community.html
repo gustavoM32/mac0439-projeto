@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <title>Adicionar comunidade</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h1>Adicionar comunidade</h1>
+
+  <form action="#" th:action="@{/communities}" th:object="${community}" method="post">
+    <div th:replace="~{communities/_community :: inputs}"></div>
+
+    <a href="#" th:href="@{/communities}">
+      <button type="button">Cancelar</button>
+    </a>
+    <button type="reset">Limpar</button>
+    <button type="submit">Adicionar</button>
+  </form>
+</body>
+</html>

@@ -9,11 +9,11 @@
   <div class="box">
     <h1>Comunidades</h1>
     <a href="/"><button>Home</button></a>
-    <a href="/communities/add"><button>Adicionar comunidade</button></a>
+    <a href="/communities/add-community"><button>Adicionar comunidade</button></a>
 
     <ul th:each="c : ${communities}">
       <li>
-        <a th:text="${c.name}" th:href="|communities/${c.id}|">Nome de comunidade</a>
+        <a th:text="${c.name}" th:href="@{/communities/{cid}(cid=${c.id})}">Nome de comunidade</a>
       </li>
     </ul>
   </div>

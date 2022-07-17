@@ -5,7 +5,16 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-  <div th:insert="~{communities/_publication_add_dialog :: dialog}"></div>
-  <a th:href="|/communities/${community.id}|"><button>Cancelar</button></a>
+  <h1>Adicionar publicação</h1>
+
+  <form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${publication}" method="post">
+    <div th:replace="~{communities/_publication :: inputs}"></div>
+
+    <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
+      <button type="button">Cancelar</button>
+    </a>
+    <button type="reset">Limpar</button>
+    <button type="submit">Publicar</button>
+  </form>
 </body>
 </html>

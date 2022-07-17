@@ -20,8 +20,7 @@ class CommunityController(
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     // Communities
-
-    // Read
+    // Read all
     @GetMapping("/communities")
     fun getCommunities(model: Model): String {
         logger.info("get /communities")
@@ -30,11 +29,10 @@ class CommunityController(
     }
 
     // Create
-    @GetMapping("/communities/add")
+    @GetMapping("/communities/add-community")
     fun getCommunitiesAdd(@ModelAttribute community: Community): String {
-        logger.info("get /communities/add")
-
-        return "communities/add"
+        logger.info("get /communities/add-community")
+        return "communities/add_community"
     }
 
     @PostMapping("/communities/add")
@@ -47,8 +45,7 @@ class CommunityController(
         return "redirect:/communities"
     }
 
-    // Communities/{id}
-    // Read
+    // Read one
     @GetMapping("/communities/{id}")
     fun getCommunity(@PathVariable id: String, model: Model): String {
         logger.info("get /communities/${id}")

@@ -19,7 +19,9 @@
 
   <div class="box">
     <h2>Publicações</h2>
-    <a th:href="|/communities/${community.id}/add-publication|"><button>Adicionar publicação</button></a>
+    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">
+      <button>Adicionar publicação</button>
+    </a>
 
     <div class="box" th:each="p : ${community.publications}">
 
