@@ -11,8 +11,8 @@
     <a href="/"><button>Home</button></a>
     <a href="/communities/add-community"><button>Adicionar comunidade</button></a>
 
-    <ul th:each="c : ${communities}">
-      <li>
+    <ul>
+      <li th:each="c : ${communities}">
         <a th:text="${c.name}" th:href="@{/communities/{cid}(cid=${c.id})}">Nome de comunidade</a>
       </li>
     </ul>
