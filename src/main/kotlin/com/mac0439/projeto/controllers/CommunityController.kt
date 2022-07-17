@@ -1,7 +1,6 @@
 package com.mac0439.projeto.controllers
 
 import com.mac0439.projeto.domain.mongo.community.Community
-import com.mac0439.projeto.domain.mongo.event.Status
 import com.mac0439.projeto.domain.mongo.publication.Comment
 import com.mac0439.projeto.domain.mongo.publication.Publication
 import com.mac0439.projeto.services.CommunityService
@@ -19,11 +18,6 @@ class CommunityController(
     private val publicationService: PublicationService
 ) { // TODO: Break this class down
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
-    private val eventStatus: Map<Status, String> = mapOf(
-        Status.PENDING to "pendente",
-        Status.CANCELLED to "cancelado",
-        Status.DONE to "realizado"
-    )
 
     // Communities
     // Read all
@@ -339,36 +333,5 @@ class CommunityController(
 
         model.addAttribute("community", community)
         return "communities/members"
-    }
-
-    // Events
-    // Read all
-    @GetMapping("/communities/{cid}/events")
-    fun getEvents(@PathVariable cid: String, model: Model): String {
-        logger.info("get /communities/$cid/events")
-        val community: Community
-
-        try {
-            community = communityService.findById(cid)
-        } catch (e: Exception) {
-            logger.error(e.toString())
-            return "redirect:/communities"
-        }
-
-        model.addAttribute("community", community)
-        model.addAttribute("eventStatus", eventStatus)
-        return "communities/events"
-    }
-
-    // Delete
-    @DeleteMapping("/communities/{cid}/events/{eid}")
-    @ResponseBody
-    fun deleteEvent(@PathVariable cid: String, @PathVariable eid: String) {
-        logger.info("delete /communities/${cid}/events/${eid}")
-        try {
-            communityService.deleteEvent(cid, eid)
-        } catch (e:Exception) {
-            logger.error(e.toString())
-        }
     }
 }
