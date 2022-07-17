@@ -10,5 +10,5 @@ data class Comment(
     @Field var author: String? = null,
     @Field var creationDate: LocalDateTime? = null,
     @Field val text: String? = null,
-    @Field val likes: List<String>? = null
+    @Field val likes: Set<String>? = null
 )

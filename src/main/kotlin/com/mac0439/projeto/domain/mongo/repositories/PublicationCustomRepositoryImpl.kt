@@ -1,10 +1,8 @@
 package com.mac0439.projeto.domain.mongo.repositories
 
-import com.mac0439.projeto.domain.mongo.community.Community
 import com.mac0439.projeto.domain.mongo.publication.Comment
 import com.mac0439.projeto.domain.mongo.publication.Publication
 import com.mongodb.BasicDBObject
-import org.springframework.data.mongodb.MongoExpression
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
@@ -25,10 +23,14 @@ class PublicationCustomRepositoryImpl(private val mongoOperations: MongoOperatio
         }
     }
 
-    override fun findCommentById(pid: String, cmid: String): Comment {
-        val query = Query()
+    fun getCommentByIdQuery(pid: String, cmid: String): Query {
+        return Query()
             .addCriteria(Criteria.where("_id").isEqualTo(pid))
             .addCriteria(Criteria.where("comments._id").isEqualTo(cmid))
+    }
+
+    override fun findCommentById(pid: String, cmid: String): Comment {
+        val query = getCommentByIdQuery(pid, cmid)
         query.fields().position("comments.\$", 1)
 
         val publication = mongoOperations.findOne(query, Publication::class.java) ?: throw Exception("Publication not found")
@@ -50,13 +52,29 @@ class PublicationCustomRepositoryImpl(private val mongoOperations: MongoOperatio
     }
 
     override fun updateComment(pid: String, comment: Comment) {
-        val query = Query()
-            .addCriteria(Criteria.where("_id").isEqualTo(pid))
-            .addCriteria(Criteria.where("comments._id").isEqualTo(comment.id))
+        if (comment.id == null) throw Exception("Null comment id")
+        val query = getCommentByIdQuery(pid, comment.id)
         val update = Update().set("comments.\$.text", comment.text ?: "")
         val result = mongoOperations.updateFirst(query, update, Publication::class.java)
         if (result.matchedCount != 1L) {
             throw Exception("Comment update had ${result.matchedCount} matches")
+        }
+    }
+
+    override fun addLikeToComment(pid: String, cmid: String, user: String) {
+        val query = getCommentByIdQuery(pid, cmid)
+        val update = Update().addToSet("comments.\$.likes", user)
+        val result = mongoOperations.updateFirst(query, update, Publication::class.java)
+        if (result.matchedCount != 1L) {
+            throw Exception("Comment like addition had ${result.matchedCount} matches")
+        }
+    }
+    override fun removeLikeFromComment(pid: String, cmid: String, user: String) {
+        val query = getCommentByIdQuery(pid, cmid)
+        val update = Update().pull("comments.\$.likes", user)
+        val result = mongoOperations.updateFirst(query, update, Publication::class.java)
+        if (result.matchedCount != 1L) {
+            throw Exception("Comment like removal had ${result.matchedCount} matches")
         }
     }
 

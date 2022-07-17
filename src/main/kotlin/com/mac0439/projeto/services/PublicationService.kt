@@ -40,6 +40,14 @@ class PublicationService(private val repository: PublicationRepository) {
         repository.updateComment(pid, comment)
     }
 
+    fun addLikeToComment(pid: String, cmid: String, user: String) {
+        repository.addLikeToComment(pid, cmid, user)
+    }
+
+    fun removeLikeFromComment(pid: String, cmid: String, user: String) {
+        repository.removeLikeFromComment(pid, cmid, user)
+    }
+
     fun deleteComment(pid: String, cmid: String) {
         repository.deleteComment(pid, cmid)
     }

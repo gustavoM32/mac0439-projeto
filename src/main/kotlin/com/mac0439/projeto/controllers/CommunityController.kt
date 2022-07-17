@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpServletRequest
 
 @Controller
 class CommunityController(
@@ -55,6 +56,7 @@ class CommunityController(
             return "redirect:/communities"
         }
 
+        model.addAttribute("currentUser", "gustavo_m32") // TODO: get current user
         model.addAttribute("community", community)
         return "communities/community"
     }
@@ -202,7 +204,6 @@ class CommunityController(
 
         model.addAttribute("community", community)
         model.addAttribute("publication", publication)
-
         return "communities/add_comment"
     }
 
@@ -263,6 +264,26 @@ class CommunityController(
         }
 
         return "redirect:/communities/$cid"
+    }
+
+    @PostMapping("/communities/{cid}/publications/{pid}/comments/{cmid}", params = ["like"])
+    fun postCommentLike(@PathVariable cid: String, @PathVariable pid: String, @PathVariable cmid: String, req: HttpServletRequest): String {
+        val like = req.getParameter("like")
+        logger.info("post /communities/$cid/publications/$pid/comments/$cmid like=$like")
+        val currentUser = "gustavo_m32" // TODO: get the actual user
+
+        try {
+            if (like == "add") {
+                publicationService.addLikeToComment(pid, cmid, currentUser)
+            } else {
+                publicationService.removeLikeFromComment(pid, cmid, currentUser)
+            }
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
+        }
+
+        return "redirect:/communities/${cid}"
     }
 
     // Delete
