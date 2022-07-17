@@ -26,10 +26,17 @@
 
   <div class="box">
     <h2>Membros</h2>
-    <div class="box" th:each="m : ${community.members}">
-      <p th:text="${m.id}">Membro</p>
-      <p th:text="|Entrou em ${#temporals.format(m.entryDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Data de entrada</p>
-    </div>
+    <ul>
+      <!--TODO: user page-->
+      <li th:each="m : ${community.members}"><a th:href="@{/users/{uid}(uid=${m.id})}" th:text="${m.id}">Membro</a></li>
+    </ul>
+    <!--TODO: member addition page-->
+    <a th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
+      <button>Adicionar membros</button>
+    </a>
+    <a th:href="@{/communities/{cid}/members(cid=${community.id})}">
+      <button>Ver todos</button>
+    </a>
   </div>
 
   <div class="box">
