@@ -9,12 +9,8 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
-import javax.servlet.http.HttpServletRequest
 
 @Controller
 class CommunityController(
@@ -65,13 +61,13 @@ class CommunityController(
     }
 
     // Delete
-    @PostMapping("/communities", params = ["cid", "remove"]) // TODO: indirect way to delete
-    fun deleteCommunity(req: HttpServletRequest): String {
-        val cid: String = req.getParameter("cid")
-        logger.info("delete /communities (cid=${cid} remove)")
+    @DeleteMapping("/communities/{cid}")
+    @ResponseBody
+    fun deleteCommunity(@PathVariable cid: String) {
+        logger.info("delete /communities/${cid}")
         val community = communityService.findById(cid)
         if (community.isEmpty) {
-            return "error" // TODO: temporary, change that
+            return // TODO: temporary, change that
         }
 
         for (p: Publication in community.get().publications!!) {
@@ -79,7 +75,6 @@ class CommunityController(
         }
 
         communityService.deleteCommunity(cid)
-        return "redirect:/communities"
     }
 
     // Publication
@@ -106,18 +101,14 @@ class CommunityController(
         val publication = publicationService.addPublication(publication)
         communityService.addPublication(cid, publication)
 
-        return "redirect:/communities/{cid}"
+        return "redirect:/communities/${cid}"
     }
 
-    // Delete
-    @PostMapping("/communities", params = ["cid", "pid", "remove"]) // TODO: indirect way to delete
-    fun deletePublication(req: HttpServletRequest): String {
-        val pid: String = req.getParameter("pid")
-        val cid: String = req.getParameter("cid")
-
-        logger.info("post /communities (cid=${cid}, pid=${pid}, remove)")
+    @DeleteMapping("/communities/{cid}/publications/{pid}")
+    @ResponseBody
+    fun deletePublication(@PathVariable cid: String, @PathVariable pid: String) {
+        logger.info("delete /communities/${cid}/publications/${pid}")
         publicationService.deleteById(pid)
-        return "redirect:/communities/${cid}"
     }
 
     // Comment
@@ -146,18 +137,14 @@ class CommunityController(
         comment.creationDate = LocalDateTime.now()
         publicationService.addComment(pid, comment)
 
-        return "redirect:/communities/{cid}"
+        return "redirect:/communities/${cid}"
     }
 
     // Delete
-    @PostMapping("/communities", params = ["cid", "pid", "cmid", "remove"]) // TODO: indirect way to delete
-    fun deleteComment(req: HttpServletRequest): String {
-        val cid: String = req.getParameter("cid")
-        val pid: String = req.getParameter("pid")
-        val cmid: String = req.getParameter("cmid")
-
-        logger.info("post /communities (cid=${cid}, pid=${pid}, cmid=${cmid}, remove)")
+    @DeleteMapping("/communities/{cid}/publications/{pid}/comments/{cmid}")
+    @ResponseBody
+    fun deleteComment(@PathVariable cid: String, @PathVariable pid: String, @PathVariable cmid: String) {
+        logger.info("delete /communities/${cid}/publications/${pid}/comments/${cmid}")
         publicationService.deleteCommentById(pid, cmid)
-        return "redirect:/communities/${cid}"
     }
 }

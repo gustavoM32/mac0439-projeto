@@ -1,3 +1,40 @@
 function confirmSubmit(msg) {
-	return confirm(msg)
+    return confirm(msg)
+}
+
+function deleteItem(url, confirmationMessage, redirectUrl) {
+    if (!confirm(confirmationMessage)) return;
+
+    fetch(url, { method: 'DELETE' })
+        .then((res) => {
+            console.info(res)
+            window.location.pathname = redirectUrl
+        })
+        .catch((e) => {
+            console.error(e)
+        })
+}
+
+function deleteCommunity(data) {
+    deleteItem(
+        `/communities/${data.cid}`,
+        "Você tem certeza que deseja remover comunidade?",
+        `/communities`
+    )
+}
+
+function deletePublication(data) {
+    deleteItem(
+        `/communities/${data.cid}/publications/${data.pid}`,
+        "Você tem certeza que deseja remover publicação?",
+        `/communities/${data.cid}`
+    )
+}
+
+function deleteComment(data) {
+    deleteItem(
+        `/communities/${data.cid}/publications/${data.pid}/comments/${data.cmid}`,
+        "Você tem certeza que deseja remover comentário?",
+        `/communities/${data.cid}`
+    )
 }
