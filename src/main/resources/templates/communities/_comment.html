@@ -5,3 +5,23 @@
     <textarea rows="10" cols="60" th:field="*{text}">Texto</textarea>
   </p>
 </div>
+
+<div th:fragment="data">
+  <p th:text="${c.author}">Autor</p>
+  <p class="replace-nl" th:text="${c.text}">Texto</p>
+  <p th:text="${#temporals.format(c.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">Data</p>
+  <p th:if="${c.likes}" th:text="|Curtidas: ${c.likes.size}|">Curtidas: 10</p>
+  <p th:unless="${c.likes}">Curtidas: 0</p>
+
+  <button type="button"
+          th:onclick="deleteComment(this.dataset)"
+          th:data-cid="${community.id}"
+          th:data-pid="${p.id}"
+          th:data-cmid="${c.id}">Remover comentário</button>
+  <form action="#" th:action="@{/communities/{cid}/publications/{pid}/comments/{cmid}(cid=${community.id},pid=${p.id},cmid=${c.id})}" method="post">
+    <button th:if="${c.likes != null and not #arrays.contains(c.likes, currentUser)}"
+            type="submit" name="like" value="add">Curtir</button>
+    <button th:unless="${c.likes != null and not #arrays.contains(c.likes, currentUser)}"
+            type="submit" name="like" value="remove">Descurtir</button>
+  </form>
+</div>

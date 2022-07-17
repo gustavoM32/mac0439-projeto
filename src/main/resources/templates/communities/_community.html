@@ -7,3 +7,30 @@
   </p>
   <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
 </div>
+
+<div th:fragment="data">
+  <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
+
+  <p class="replace-nl" th:text="${community.description}">Descrição</p>
+  <p th:utext="|Criada por ${community.creator} em ${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Criado por alguém em 00/00/0000, 00:00</p>
+
+  <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}">
+    <button>Editar informações</button>
+  </a>
+
+  <a href="/communities"><button>Voltar</button></a>
+
+  <button th:onclick="deleteCommunity(this.dataset)"
+          th:data-cid="${community.id}">Remover comunidade</button>
+
+  <div class="box">
+    <h2>Publicações</h2>
+    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">
+      <button>Adicionar publicação</button>
+    </a>
+
+    <div class="box" th:each="p : ${community.publications}">
+      <div th:replace="~{communities/_publication :: data}"></div>
+    </div>
+  </div>
+</div>

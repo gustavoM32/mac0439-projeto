@@ -6,3 +6,25 @@
     <textarea rows="10" cols="60" th:field="*{text}">Texto da publicação</textarea>
   </p>
 </div>
+
+<div th:fragment="data">
+  <b><p th:text="${p.title}">Título</p></b>
+  <p class="replace-nl" th:text="${p.text}">Texto</p>
+  <p th:text="|Publicado por ${p.author} em ${#temporals.format(p.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Publicado por alguém em 00/00/0000, 00:00</p>
+
+  <a th:href="@{/communities/{cid}/publications/{pid}/edit-publication(cid=${community.id},pid=${p.id})}">
+    <button>Editar publicação</button>
+  </a>
+  <button th:onclick="deletePublication(this.dataset)"
+          th:data-cid="${community.id}"
+          th:data-pid="${p.id}">Remover publicação</button>
+
+  <div class="box">
+    <h3>Comentários</h3>
+    <a th:href="|/communities/${community.id}/publications/${p.id}/add-comment|"><button>Adicionar comentário</button></a>
+
+    <div class="box" th:each="c : ${p.comments}">
+      <div th:replace="~{communities/_comment :: data}"></div>
+    </div>
+  </div>
+</div>
