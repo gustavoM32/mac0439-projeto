@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 @Node("Project")
 data class Project(
     @Id val name: String? = null, // o spring muda pra mim
+    private val id: Int? = null,
 //    private val description: String?= null,
 //    private val status: String?= null,
 //    private val deadline: LocalDateTime?= null,
@@ -19,6 +20,6 @@ data class Project(
 //    @Relationship(type = "CREATED_BY") var creator: User,
     @Relationship(type = "SUBPROJECT") var subproject: Set<Project>? = null,
 //    @Relationship(type = "HAS_TEAM") var team_members: Set<User>, // n muda
-//    @Relationship(type = "HAS_TASK") var task_list: Set<Task>
+    @Relationship(type = "HAS_TASK") var task_list: Set<Task>? = null
 
 )

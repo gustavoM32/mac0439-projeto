@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Title</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Tarefas</h1>
+<ul th:each="t : ${tasks}">
+  <li>
+    <!--<a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->
+    <p th:text="${t.name}">Nome Tarefa</p>
+  </li>
+</ul>
+<p><a href="/">Back</a></p>
+</body>
+</html>
