@@ -4,11 +4,6 @@
   <title>Comunidade</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="/style.css">
-  <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"></script>
- <script type="text/javascript" src="/js/community.js"></script>
 </head>
 <body>
 <div class="box">
@@ -16,9 +11,17 @@
 <!---->
   <div class="box">
     <h2>Projetos</h2>
-    <div class="box" th:each="p : ${community.projects}">
-      <p th:text="${p.name}">Projeto</p>
-    </div>
+    <ul>
+      <!--TODO: project page-->
+      <li th:each="p : ${community.projects}"><a th:href="@{/projects/{pjid}(pjid=${p.id})}" th:text="${p.name}">Projeto</a></li>
+    </ul>
+    <!--TODO: project creation page-->
+    <a th:href="@{/projects/add-project}">
+      <button>Adicionar projeto</button>
+    </a>
+    <a th:href="@{/communities/{cid}/projects(cid=${community.id})}">
+      <button>Ver todos</button>
+    </a>
   </div>
 
   <div class="box">
@@ -54,4 +57,9 @@
   </div>
 </div>
 </body>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/community.js"></script>
 </html>

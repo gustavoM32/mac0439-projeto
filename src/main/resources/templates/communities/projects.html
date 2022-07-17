@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <title th:text="|Projetos da comunidade '${community.name}'|">Projetos da comunidade</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="box">
+    <h1 th:text="|Projetos da comunidade '${community.name}'|">Projetos da comunidade</h1>
+    <a th:href="@{/communities/{cid}(cid=${community.id})}">
+      <button>Voltar</button>
+    </a>
+    <a th:href="@{/projects/add-project}">
+      <button>Adicionar projeto</button>
+    </a>
+
+    <ul>
+      <li th:each="p : ${community.projects}">
+        <a th:text="${p.name}" th:href="@{/projects/{pid}(pid=${p.id})}">Nome do projeto</a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
