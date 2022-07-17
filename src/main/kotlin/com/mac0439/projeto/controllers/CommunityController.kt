@@ -1,6 +1,7 @@
 package com.mac0439.projeto.controllers
 
 import com.mac0439.projeto.domain.mongo.community.Community
+import com.mac0439.projeto.domain.mongo.event.Status
 import com.mac0439.projeto.domain.mongo.publication.Comment
 import com.mac0439.projeto.domain.mongo.publication.Publication
 import com.mac0439.projeto.services.CommunityService
@@ -18,6 +19,11 @@ class CommunityController(
     private val publicationService: PublicationService
 ) { // TODO: Break this class down
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
+    private val eventStatus: Map<Status, String> = mapOf(
+        Status.PENDING to "pendente",
+        Status.CANCELLED to "cancelado",
+        Status.DONE to "realizado"
+    )
 
     // Communities
     // Read all
@@ -58,6 +64,7 @@ class CommunityController(
 
         model.addAttribute("currentUser", "gustavo_m32") // TODO: get current user
         model.addAttribute("community", community)
+        model.addAttribute("eventStatus", eventStatus)
         return "communities/community"
     }
 

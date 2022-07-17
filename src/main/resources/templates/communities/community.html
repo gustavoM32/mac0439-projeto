@@ -15,7 +15,7 @@
   <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
 
   <p class="replace-nl" th:text="${community.description}">Descrição</p>
-  <p th:text="|Criada por ${community.creator} em ${community.creationDate}|">Criado por alguém em 00/00/0000 às 00:00</p>
+  <p th:utext="|Criada por ${community.creator} em ${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Criado por alguém em 00/00/0000, 00:00</p>
 
   <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}">
     <button>Editar informações</button>
@@ -34,9 +34,9 @@
 
     <div class="box" th:each="p : ${community.publications}">
 
-      <p th:text="${p.title}">Título</p>
+      <b><p th:text="${p.title}">Título</p></b>
       <p class="replace-nl" th:text="${p.text}">Texto</p>
-      <p th:text="|Publicado por ${p.author} em ${p.creationDate}|">Publicado por alguém em 00/00/0000 às 00:00</p>
+      <p th:text="|Publicado por ${p.author} em ${#temporals.format(p.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Publicado por alguém em 00/00/0000, 00:00</p>
 
       <a th:href="@{/communities/{cid}/publications/{pid}/edit-publication(cid=${community.id},pid=${p.id})}">
         <button>Editar publicação</button>
@@ -52,7 +52,7 @@
         <div class="box" th:each="c : ${p.comments}">
           <p th:text="${c.author}">Autor</p>
           <p class="replace-nl" th:text="${c.text}">Texto</p>
-          <p th:text="${c.creationDate}">Data</p>
+          <p th:text="${#temporals.format(c.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">Data</p>
           <p th:if="${c.likes}" th:text="|Curtidas: ${c.likes.size}|">Curtidas: 10</p>
           <p th:unless="${c.likes}">Curtidas: 0</p>
 
@@ -83,18 +83,18 @@
     <h2>Membros</h2>
     <div class="box" th:each="m : ${community.members}">
       <p th:text="${m.id}">Membro</p>
-      <p th:text="|Entrou em ${m.entryDate}|">Data de entrada</p>
+      <p th:text="|Entrou em ${#temporals.format(m.entryDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Data de entrada</p>
     </div>
   </div>
 
   <div class="box">
     <h2>Eventos</h2>
     <div class="box" th:each="e : ${community.events}">
-      <p th:text="${e.title}">Título</p>
-      <p th:text="|Estado: ${e.status}|">Estado: indefinido</p>
+      <b><p th:text="${e.title}">Título</p></b>
+      <p th:text="|Estado: ${eventStatus.getOrDefault(e.status, 'indefinido')}|">Estado: indefinido</p>
       <p th:text="${e.description}">Descrição</p>
       <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
-      <p th:text="|Agendado para ${e.date}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
+      <p th:text="|Agendado para ${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
       <div class="box">
         <h3>Notas</h3>
         <div th:each="n : ${e.notes}">
@@ -104,7 +104,7 @@
       <div class="box">
         <h3>Participantes</h3>
         <div th:each="v : ${e.participants}">
-          <p th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${v.confirmationDate}|">Participante confirmado em 00/00/0000 às 00:00</p>
+          <p th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${#temporals.format(v.confirmationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Participante confirmado em 00/00/0000 às 00:00</p>
           <p th:unless="${v.confirmationDate}" th:text="|${v.id} não confirmado|">Participante não confirmado</p>
         </div>
       </div>
