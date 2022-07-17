@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
-import java.time.LocalDateTime
 
 @Controller
 class CommunityController(
@@ -35,25 +34,28 @@ class CommunityController(
         return "communities/add_community"
     }
 
-    @PostMapping("/communities/add")
-    fun postCommunitiesAdd(@ModelAttribute community: Community): String {
-        logger.info("post /communities/add")
+    @PostMapping("/communities")
+    fun postCommunities(@ModelAttribute community: Community): String {
+        logger.info("post /communities")
         community.creator = "gustavo_m32" // TODO: add the current logged in user
-        community.creationDate = LocalDateTime.now()
-        communityService.addCommunity(community)
-
-        return "redirect:/communities"
+        val addedCommunity = communityService.addCommunity(community)
+        return "redirect:/communities/${addedCommunity.id}"
     }
 
     // Read one
     @GetMapping("/communities/{id}")
     fun getCommunity(@PathVariable id: String, model: Model): String {
         logger.info("get /communities/${id}")
-        val community = communityService.findById(id)
-        if (community.isEmpty) {
-            return "error" // TODO: temporary, change that
+        val community: Community
+
+        try {
+            community = communityService.findById(id)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
         }
-        model.addAttribute("community", community.get())
+
+        model.addAttribute("community", community)
         return "communities/community"
     }
 
@@ -62,16 +64,13 @@ class CommunityController(
     @ResponseBody
     fun deleteCommunity(@PathVariable cid: String) {
         logger.info("delete /communities/${cid}")
-        val community = communityService.findById(cid)
-        if (community.isEmpty) {
-            return // TODO: temporary, change that
-        }
 
-        for (p: Publication in community.get().publications!!) {
-            publicationService.deleteById(p.id!!) // TODO: maybe this should be in communityService
+        try {
+            communityService.deleteCommunity(cid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return
         }
-
-        communityService.deleteCommunity(cid)
     }
 
     // Publication
@@ -79,33 +78,33 @@ class CommunityController(
     @GetMapping("/communities/{cid}/add-publication")
     fun getPublicationAdd(@PathVariable cid: String, model: Model, @ModelAttribute publication: Publication): String {
         logger.info("get /communities/${cid}/add-publication")
+        val community: Community
 
-        val community = communityService.findById(cid)
-        if (community.isEmpty) {
-            return "error" // TODO: temporary, change that
+        try {
+            community = communityService.findById(cid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
         }
-        model.addAttribute("community", community.get())
 
+        model.addAttribute("community", community)
         return "communities/add_publication"
     }
 
-    @PostMapping("/communities/{cid}/add-publication")
-    fun postPublicationAdd(@PathVariable cid: String, @ModelAttribute publication: Publication): String {
-        logger.info("post /communities/${cid}/add-publication")
-
+    @PostMapping("/communities/{cid}")
+    fun postPublication(@PathVariable cid: String, @ModelAttribute publication: Publication): String {
+        logger.info("post /communities/${cid}")
         publication.author = "gustavo_m32" // TODO: add the current logged in user
-        publication.creationDate = LocalDateTime.now()
-        val publication = publicationService.addPublication(publication)
         communityService.addPublication(cid, publication)
-
         return "redirect:/communities/${cid}"
     }
 
+    // Delete
     @DeleteMapping("/communities/{cid}/publications/{pid}")
     @ResponseBody
     fun deletePublication(@PathVariable cid: String, @PathVariable pid: String) {
         logger.info("delete /communities/${cid}/publications/${pid}")
-        publicationService.deleteById(pid)
+        publicationService.deletePublication(pid)
     }
 
     // Comment
@@ -113,25 +112,34 @@ class CommunityController(
     @GetMapping("/communities/{cid}/publications/{pid}/add-comment")
     fun getCommentAdd(@PathVariable cid: String, @PathVariable pid: String, model: Model, @ModelAttribute comment: Comment): String {
         logger.info("get /communities/${cid}/publications/${pid}/add-comment")
+        val community: Community
+        val publication: Publication
 
-        val community = communityService.findById(cid)
-        val publication = publicationService.findById(pid)
-
-        if (community.isEmpty || publication.isEmpty) {
-            return "error" // TODO: temporary, change that
+        try {
+            community = communityService.findById(cid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities"
         }
-        model.addAttribute("community", community.get())
-        model.addAttribute("publication", publication.get())
+
+        try {
+            publication = publicationService.findById(pid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/communities/${cid}"
+        }
+
+        model.addAttribute("community", community)
+        model.addAttribute("publication", publication)
 
         return "communities/add_comment"
     }
 
-    @PostMapping("/communities/{cid}/publications/{pid}/add-comment") // TODO: make delete method and this the same (path variables or params)
-    fun postCommentAdd(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute comment: Comment): String {
-        logger.info("post /communities/${cid}/publications/${pid}/add-comment")
+    @PostMapping("/communities/{cid}/publications/{pid}")
+    fun postComment(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute comment: Comment): String {
+        logger.info("post /communities/${cid}/publications/${pid}")
 
         comment.author = "gustavo_m32" // TODO: add the current logged in user
-        comment.creationDate = LocalDateTime.now()
         publicationService.addComment(pid, comment)
 
         return "redirect:/communities/${cid}"
@@ -142,6 +150,10 @@ class CommunityController(
     @ResponseBody
     fun deleteComment(@PathVariable cid: String, @PathVariable pid: String, @PathVariable cmid: String) {
         logger.info("delete /communities/${cid}/publications/${pid}/comments/${cmid}")
-        publicationService.deleteCommentById(pid, cmid)
+        try {
+            publicationService.deleteComment(pid, cmid)
+        } catch (e:Exception) {
+            logger.error(e.toString())
+        }
     }
 }

@@ -14,6 +14,9 @@ class CommunityCustomRepositoryImpl(private val mongoOperations: MongoOperations
     override fun addPublication(community: String, publication: Publication) {
         val query = Query().addCriteria((Criteria.where("_id")).isEqualTo(community))
         val update = Update().push("publications", publication)
-        mongoOperations.updateFirst(query, update, Community::class.java)
+        val result = mongoOperations.updateFirst(query, update, Community::class.java)
+        if (result.modifiedCount != 1L) {
+            throw Exception("Publication addition caused ${result.modifiedCount} modifications")
+        }
     }
 }

@@ -15,12 +15,18 @@ class PublicationCustomRepositoryImpl(private val mongoOperations: MongoOperatio
     override fun addComment(publication: String, comment: Comment) {
         val query = Query().addCriteria((Criteria.where("_id")).isEqualTo(publication))
         val update = Update().push("comments", comment)
-        mongoOperations.updateFirst(query, update, Publication::class.java)
+        val result = mongoOperations.updateFirst(query, update, Publication::class.java)
+        if (result.modifiedCount != 1L) {
+            throw Exception("Comment addition caused ${result.modifiedCount} modifications")
+        }
     }
 
-    override fun deleteCommentById(pid: String, cmid: String) {
+    override fun deleteComment(pid: String, cmid: String) {
         val query = Query().addCriteria((Criteria.where("_id")).isEqualTo(pid))
         val update = Update().pull("comments", BasicDBObject("_id", cmid))
-        mongoOperations.updateFirst(query, update, Publication::class.java)
+        val result = mongoOperations.updateFirst(query, update, Publication::class.java)
+        if (result.modifiedCount != 1L) {
+            throw Exception("Comment addition caused ${result.modifiedCount} modifications")
+        }
     }
 }
