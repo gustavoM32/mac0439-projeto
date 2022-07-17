@@ -64,7 +64,7 @@ class CommunityController(
 
         model.addAttribute("currentUser", "gustavo_m32") // TODO: get current user
         model.addAttribute("community", community)
-        model.addAttribute("eventStatus", eventStatus)
+        model.addAttribute("nl", "\n")
         return "communities/community"
     }
 
@@ -358,5 +358,17 @@ class CommunityController(
         model.addAttribute("community", community)
         model.addAttribute("eventStatus", eventStatus)
         return "communities/events"
+    }
+
+    // Delete
+    @DeleteMapping("/communities/{cid}/events/{eid}")
+    @ResponseBody
+    fun deleteEvent(@PathVariable cid: String, @PathVariable eid: String) {
+        logger.info("delete /communities/${cid}/events/${eid}")
+        try {
+            communityService.deleteEvent(cid, eid)
+        } catch (e:Exception) {
+            logger.error(e.toString())
+        }
     }
 }

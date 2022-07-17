@@ -10,4 +10,6 @@ interface CommunityCustomRepository {
     fun addPublication(cid: String, publication: Publication)
     @Throws(Exception::class)
     fun deletePublication(cid: String, pid: String)
+    @Throws(Exception::class)
+    fun deleteEvent(cid: String, eid: String)
 }

@@ -39,4 +39,13 @@ class CommunityCustomRepositoryImpl(private val mongoOperations: MongoOperations
             throw Exception("Publication deletion caused ${result.modifiedCount} modifications")
         }
     }
+
+    override fun deleteEvent(cid: String, eid: String) {
+        val query = Query().addCriteria((Criteria.where("_id")).isEqualTo(cid))
+        val update = Update().pull("events", eid)
+        val result = mongoOperations.updateFirst(query, update, Community::class.java)
+        if (result.modifiedCount != 1L) {
+            throw Exception("Event deletion caused ${result.modifiedCount} modifications")
+        }
+    }
 }

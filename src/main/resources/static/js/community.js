@@ -39,6 +39,14 @@ function deleteComment(data) {
     )
 }
 
+function deleteEvent(data) {
+	deleteItem(
+		`/communities/${data.cid}/events/${data.eid}`,
+		"Você tem certeza que deseja remover evento?",
+		`/communities/${data.cid}/events`
+	)
+}
+
 function replaceNewLineWithBR(text) {
     return text.replaceAll("\n", "<br>")
 }

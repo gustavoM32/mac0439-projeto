@@ -84,5 +84,16 @@ class CommunityService(
 
         publicationService.deleteById(pid)
     }
+
+    fun deleteEvent(cid: String, eid: String) {
+        try {
+            // event deletion should delete it from their context list
+            repository.deleteEvent(cid, eid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            logger.error("Event reference in community not deleted")
+        }
+
+        eventService.deleteById(eid)
     }
 }
