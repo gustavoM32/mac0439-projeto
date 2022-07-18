@@ -8,7 +8,7 @@
   <h1>Editar publicação</h1>
 
   <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${publication.id})}" th:object="${publication}" method="post">
-    <div th:replace="~{communities/_publication :: inputs}"></div>
+    <div th:include="~{communities/_publication :: inputs}"></div>
 
     <input type="hidden" name="id" th:value="${publication.id}">
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">

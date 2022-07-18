@@ -8,7 +8,7 @@
   <h1>Editar comunidade</h1>
 
   <form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${community}" method="post">
-    <div th:replace="~{communities/_community :: inputs}"></div>
+    <div th:include="~{communities/_community :: inputs}"></div>
 
     <input type="hidden" name="update">
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">

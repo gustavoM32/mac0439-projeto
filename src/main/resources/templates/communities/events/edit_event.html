@@ -8,7 +8,7 @@
   <h1>Editar evento</h1>
 
   <form action="#" th:action="@{/communities/{cid}/events/{eid}(cid=${community.id},eid=${event.id})}" th:object="${event}" method="post">
-    <div th:replace="~{communities/events/_event :: inputs}"></div>
+    <div th:include="~{communities/events/_event :: inputs}"></div>
 
     <input type="hidden" name="id" th:value="${event.id}">
     <a href="#" th:href="@{/communities/{cid}/events(cid=${community.id})}">

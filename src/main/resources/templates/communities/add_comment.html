@@ -8,7 +8,7 @@
   <h1>Adicionar comentário</h1>
 
   <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${publication.id})}" th:object="${comment}" method="post">
-    <div th:replace="~{communities/_comment :: inputs}"></div>
+    <div th:include="~{communities/_comment :: inputs}"></div>
 
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
       <button type="button">Cancelar</button>

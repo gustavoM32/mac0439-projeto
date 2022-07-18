@@ -8,7 +8,7 @@
   <h1>Adicionar comunidade</h1>
 
   <form action="#" th:action="@{/communities}" th:object="${community}" method="post">
-    <div th:replace="~{communities/_community :: inputs}"></div>
+    <div th:include="~{communities/_community :: inputs}"></div>
 
     <a href="#" th:href="@{/communities}">
       <button type="button">Cancelar</button>

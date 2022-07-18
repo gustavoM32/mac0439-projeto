@@ -8,7 +8,7 @@
   <h1>Editar comentários</h1>
 
   <form action="#" th:action="@{/communities/{cid}/publications/{pid}/comments/{cmid}(cid=${community.id},pid=${publication.id},cmid=${comment.id})}" th:object="${comment}" method="post">
-    <div th:replace="~{communities/_comment :: inputs}"></div>
+    <div th:include="~{communities/_comment :: inputs}"></div>
 
     <input type="hidden" name="id" th:value="${comment.id}">
     <input type="hidden" name="update">
