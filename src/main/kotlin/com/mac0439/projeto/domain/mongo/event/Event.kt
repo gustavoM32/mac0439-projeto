@@ -11,9 +11,10 @@ data class Event(
     @Id val id: String? = null,
     @Field val title: String? = null,
     @Field val description: String? = null,
-    @Field val creator: String? = null, // event has one creator=user that may no longer exist
+    @Field var creator: String? = null, // event has one creator=user that may no longer exist
 //    TODO: Check if this context field is necessary
 //    @Field val context: Context? = null, // event has one context=team/project/community that should exist
+    @Field val status: Status? = Status.PENDING,
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Field val date: LocalDateTime? = null,
     @Field val estimatedDuration: String? = null,

@@ -85,6 +85,11 @@ class CommunityService(
         publicationService.deleteById(pid)
     }
 
+    fun addEvent(cid: String, event: Event) {
+        val newEvent = eventService.addEvent(event)
+        repository.addEvent(cid, newEvent)
+    }
+
     fun deleteEvent(cid: String, eid: String) {
         try {
             // event deletion should delete it from their context list

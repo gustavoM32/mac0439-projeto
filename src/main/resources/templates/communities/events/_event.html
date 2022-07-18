@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="inputs">
+  <p>Título: <input type="text" th:field="*{title}" /></p>
+  <p>Descrição:<br>
+    <textarea rows="10" cols="60" th:field="*{description}">Descrição</textarea>
+  </p>
+  <p>Data: <input class="date-input" type="datetime-local" th:field="*{date}"/></p>
+  <p>Duração estimada: <input type="text" th:field="*{estimatedDuration}" /></p>
+  <!--TODO: Notes-->
+</div>
