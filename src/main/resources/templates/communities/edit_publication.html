@@ -11,12 +11,11 @@
     <div th:replace="~{communities/_publication :: inputs}"></div>
 
     <input type="hidden" name="id" th:value="${publication.id}">
-    <input type="hidden" name="update">
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
       <button type="button">Cancelar</button>
     </a>
     <button type="reset">Limpar</button>
-    <button type="submit">Atualizar</button>
+    <button type="submit" name="update">Atualizar</button>
   </form>
 </body>
 </html>

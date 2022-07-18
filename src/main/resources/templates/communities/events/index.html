@@ -23,9 +23,12 @@
         <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
         <p>Notas: <span th:each="n, nStat : ${e.notes}"><span th:text="${n}"></span><span th:unless="${nStat.count} == ${nStat.size}" th:text="|; |">; </span></span></p>
         <p th:text="|Agendado para ${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
-          <button th:onclick="deleteEvent(this.dataset)"
-                th:data-cid="${community.id}"
-                th:data-eid="${e.id}">Remover evento</button>
+        <a th:href="@{/communities/{cid}/events/{eid}/edit-event(cid=${community.id},eid=${e.id})}">
+          <button>Editar evento</button>
+        </a>
+        <button th:onclick="deleteEvent(this.dataset)"
+              th:data-cid="${community.id}"
+              th:data-eid="${e.id}">Remover evento</button>
         <div class="box">
           <h3>Participantes</h3>
           <ul>
