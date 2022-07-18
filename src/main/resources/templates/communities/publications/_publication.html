@@ -12,40 +12,44 @@
   </div>
 </th:block>
 
-<div th:fragment="data">
-  <b><p th:text="${p.title}">Título</p></b>
-  <p class="replace-nl" th:text="${p.text}">Texto</p>
-  <p>Criada por <a th:href="@{/users/{uid}(uid=${p.author})}" th:text="${p.author}">alguém</a> em <span th:text="${#temporals.format(p.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>
+<th:block th:fragment="data">
+  <div class="media">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1" th:text="${p.title}">Título</h5>
+      <p class="replace-nl" th:text="${p.text}">Texto</p>
+      <p>Criada por <a th:href="@{/users/{uid}(uid=${p.author})}" th:text="${p.author}">alguém</a> em <span th:text="${#temporals.format(p.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>
 
-  <div>
-    <a class="btn btn-primary" role="button"
-       th:href="@{/communities/{cid}/publications/{pid}/publications/edit(cid=${community.id},pid=${p.id})}">
-       Editar publicação</a>
-    <a class="btn btn-secondary" role="button"
-       th:onclick="deletePublication(this.dataset)"
-       th:data-cid="${community.id}"
-       th:data-pid="${p.id}">
-       Remover publicação</a>
-  </div>
-
-  <div class="box">
-    <h3>Comentários</h3>
-
-    <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${p.id})}" th:object="${newComment}" method="post">
-      <div class="form-group">
-        <label for="text">Texto</label>
-        <textarea class="form-control" th:field="*{text}" rows="3"
-          placeholder="Texto do comentário"></textarea>
+      <div>
+        <a class="btn btn-primary" role="button"
+          th:href="@{/communities/{cid}/publications/{pid}/publications/edit(cid=${community.id},pid=${p.id})}">
+          Editar publicação</a>
+        <a class="btn btn-secondary" role="button"
+          th:onclick="deletePublication(this.dataset)"
+          th:data-cid="${community.id}"
+          th:data-pid="${p.id}">
+          Remover publicação</a>
       </div>
-  
-      <button type="submit" class="btn btn-primary">Comentar</button>
-      <button type="reset" class="btn btn-secondary">Limpar</button>
-    </form>
-    
-    <th:block th:unless="${#lists.isEmpty(p.comments)}">
-      <div class="box" th:each="c : ${#lists?.sort(p.comments, recentCommentComparator)}">
-        <th:block th:replace="~{communities/comments/_comment :: data}"/>
+
+      <div class="box">
+        <h3>Comentários</h3>
+
+        <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${p.id})}" th:object="${newComment}" method="post">
+          <div class="form-group">
+            <label for="text">Texto</label>
+            <textarea class="form-control" th:field="*{text}" rows="3"
+              placeholder="Texto do comentário"></textarea>
+          </div>
+      
+          <button type="submit" class="btn btn-primary">Comentar</button>
+          <button type="reset" class="btn btn-secondary">Limpar</button>
+        </form>
+        
+        <th:block th:unless="${#lists.isEmpty(p.comments)}">
+          <div class="box" th:each="c : ${#lists?.sort(p.comments, recentCommentComparator)}">
+            <th:block th:replace="~{communities/comments/_comment :: data}"/>
+          </div>
+        </th:block>
       </div>
-    </th:block>
+    </div>
   </div>
-</div>
+</th:block>
