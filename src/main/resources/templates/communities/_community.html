@@ -14,7 +14,7 @@
 </th:block>
 
 <div th:fragment="data">
-  <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
+  <h1 th:text="${community.name}">Nome</h1>
 
   <p class="replace-nl" th:text="${community.description}">Descrição</p>
   <p>Criada por <a th:href="@{/users/{uid}(uid=${community.creator})}" th:text="${community.creator}">alguém</a> em <span th:text="${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>
@@ -30,16 +30,18 @@
        Remover comunidade</a>
   </div>
 
-  <div class="box">
-    <h2>Publicações</h2>
-    <a class="btn btn-primary" role="button"
-       th:href="@{/communities/{cid}/publications/add(cid=${community.id})}">
-       Adicionar publicação</a>
-    
-    <th:block th:unless="${#lists.isEmpty(community.publications)}">
-      <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">
-        <th:block th:replace="~{communities/publications/_publication :: data}"/>
-      </div>
-    </th:block>
+  <div class="card">
+    <div class="card-body">
+      <h2>Publicações</h2>
+      <a class="btn btn-primary" role="button"
+        th:href="@{/communities/{cid}/publications/add(cid=${community.id})}">
+        Adicionar publicação</a>
+      
+      <th:block th:unless="${#lists.isEmpty(community.publications)}">
+        <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">
+          <th:block th:replace="~{communities/publications/_publication :: data}"/>
+        </div>
+      </th:block>
+    </div>
   </div>
 </div>
