@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+  <title th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="box">
+    <h1 th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</h1>
+    <a th:href="@{/communities/{cid}(cid=${community.id})}">
+      <button>Voltar</button>
+    </a>
+    <a th:href="@{/communities/{cid}/events/add-event(cid=${community.id})}">
+      <button>Adicionar evento</button>
+    </a>
+
+    <div class="box">
+      <div class="box" th:each="e : ${events}">
+        <b><p th:text="${e.title}">Título</p></b>
+        <p th:text="${e.description}">Descrição</p>
+        <p th:text="|Estado: ${eventStatus.getOrDefault(e.status, 'indefinido')}|">Estado: indefinido</p>
+        <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
+        <p>Notas: <span th:each="n, nStat : ${e.notes}"><span th:text="${n}"></span><span th:unless="${nStat.count} == ${nStat.size}" th:text="|; |">; </span></span></p>
+        <p th:text="|Agendado para ${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
+        <a th:href="@{/communities/{cid}/events/{eid}/edit-event(cid=${community.id},eid=${e.id})}">
+          <button>Editar evento</button>
+        </a>
+        <button th:onclick="deleteEvent(this.dataset)"
+              th:data-cid="${community.id}"
+              th:data-eid="${e.id}">Remover evento</button>
+        <div class="box">
+          <h3>Participantes</h3>
+          <ul>
+            <li th:each="v : ${e.participants}">
+              <span th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${#temporals.format(v.confirmationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Participante confirmado em 00/00/0000 às 00:00</span>
+              <span th:unless="${v.confirmationDate}" th:text="|${v.id} não confirmado|">Participante não confirmado</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/community.js"></script>
+</html>

@@ -3,14 +3,19 @@
 <head> 
   <title>Comunidades</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-	<h1>Comunidades</h1>
-    <ul th:each="c : ${communities}">
-        <li>
-            <a th:text="${c.name}" th:href="|communities/${c.id}|">Nome de comunidade</a>
-        </li>
+  <div class="box">
+    <h1>Comunidades</h1>
+    <a href="/"><button>Home</button></a>
+    <a href="/communities/add-community"><button>Adicionar comunidade</button></a>
+
+    <ul>
+      <li th:each="c : ${communities}">
+        <a th:text="${c.name}" th:href="@{/communities/{cid}(cid=${c.id})}">Nome de comunidade</a>
+      </li>
     </ul>
-    <p><a href="/">Back</a></p>
+  </div>
 </body>
 </html>
