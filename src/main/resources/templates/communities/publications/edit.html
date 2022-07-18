@@ -5,14 +5,14 @@
       th:with="title='Editar publicação'">
 <th:block layout:fragment="content">
   <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${publication.id})}" th:object="${publication}" method="post">
-    <th:block th:replace="~{communities/_publication :: inputs}"/>
+    <th:block th:replace="~{communities/publications/_publication :: inputs}"/>
 
     <input type="hidden" name="id" th:value="${publication.id}">
+
+    <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
-      <button type="button">Cancelar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
-    <button type="reset">Limpar</button>
-    <button type="submit" name="update">Atualizar</button>
   </form>
 </th:block>
 </html>

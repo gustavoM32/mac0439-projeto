@@ -44,9 +44,9 @@ class EventsController(
     }
 
     // Create
-    @GetMapping("/communities/{cid}/events/add-event")
+    @GetMapping("/communities/{cid}/events/add")
     fun getEventAdd(@PathVariable cid: String, model: Model, @ModelAttribute event: Event): String {
-        logger.info("get /communities/${cid}/events/add-event")
+        logger.info("get /communities/${cid}/events/add")
         val community: Community
 
         try {
@@ -57,7 +57,7 @@ class EventsController(
         }
 
         model.addAttribute("community", community)
-        return "communities/events/add_event"
+        return "communities/events/add"
     }
 
     @PostMapping("/communities/{cid}/events")
@@ -70,9 +70,9 @@ class EventsController(
     }
 
     // Edit
-    @GetMapping("/communities/{cid}/events/{eid}/edit-event")
+    @GetMapping("/communities/{cid}/events/{eid}/edit")
     fun getEventEdit(@PathVariable cid: String, @PathVariable eid: String, model: Model): String {
-        logger.info("get /communities/${cid}/events/${eid}/edit-event")
+        logger.info("get /communities/${cid}/events/${eid}/edit")
         val community: Community
         val event: Event
 
@@ -92,7 +92,7 @@ class EventsController(
 
         model.addAttribute("community", community)
         model.addAttribute("event", event)
-        return "communities/events/edit_event"
+        return "communities/events/edit"
     }
 
     @PostMapping("/communities/{cid}/events/{eid}", params = ["update"])

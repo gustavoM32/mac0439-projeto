@@ -1,9 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="inputs">
-  <p>Texto:<br>
-    <textarea rows="10" cols="60" th:field="*{text}">Texto</textarea>
-  </p>
+  <div class="form-group">
+    <label for="text">Texto</label>
+    <textarea class="form-control" th:field="*{text}" rows="10"
+      placeholder="Texto do comentário"></textarea>
+  </div>
 </th:block>
 
 <div th:fragment="data">
@@ -17,14 +19,17 @@
 
     <div>
       <button class="btn btn-primary" role="button"
-         th:if="${c.likes != null and not #arrays.contains(c.likes, currentUser)}"
+         th:if="${c.likes == null or not #arrays.contains(c.likes, currentUser)}"
          type="submit" name="like" value="add">
          Curtir</button>
       <button class="btn btn-primary" role="button"
-         th:unless="${c.likes != null and not #arrays.contains(c.likes, currentUser)}"
+         th:unless="${c.likes == null or not #arrays.contains(c.likes, currentUser)}"
          type="submit" name="like" value="remove">
          Descurtir</button>
-      <a class="btn btn-danger" role="button" type="button"
+      <a class="btn btn-primary" role="button"
+         th:href="@{/communities/{cid}/publications/{pid}/comments/{cmid}/edit(cid=${community.id},pid=${p.id},cmid=${c.id})}">
+         Editar comentário</a>
+      <a class="btn btn-secondary" role="button" type="button"
          th:onclick="deleteComment(this.dataset)"
          th:data-cid="${community.id}"
          th:data-pid="${p.id}"

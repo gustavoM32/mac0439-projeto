@@ -7,11 +7,10 @@
   <form action="#" th:action="@{/communities/{cid}/events/{eid}(cid=${community.id},eid=${event.id})}" th:object="${event}" method="post">
     <th:block th:replace="~{communities/events/_event :: inputs}"/>
 
+    <button type="submit" class="btn btn-primary">Criar evento</button>
     <a href="#" th:href="@{/communities/{cid}/events(cid=${community.id})}">
-      <button type="button">Cancelar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
-    <button type="reset">Limpar</button>
-    <button type="submit">Criar evento</button>
   </form>
 </th:block>
 </html>

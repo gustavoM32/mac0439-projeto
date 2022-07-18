@@ -8,11 +8,11 @@
     <th:block th:replace="~{communities/events/_event :: inputs}"/>
 
     <input type="hidden" name="id" th:value="${event.id}">
+    
+    <button type="submit" name="update" class="btn btn-primary">Editar evento</button>
     <a href="#" th:href="@{/communities/{cid}/events(cid=${community.id})}">
-      <button type="button">Cancelar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
-    <button type="reset">Limpar</button>
-    <button type="submit" name="update">Editar evento</button>
   </form>
 </th:block>
 

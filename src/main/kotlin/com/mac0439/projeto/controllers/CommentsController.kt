@@ -57,9 +57,9 @@ class CommentsController(
     }
 
     // Edit
-    @GetMapping("/communities/{cid}/publications/{pid}/comments/{cmid}/edit-comment")
+    @GetMapping("/communities/{cid}/publications/{pid}/comments/{cmid}/edit")
     fun getCommentEdit(@PathVariable cid: String, @PathVariable pid: String, @PathVariable cmid: String, model: Model): String {
-        logger.info("get /communities/$cid/comments/$cmid/edit-comment")
+        logger.info("get /communities/$cid/publications/{pid}/comments/$cmid/edit")
         val community: Community
         val publication: Publication
         val comment: Comment
@@ -88,7 +88,7 @@ class CommentsController(
         model.addAttribute("community", community)
         model.addAttribute("publication", publication)
         model.addAttribute("comment", comment)
-        return "communities/edit_comment"
+        return "communities/comments/edit"
     }
 
     @PostMapping("/communities/{cid}/publications/{pid}/comments/{cmid}", params = ["update"])
