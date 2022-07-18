@@ -1,10 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="inputs">
+<th:block th:fragment="inputs">
   <p>Texto:<br>
     <textarea rows="10" cols="60" th:field="*{text}">Texto</textarea>
   </p>
-</div>
+</th:block>
 
 <div th:fragment="data">
   <p><a th:href="@{/users/{uid}(uid=${c.author})}" th:text="${c.author}">Autor</a>, <span th:text="${#temporals.format(c.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">Data</span></p>

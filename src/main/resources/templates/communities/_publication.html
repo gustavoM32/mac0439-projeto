@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="inputs">
+<th:block th:fragment="inputs">
   <p>Título: <input type="text" th:field="*{title}" /></p>
   <p>Texto:<br>
     <textarea rows="10" cols="60" th:field="*{text}">Texto da publicação</textarea>
   </p>
-</div>
+</th:block>
 
 <div th:fragment="data">
   <b><p th:text="${p.title}">Título</p></b>

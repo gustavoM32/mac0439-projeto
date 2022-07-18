@@ -5,7 +5,7 @@
       th:with="title='Editar comunidade'">
 <th:block layout:fragment="content">
   <form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${community}" method="post">
-    <div th:include="~{communities/_community :: inputs}"></div>
+    <th:block th:replace="~{communities/_community :: inputs}"/>
 
     <input type="hidden" name="update">
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">

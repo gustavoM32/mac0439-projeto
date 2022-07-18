@@ -5,7 +5,7 @@
       th:with="title='Adicionar comunidade'">
 <th:block layout:fragment="content">
   <form action="#" th:action="@{/communities}" th:object="${community}" method="post">
-    <div th:include="~{communities/_community :: inputs}"></div>
+    <th:block th:replace="~{communities/_community :: inputs}"/>
 
     <a href="#" th:href="@{/communities}">
       <button type="button">Cancelar</button>

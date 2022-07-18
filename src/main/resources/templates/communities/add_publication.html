@@ -5,7 +5,7 @@
       th:with="title='Adicionar publicação'">
 <th:block layout:fragment="content">
 	<form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${publication}" method="post">
-    <div th:include="~{communities/_publication :: inputs}"></div>
+    <th:block th:replace="~{communities/_publication :: inputs}"/>
 
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
       <button type="button">Cancelar</button>

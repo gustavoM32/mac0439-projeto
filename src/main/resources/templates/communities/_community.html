@@ -1,12 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="inputs">
+<th:block th:fragment="inputs">
   <p>Nome: <input type="text" th:field="*{name}" /></p>
   <p>Descrição:<br>
     <textarea rows="10" cols="60" th:field="*{description}">Texto</textarea>
   </p>
   <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
-</div>
+</th:block>
 
 <div th:fragment="data">
   <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
