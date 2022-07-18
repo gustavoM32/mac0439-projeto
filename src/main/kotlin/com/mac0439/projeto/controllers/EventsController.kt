@@ -37,9 +37,10 @@ class EventsController(
             return "redirect:/communities"
         }
 
+        model.addAttribute("events", community.events?.sortedByDescending { it.date } ?: listOf<Event>())
         model.addAttribute("community", community)
         model.addAttribute("eventStatus", eventStatus)
-        return "communities/events"
+        return "communities/events/index"
     }
 
     // Create

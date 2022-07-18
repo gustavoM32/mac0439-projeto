@@ -10,7 +10,7 @@
 <div th:fragment="data">
   <b><p th:text="${p.title}">Título</p></b>
   <p class="replace-nl" th:text="${p.text}">Texto</p>
-  <p th:text="|Publicado por ${p.author} em ${#temporals.format(p.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Publicado por alguém em 00/00/0000, 00:00</p>
+  <p>Criada por <a th:href="@{/users/{uid}(uid=${p.author})}" th:text="${p.author}">alguém</a> em <span th:text="${#temporals.format(p.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>
 
   <a th:href="@{/communities/{cid}/publications/{pid}/edit-publication(cid=${community.id},pid=${p.id})}">
     <button>Editar publicação</button>
@@ -23,7 +23,7 @@
     <h3>Comentários</h3>
     <a th:href="|/communities/${community.id}/publications/${p.id}/add-comment|"><button>Adicionar comentário</button></a>
 
-    <div class="box" th:each="c : ${p.comments}">
+    <div class="box" th:each="c : ${#lists.sort(p.comments, recentCommentComparator)}">
       <div th:replace="~{communities/_comment :: data}"></div>
     </div>
   </div>

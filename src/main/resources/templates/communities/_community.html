@@ -12,7 +12,7 @@
   <h1 th:text="|Comunidade / ${community.name}|">Comunidade</h1>
 
   <p class="replace-nl" th:text="${community.description}">Descrição</p>
-  <p th:utext="|Criada por ${community.creator} em ${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Criado por alguém em 00/00/0000, 00:00</p>
+  <p>Criada por <a th:href="@{/users/{uid}(uid=${community.creator})}" th:text="${community.creator}">alguém</a> em <span th:text="${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>
 
   <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}">
     <button>Editar informações</button>
@@ -29,7 +29,7 @@
       <button>Adicionar publicação</button>
     </a>
 
-    <div class="box" th:each="p : ${community.publications}">
+    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">
       <div th:replace="~{communities/_publication :: data}"></div>
     </div>
   </div>

@@ -16,7 +16,7 @@
     </a>
 
     <div class="box">
-      <div class="box" th:each="e : ${community.events}">
+      <div class="box" th:each="e : ${events}">
         <b><p th:text="${e.title}">Título</p></b>
         <p th:text="${e.description}">Descrição</p>
         <p th:text="|Estado: ${eventStatus.getOrDefault(e.status, 'indefinido')}|">Estado: indefinido</p>

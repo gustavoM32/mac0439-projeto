@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
+import kotlin.math.min
 
 @Controller
 class CommunityController(
@@ -18,6 +19,17 @@ class CommunityController(
     private val publicationService: PublicationService
 ) { // TODO: Break this class down
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
+
+    @ModelAttribute("recentCommentComparator")
+    fun recentCommentComparator() = compareByDescending<Comment> { it.creationDate }
+
+    @ModelAttribute("recentPublicationComparator")
+    fun recentPublicationComparator() = compareByDescending<Publication> { it.creationDate }
+
+    fun <E> getFirstN(list: List<E>?, n: Int): List<E> {
+        if (list == null) return listOf()
+        return list.slice(0 until min(n, list.size))
+    }
 
     // Communities
     // Read all
@@ -55,6 +67,10 @@ class CommunityController(
             logger.error(e.toString())
             return "redirect:/communities"
         }
+
+        model.addAttribute("events", getFirstN(community.events?.sortedByDescending { it.date }, 5))
+        model.addAttribute("members", getFirstN(community.members, 5))
+        model.addAttribute("projects", getFirstN(community.projects, 5))
 
         model.addAttribute("currentUser", "gustavo_m32") // TODO: get current user
         model.addAttribute("community", community)
