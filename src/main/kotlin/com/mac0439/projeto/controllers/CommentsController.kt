@@ -21,31 +21,6 @@ class CommentsController(
 
     // Community publication comment
     // Create
-    @GetMapping("/communities/{cid}/publications/{pid}/add-comment")
-    fun getCommentAdd(@PathVariable cid: String, @PathVariable pid: String, model: Model, @ModelAttribute comment: Comment): String {
-        logger.info("get /communities/${cid}/publications/${pid}/add-comment")
-        val community: Community
-        val publication: Publication
-
-        try {
-            community = communityService.findById(cid)
-        } catch (e: Exception) {
-            logger.error(e.toString())
-            return "redirect:/communities"
-        }
-
-        try {
-            publication = publicationService.findById(pid)
-        } catch (e: Exception) {
-            logger.error(e.toString())
-            return "redirect:/communities/${cid}"
-        }
-
-        model.addAttribute("community", community)
-        model.addAttribute("publication", publication)
-        return "communities/add_comment"
-    }
-
     @PostMapping("/communities/{cid}/publications/{pid}")
     fun postComment(@PathVariable cid: String, @PathVariable pid: String, @ModelAttribute comment: Comment): String {
         logger.info("post /communities/${cid}/publications/${pid}")

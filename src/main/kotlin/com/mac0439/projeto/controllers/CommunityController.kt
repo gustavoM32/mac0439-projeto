@@ -67,6 +67,7 @@ class CommunityController(
             return "redirect:/communities"
         }
 
+        model.addAttribute("newComment", Comment())
         model.addAttribute("events", getFirstN(community.events?.sortedByDescending { it.date }, 5))
         model.addAttribute("members", getFirstN(community.members, 5))
         model.addAttribute("projects", getFirstN(community.projects, 5))
