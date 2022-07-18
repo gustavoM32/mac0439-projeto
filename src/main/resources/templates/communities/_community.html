@@ -14,20 +14,22 @@
   <p class="replace-nl" th:text="${community.description}">Descrição</p>
   <p>Criada por <a th:href="@{/users/{uid}(uid=${community.creator})}" th:text="${community.creator}">alguém</a> em <span th:text="${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>
 
-  <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}">
-    <button>Editar informações</button>
-  </a>
-
-  <a href="/communities"><button>Voltar</button></a>
-
-  <button th:onclick="deleteCommunity(this.dataset)"
-          th:data-cid="${community.id}">Remover comunidade</button>
+  <div>
+    <a class="btn btn-primary" role="button"
+       th:href="@{/communities/{cid}/edit-community(cid=${community.id})}"
+       >
+       Editar informações</a>
+    <a class="btn btn-danger" role="button"
+       th:onclick="deleteCommunity(this.dataset)"
+       th:data-cid="${community.id}">
+       Remover comunidade</a>
+  </div>
 
   <div class="box">
     <h2>Publicações</h2>
-    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">
-      <button>Adicionar publicação</button>
-    </a>
+    <a class="btn btn-primary" role="button"
+       th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">
+       Adicionar publicação</a>
 
     <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">
       <div th:replace="~{communities/_publication :: data}"></div>

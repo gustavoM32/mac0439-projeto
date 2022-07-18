@@ -4,19 +4,26 @@
       layout:decorate="~{layout}"
       th:with="title='Comunidades'">
 <th:block layout:fragment="content">
-  <div class="box">
-    <a href="/">
-      <button>Home</button>
-    </a>
-    <a href="/communities/add-community">
-      <button>Adicionar comunidade</button>
-    </a>
-
-    <ul>
-      <li th:each="c : ${communities}">
-        <a th:text="${c.name}" th:href="@{/communities/{cid}(cid=${c.id})}">Nome de comunidade</a>
-      </li>
-    </ul>
+  <div class="container">
+    <div class="box">
+    <div class="row">
+      <div class="col">
+        <div>
+          <a href="/communities/add-community" class="btn btn-primary" role="button">Adicionar comunidade</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="list-group">
+          <a th:each="c : ${communities}"
+            th:href="@{/communities/{cid}(cid=${c.id})}"
+            th:text="${c.name}"
+            class="list-group-item list-group-item-action">Nome de comunidade</a>
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
 </th:block>
 <th:block layout:fragment="custom_scripts">

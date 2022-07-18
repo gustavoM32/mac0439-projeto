@@ -18,12 +18,14 @@
             <li th:each="p : ${projects}"><a th:href="@{/projects/{pjid}(pjid=${p.id})}" th:text="${p.name}">Projeto</a></li>
           </ul>
           <!--TODO: project creation page-->
-          <a th:href="@{/projects/add-project}">
-            <button>Adicionar projeto</button>
-          </a>
-          <a th:href="@{/communities/{cid}/projects(cid=${community.id})}">
-            <button>Ver todos</button>
-          </a>
+          <div>
+            <a class="btn btn-primary" role="button"
+               th:href="@{/projects/add-project}">
+               Adicionar projeto</a>
+            <a class="btn btn-secondary" role="button"
+               th:href="@{/communities/{cid}/projects(cid=${community.id})}">
+               Ver todos</a>
+          </div>
         </div>
       
         <div class="box">
@@ -33,12 +35,14 @@
             <li th:each="m : ${members}"><a th:href="@{/users/{uid}(uid=${m.id})}" th:text="${m.id}">Membro</a></li>
           </ul>
           <!--TODO: member addition page-->
-          <a th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
-            <button>Adicionar membros</button>
-          </a>
-          <a th:href="@{/communities/{cid}/members(cid=${community.id})}">
-            <button>Ver todos</button>
-          </a>
+          <div>
+            <a class="btn btn-primary" role="button"
+               th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
+               Adicionar membros</a>
+            <a class="btn btn-secondary" role="button"
+               th:href="@{/communities/{cid}/members(cid=${community.id})}">
+               Ver todos</a>
+          </div>
         </div>
       
         <div class="box">
@@ -48,12 +52,14 @@
             </li>
           </ul>
           <!--TODO: event addition page-->
-          <a th:href="@{/communities/{cid}/events/add-event(cid=${community.id})}">
-            <button>Adicionar evento</button>
-          </a>
-          <a th:href="@{/communities/{cid}/events(cid=${community.id})}">
-            <button>Ver todos</button>
-          </a>
+          <div>
+            <a class="btn btn-primary" role="button"
+               th:href="@{/communities/{cid}/events/add-event(cid=${community.id})}">
+               Adicionar evento</a>
+            <a class="btn btn-secondary" role="button"
+               th:href="@{/communities/{cid}/events(cid=${community.id})}">
+               Ver todos</a>
+          </div>
         </div>
       </div>
     </div>
