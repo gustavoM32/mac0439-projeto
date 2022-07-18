@@ -8,12 +8,9 @@
 
 <body>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <th:block layout:insert="~{fragments/pagetitle}"/>
-        <th:block layout:fragment="content"/>
-      </div>
-    </div>
+    <th:block layout:replace="~{fragments/navbar}"/>
+    <th:block layout:insert="~{fragments/pagetitle}"/>
+    <th:block layout:fragment="content"/>
   </div>
   <th:block layout:fragment="body_end"/>
 
