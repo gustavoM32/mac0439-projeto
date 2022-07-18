@@ -1,11 +1,9 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head> 
-  <title th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Eventos da comunidade'">
+<th:block layout:fragment="content">
   <div class="box">
     <h1 th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</h1>
     <a th:href="@{/communities/{cid}(cid=${community.id})}">
@@ -41,10 +39,8 @@
       </div>
     </div>
   </div>
-</body>
-<script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
-<script type="text/javascript" src="/js/community.js"></script>
+</th:block>
+<th:block layout:fragment="custom_scripts">
+  <script type="text/javascript" src="/js/community.js"></script>
+</th:block>
 </html>

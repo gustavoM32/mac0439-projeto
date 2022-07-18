@@ -1,15 +1,16 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head> 
-  <title>Comunidades</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Comunidades'">
+<th:block layout:fragment="content">
   <div class="box">
-    <h1>Comunidades</h1>
-    <a href="/"><button>Home</button></a>
-    <a href="/communities/add-community"><button>Adicionar comunidade</button></a>
+    <a href="/">
+      <button>Home</button>
+    </a>
+    <a href="/communities/add-community">
+      <button>Adicionar comunidade</button>
+    </a>
 
     <ul>
       <li th:each="c : ${communities}">
@@ -17,5 +18,8 @@
       </li>
     </ul>
   </div>
-</body>
+</th:block>
+<th:block layout:fragment="custom_scripts">
+  <script type="text/javascript" src="/js/community.js"></script>
+</th:block>
 </html>

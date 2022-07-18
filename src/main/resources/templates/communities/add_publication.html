@@ -1,13 +1,10 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Adicionar publicação</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-  <h1>Adicionar publicação</h1>
-
-  <form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${publication}" method="post">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Adicionar publicação'">
+<th:block layout:fragment="content">
+	<form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${publication}" method="post">
     <div th:include="~{communities/_publication :: inputs}"></div>
 
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
@@ -16,5 +13,5 @@
     <button type="reset">Limpar</button>
     <button type="submit">Publicar</button>
   </form>
-</body>
+</th:block>
 </html>

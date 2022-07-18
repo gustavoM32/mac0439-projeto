@@ -1,12 +1,9 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Editar comentários</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-  <h1>Editar comentários</h1>
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Editar comentários'">
+<th:block layout:fragment="content">
   <form action="#" th:action="@{/communities/{cid}/publications/{pid}/comments/{cmid}(cid=${community.id},pid=${publication.id},cmid=${comment.id})}" th:object="${comment}" method="post">
     <div th:include="~{communities/_comment :: inputs}"></div>
 
@@ -18,5 +15,5 @@
     <button type="reset">Limpar</button>
     <button type="submit">Atualizar</button>
   </form>
-</body>
+</th:block>
 </html>
