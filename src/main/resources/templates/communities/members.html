@@ -6,12 +6,15 @@
 <th:block layout:fragment="content">
   <div class="box">
     <h1 th:text="|Membros da comunidade '${community.name}'|">Membros da comunidade</h1>
-    <a th:href="@{/communities/{cid}(cid=${community.id})}">
-      <button>Voltar</button>
-    </a>
-    <a th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
-      <button>Adicionar membros</button>
-    </a>
+
+    <div>
+      <a class="btn btn-primary" role="button"
+         th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
+         Adicionar projeto</a>
+      <a class="btn btn-secondary" role="button"
+         th:href="@{/communities/{cid}(cid=${community.id})}">
+         Voltar</a>
+    </div>
 
     <ul>
       <li th:each="m : ${community.members}">

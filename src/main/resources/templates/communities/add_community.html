@@ -7,11 +7,10 @@
   <form action="#" th:action="@{/communities}" th:object="${community}" method="post">
     <th:block th:replace="~{communities/_community :: inputs}"/>
 
+    <button type="submit" class="btn btn-primary">Criar comunidade</button>
     <a href="#" th:href="@{/communities}">
-      <button type="button">Cancelar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
-    <button type="reset">Limpar</button>
-    <button type="submit">Adicionar</button>
   </form>
 </th:block>
 </html>

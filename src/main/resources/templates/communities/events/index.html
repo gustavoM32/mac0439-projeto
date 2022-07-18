@@ -6,12 +6,15 @@
 <th:block layout:fragment="content">
   <div class="box">
     <h1 th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</h1>
-    <a th:href="@{/communities/{cid}(cid=${community.id})}">
-      <button>Voltar</button>
-    </a>
-    <a th:href="@{/communities/{cid}/events/add-event(cid=${community.id})}">
-      <button>Adicionar evento</button>
-    </a>
+
+    <div>
+      <a class="btn btn-primary" role="button"
+         th:href="@{/communities/{cid}/events/add(cid=${community.id})}">
+         Adicionar evento</a>
+      <a class="btn btn-secondary" role="button"
+         th:href="@{/communities/{cid}(cid=${community.id})}">
+         Voltar</a>
+    </div>
 
     <div class="box">
       <div class="box" th:each="e : ${events}">
@@ -21,12 +24,18 @@
         <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
         <p>Notas: <span th:each="n, nStat : ${e.notes}"><span th:text="${n}"></span><span th:unless="${nStat.count} == ${nStat.size}" th:text="|; |">; </span></span></p>
         <p th:text="|Agendado para ${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
-        <a th:href="@{/communities/{cid}/events/{eid}/edit-event(cid=${community.id},eid=${e.id})}">
-          <button>Editar evento</button>
-        </a>
-        <button th:onclick="deleteEvent(this.dataset)"
-              th:data-cid="${community.id}"
-              th:data-eid="${e.id}">Remover evento</button>
+
+        <div>
+          <a class="btn btn-primary" role="button"
+             th:href="@{/communities/{cid}/events/{eid}/edit(cid=${community.id},eid=${e.id})}">
+             Editar evento</a>
+          <a class="btn btn-secondary" role="button"
+             th:onclick="deleteEvent(this.dataset)"
+             th:data-cid="${community.id}"
+             th:data-eid="${e.id}">
+             Remover evento</a>
+        </div>
+
         <div class="box">
           <h3>Participantes</h3>
           <ul>

@@ -1,10 +1,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="inputs">
-  <p>Nome: <input type="text" th:field="*{name}" /></p>
-  <p>Descrição:<br>
-    <textarea rows="10" cols="60" th:field="*{description}">Texto</textarea>
-  </p>
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input type="text" class="form-control" th:field="*{name}" placeholder="Nome da comunidade" required>
+  </div>
+  <div class="form-group">
+    <label for="description">Descrição</label>
+    <textarea class="form-control" th:field="*{description}" rows="10"
+      placeholder="Descrição da comunidade"></textarea>
+  </div>
   <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
 </th:block>
 
@@ -19,7 +24,7 @@
        th:href="@{/communities/{cid}/edit-community(cid=${community.id})}"
        >
        Editar informações</a>
-    <a class="btn btn-danger" role="button"
+    <a class="btn btn-secondary" role="button"
        th:onclick="deleteCommunity(this.dataset)"
        th:data-cid="${community.id}">
        Remover comunidade</a>
@@ -28,11 +33,13 @@
   <div class="box">
     <h2>Publicações</h2>
     <a class="btn btn-primary" role="button"
-       th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">
+       th:href="@{/communities/{cid}/publications/add(cid=${community.id})}">
        Adicionar publicação</a>
-
-    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">
-      <div th:replace="~{communities/_publication :: data}"></div>
-    </div>
+    
+    <th:block th:unless="${#lists.isEmpty(community.publications)}">
+      <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">
+        <th:block th:replace="~{communities/publications/_publication :: data}"/>
+      </div>
+    </th:block>
   </div>
 </div>

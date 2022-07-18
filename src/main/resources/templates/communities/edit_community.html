@@ -8,11 +8,11 @@
     <th:block th:replace="~{communities/_community :: inputs}"/>
 
     <input type="hidden" name="update">
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
-      <button type="button">Cancelar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
-    <button type="reset">Limpar</button>
-    <button type="submit">Atualizar</button>
   </form>
 </th:block>
 </html>
