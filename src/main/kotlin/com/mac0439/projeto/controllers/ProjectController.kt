@@ -16,7 +16,6 @@ class ProjectController(private val service: ProjectService) {
 
     @GetMapping("/projects/{id}")
     fun getProject(@PathVariable id: String, model: Model): String {
-        model.addAttribute("hello", id)
         val project = service.findById(id)
         if (project.isEmpty) {
             return "error"

@@ -7,8 +7,8 @@ import java.time.LocalDateTime
 
 @Node("User")
 data class User(
-    @Id val name: String, // o spring muda pra mim
+    @Id val name: String? = null, // o spring muda pra mim
 
-    @Relationship(type = "MEMBER_OF") var project: Project,
-    @Relationship(type = "FRIENDS_WITH") var friends: Set<User>
+    @Relationship(type = "MEMBER_OF") var projects: Set<Project>? = null,
+    @Relationship(type = "FRIENDS_WITH") var friends: Set<User>? = null
 )

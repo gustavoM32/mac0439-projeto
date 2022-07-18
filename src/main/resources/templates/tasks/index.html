@@ -9,7 +9,7 @@
 <ul th:each="t : ${tasks}">
   <li>
     <!--<a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->
-    <p th:text="${t.name}">Nome Tarefa</p>
+    <a th:text="${t.name}" th:href="|tasks/${t.id}|">Nome Tarefa</a>
   </li>
 </ul>
 <p><a href="/">Back</a></p>

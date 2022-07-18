@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <title>Projetos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -9,7 +9,7 @@
 <ul th:each="p : ${projects}">
     <li>
         <!--<a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->
-        <p th:text="${p.name}">Nome Projeto</p>
+        <a th:text="${p.name}"  th:href="|projects/${p.id}|">Nome Projeto</a>
     </li>
 </ul>
 <p><a href="/">Back</a></p>

@@ -13,15 +13,16 @@ import java.time.LocalDateTime
 
 @Node("Task")
 data class Task(
-    @Id val name: String? = null, // o spring muda pra mim
-    private val description: String? = null,
-    private val status: String? = null,
-    private val notes: List<String>? = null,
-    private val deadline: LocalDateTime? = null,
-    private val team: Set<User>? = null,
+    @Id val id: String? = null, // o spring muda pra mim // ok
+    var name: String? = null, // o spring muda pra mim // ok
+    var description: String? = null, // ok
+    var status: Boolean? = false,  // ok
+    var notes: List<String>? = null, // ok
+    var deadline: LocalDateTime? = null, // ok
+    var team: Set<User>? = null,
 
     //@Relationship(type = "CREATED_BY", direction = Relationship.INCOMING) var creator: User,
-    @Relationship(type = "SUBTASKS") var subtask: Set<Task>? = null,
-    @Relationship(type = "HAS_TEAM") var team_members: Set<User>? = null // n muda
+    @Relationship(type = "SUBTASKS") var subtasks: Set<Task>? = null, // ok
+    @Relationship(type = "HAS_TEAM") var team_members: Set<User>? = null // n muda // ok
 
 )

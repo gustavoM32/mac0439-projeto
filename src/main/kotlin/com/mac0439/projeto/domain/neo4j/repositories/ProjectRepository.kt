@@ -5,4 +5,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProjectRepository : Neo4jRepository<Project, String>
+interface ProjectRepository : Neo4jRepository<Project, String> {
+
+}
