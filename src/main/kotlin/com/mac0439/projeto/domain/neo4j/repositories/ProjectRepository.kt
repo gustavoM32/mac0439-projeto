@@ -21,7 +21,7 @@ interface ProjectRepository : Neo4jRepository<Project, String> {
 //    @Query("MATCH (proj:Project {id:\$parent_id}), (sp:Project {id:\$pid}) MERGE (proj)-[:HAS_SUBPROJECT]->(sp)")
 //    fun addProjectToParent(parent_id: String?, pid: String?): String?
 
-    @Query("MATCH (proj:Project {id:\$parent_id}), (sp:Project {id:\$pid}) MERGE (proj)-[:HAS_SUBPROJECT]->(sp)")
-    fun addProjectToParent(parent_id: String?, pid: String?): String?
+    @Query("MATCH (proj:Project {id:\$parent_id}), (sp:Project {id:\$pid}) MERGE (proj)-[:HAS_SUBPROJECT]->(sp) RETURN proj")
+    fun addProjectToParent(parent_id: String?, pid: String?): Project
 
 }

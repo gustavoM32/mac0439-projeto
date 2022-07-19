@@ -53,15 +53,18 @@ class ProjectService(private val repository: ProjectRepository,
 //        return repository.save(project)
 //    }
 
-    fun addToSubprojectList(project: Project, parent : Project) {
+    fun addToSubprojectList(project: Project, parent : Project):Project {
         //project.created = LocalDateTime.now()
+        var res: Project
         try {
             // event deletion should delete it from their context list
-            repository.addProjectToParent(parent.id, project.id)
+            res = repository.addProjectToParent(parent.id, project.id)
         } catch (e: Exception) {
             logger.error(e.toString())
             throw Exception("Project to add not found")
         }
+
+        return res
 
     }
 

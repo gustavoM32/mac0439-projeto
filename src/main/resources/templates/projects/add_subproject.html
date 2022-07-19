@@ -8,7 +8,7 @@
 <h1>Adicionar subprojeto</h1>
 
 <!--<a th:href="@{/projects/{cid}/tasks/add-task(cid=${project.id})}">-->
-<form action="#" th:action="@{/projects/{cid}(cid=${parent_id})}" th:object="${project}" method="post">
+<form action="#" th:action="@{/projects/{cid}(cid=${parent_id})}" th:object="${new_project}" method="post">
   <div th:replace="~{projects/_subproject :: inputs}"></div>
 
   <a href="#" th:href="@{/projects/{cid}(cid=${parent_id})}">

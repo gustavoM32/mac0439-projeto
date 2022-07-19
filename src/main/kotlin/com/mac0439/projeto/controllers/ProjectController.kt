@@ -62,7 +62,7 @@ class ProjectController(private val service: ProjectService,
         //parent_id.subprojects.add()
         //parentProject.subprojects.add(new_subproject)
         model.addAttribute("parent_id", id)
-        //model.addAttribute("project", new_subproject)
+        model.addAttribute("new_project", new_subproject)
         return "projects/add_subproject"
         //return repository.save(new_project)
     }
@@ -72,10 +72,18 @@ class ProjectController(private val service: ProjectService,
         logger.info("post /projects/${id}")
         val parent = repository.findById(id).get()
         logger.info("parent ${parent.name}")
+        logger.info("parent ${parent.subprojects}")
+        logger.info("filho ${project.name}")
+        var novo_gambiarra = Project(name=project.name, description = project.description)
+
+        logger.info("parent ${parent.name}")
         //project.creator
-        val added = service.addProject(project)
-        service.addToSubprojectList(added, parent)
-        repository.save(parent)
+        val added = service.addProject(novo_gambiarra)
+        logger.info("filho ${added.id}")
+        logger.info("pai ${parent.id}")
+
+        var p = service.addToSubprojectList(added, parent)
+
         return "redirect:/projects/${added.id}"
     }
 
