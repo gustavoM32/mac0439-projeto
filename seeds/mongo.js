@@ -96,7 +96,7 @@ let events = db.events.insertMany([
 		"creator": "Chico_Bento",
 		"context": {
 			"type": "project",
-			"_id":  7
+			"_id": "da771c27-19b1-416a-b964-dbd4443781c9",
 		},
 		"status": "PENDING",
 		"date": new Date("2022-06-10T18:00:00"),
@@ -160,7 +160,7 @@ db.communities.insertMany([
 		"creationDate": new Date("2022-02-04T14:32:32"),
 		"projects": [
 			{
-				"_id":  4,
+				"_id": "df84664c-e804-4614-9be4-e68652b8fcb9",
 				"name": "Indie Game Project"
 			}
 		],
@@ -195,7 +195,7 @@ db.communities.insertMany([
 		"creationDate": new Date("2021-10-04T09:17:49"),
 		"projects": [
 			{
-				"_id":  7,
+				"_id":  "da771c27-19b1-416a-b964-dbd4443781c9",
 				"name": "Festa Junina"
 			}
 		],
@@ -223,7 +223,7 @@ db.communities.insertMany([
 		"creationDate": new Date("2021-04-20T20:12:22"),
 		"projects": [
 			{
-				"_id":  19,
+				"_id":  "9930cd67-3658-41ee-af01-32b4ab77bc3c",
 				"name": "Dungeons and Dragons RPG"
 			}
 		],
@@ -257,3 +257,4 @@ db.communities.insertMany([
 		"publications": [publications.insertedIds['2']]
 	}
 ]);
+

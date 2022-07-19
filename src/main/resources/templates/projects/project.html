@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Projeto'">
+<th:block layout:fragment="content">
+
+    <div th:replace="~{projects/_project :: data}"></div>
+
+    <h2 th:text="|Subprojetos|"></h2>
+    <a th:href="@{/projects/{cid}/add-project(cid=${project.id})}" class="btn btn-primary" role="button">Adicionar subprojeto</a>
+    <div class="box" th:each="p : ${project.subprojects}">
+        <a th:text="${p.name}" th:href="|${p.id}|">Subprojeto</a>
+        <p th:text="${p.description}">Descrição</p>
+    </div>
+
+    <h2 th:text="|Tarefas|"></h2>
+
+    <a th:href="@{/projects/{cid}/tasks/add-task(cid=${project.id})}" class="btn btn-primary" role="button">Adicionar tarefa</a>
+    <div class="box" th:each="t : ${project.task_list}">
+    <!--    <a th:text="${t.name}" th:href="|/tasks/${t.id}|">Tarefa</a>-->
+        <a th:text="${t.name}" th:href="@{/projects/{cid}/tasks/{tid}(cid=${project.id}, tid=${t.id})}">Tarefa</a>
+        <p th:text="${t.description}">Descrição</p>
+    </div>
+
+    <h3>Anotações</h3>
+    <div th:if="${#lists.isEmpty(project.notes)}">Nenhuma anotação</div>
+    <div class="box" th:each="t : ${project.notes}">
+        <p th:text="${t}">Descrição</p>
+    </div>
+
+
+    <div>
+        <a class="btn btn-secondary" role="button"
+           th:onclick="deleteProject(this.dataset)"
+           th:data-id="${project.id}">
+            Remover projeto</a>
+    </div>
+
+</th:block>
+<th:block layout:fragment="custom_scripts">
+    <script type="text/javascript" src="/js/project.js"></script>
+</th:block>
+</html>
+

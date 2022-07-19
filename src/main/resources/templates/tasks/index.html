@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Tarefas'">
+<th:block layout:fragment="content">
+
+  <div class="row">
+    <div class="col">
+      <div>
+        <a href="/tasks/add-task" class="btn btn-primary" role="button">Adicionar tarefa</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="list-group">
+        <a th:each="t : ${tasks}"
+           th:href="|tasks/${t.id}|"
+           th:text="${t.name}"
+           class="list-group-item list-group-item-action">Nome da tarefa</a>
+      </div>
+    </div>
+  </div>
+</th:block>
+</html>

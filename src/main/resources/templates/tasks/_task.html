@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="inputs">
+  <label for="name">Nome</label>
+  <input type="text" class="form-control" th:field="*{name}" placeholder="Nome da tarefa" required>
+
+  <label for="description">Descrição</label>
+  <textarea class="form-control" th:field="*{description}" rows="10"
+            placeholder="Descrição da tarefa"></textarea>
+</th:block>
+
+<div th:fragment="data">
+  <h1 th:text="${task.name}">Tarefa</h1>
+
+  <p th:text="${task.description}">Descrição</p>
+  <p th:text="|Estado: ${(task.status == false) ? 'pendente' : 'finalizada'}|">Estado</p>
+  <p th:if="${task.deadline}" th:text="|Prazo: ${#temporals.format(task.deadline, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Prazo</p>
+
+<!--  <h2>Membros do time</h2>-->
+<!--  <div th:if="${#lists.isEmpty(task.team_members)}">Nenhum membro</div>-->
+<!--  <div class="box" th:each="tm : ${task.team_members}">-->
+<!--    <a th:text="${tm}">Subtarefa</a>-->
+<!--  </div>-->
+
+  <h2 th:text="|Subtarefas|"></h2>
+  <div th:if="${#lists.isEmpty(task.subtasks)}">Nenhuma subtarefa</div>
+  <div class="box" th:each="t : ${task.subtasks}">
+    <a th:text="${t.name}" th:href="|${t.id}|">Subtarefa</a>
+    <p th:text="${t.description}">Descrição</p>
+  </div>
+
+  <h3>Anotações</h3>
+  <div th:if="${#lists.isEmpty(task.notes)}">Nenhuma anotação</div>
+  <ul>
+    <li class="box" th:each="t : ${task.notes}">
+      <p th:text="${t}">anotação</p>
+    </li>
+  </ul>
+
+  <div>
+    <a class="btn btn-secondary" role="button"
+       th:onclick="deleteTask(this.dataset)"
+       th:data-id="${task.id}">
+      Remover tarefa</a>
+  </div>
+</div>
