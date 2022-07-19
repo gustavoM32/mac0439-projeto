@@ -34,5 +34,4 @@ data class Project(
     @Relationship(type = "HAS_SUBPROJECT") var subprojects: Set<Project>? = null,
     @Relationship(type = "HAS_TEAM") var team_members: Team? = null, // n muda
     @Relationship(type = "HAS_TASKS") var task_list: Set<Task>? = null
-
 )
