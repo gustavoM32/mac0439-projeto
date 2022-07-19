@@ -1,15 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="inputs">
-  <div class="form-group">
-    <label for="name">Nome</label>
-    <input type="text" class="form-control" th:field="*{name}" placeholder="Nome da comunidade" required>
-  </div>
-  <div class="form-group">
-    <label for="description">Descrição</label>
-    <textarea class="form-control" th:field="*{description}" rows="10"
-      placeholder="Descrição da comunidade"></textarea>
-  </div>
+  <label for="name">Nome</label>
+  <input type="text" class="form-control" th:field="*{name}" placeholder="Nome da comunidade" required>
+
+  <label for="description">Descrição</label>
+  <textarea class="form-control" th:field="*{description}" rows="10"
+    placeholder="Descrição da comunidade"></textarea>
   <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
 </th:block>
 

@@ -1,11 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="inputs">
-  <div class="form-group">
-    <label for="text">Texto</label>
-    <textarea class="form-control" th:field="*{text}" rows="10"
-      placeholder="Texto do comentário"></textarea>
-  </div>
+  <label for="text">Texto</label>
+  <textarea class="form-control" th:field="*{text}" rows="10"
+    placeholder="Texto do comentário"></textarea>
 </th:block>
 
 <th:block th:fragment="data">

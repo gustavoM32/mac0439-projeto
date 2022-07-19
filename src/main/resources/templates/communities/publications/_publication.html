@@ -1,15 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="inputs">
-  <div class="form-group">
-    <label for="title">Título</label>
-    <input type="text" class="form-control" th:field="*{title}" placeholder="Título da publicação" required>
-  </div>
-  <div class="form-group">
-    <label for="text">Texto</label>
-    <textarea class="form-control" th:field="*{text}" rows="10"
-      placeholder="Texto da publicação"></textarea>
-  </div>
+  <label for="title">Título</label>
+  <input type="text" class="form-control" th:field="*{title}" placeholder="Título da publicação" required>
+
+  <label for="text">Texto</label>
+  <textarea class="form-control" th:field="*{text}" rows="10"
+    placeholder="Texto da publicação"></textarea>
 </th:block>
 
 <th:block th:fragment="data">
@@ -35,11 +32,9 @@
           <h3>Comentários</h3>
 
           <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${p.id})}" th:object="${newComment}" method="post">
-            <div class="form-group">
-              <label for="text">Texto</label>
-              <textarea class="form-control" th:field="*{text}" rows="3"
-                placeholder="Texto do comentário"></textarea>
-            </div>
+            <label for="text">Texto</label>
+            <textarea class="form-control" th:field="*{text}" rows="3"
+              placeholder="Texto do comentário"></textarea>
         
             <button type="submit" class="btn btn-primary">Comentar</button>
             <button type="reset" class="btn btn-secondary">Limpar</button>
