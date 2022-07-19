@@ -1,6 +1,21 @@
 # Projeto de MAC0439 - Laboratório de Banco de Dados
 
-## Comandos
+## Uso
+
+É necessário ter a versão 17 do Java instalada no sistema.
+
+1. Inicializar os bancos de dados\
+`docker-compose up`
+2. Compilar aplicação\
+`./gradlew build`
+3. Executar aplicação\
+`java -jar build/libs/projeto.jar`
+4. Popular bancos de dados (após aplicação estar inicializada)\
+`./populate.sh`
+5. Acessar aplicação
+`localhost:8080`
+
+## Comandos para desenvolvimento
 
 * Constrói as imagens necessárias\
 `docker-compose build`

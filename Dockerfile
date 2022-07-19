@@ -1,8 +1,5 @@
 FROM openjdk:17-jdk-alpine
 
-WORKDIR /app
+COPY /build/libs/projeto.jar app.jar
 
-COPY gradle/ ./gradle
-COPY gradlew build.gradle.kts settings.gradle.kts ./
-
-RUN ./gradlew
+ENTRYPOINT ["java", "-jar", "app.jar"]

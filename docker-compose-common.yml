@@ -1,9 +1,0 @@
-version: '3.8'
-
-services:
-  spring:
-    build: .
-    working_dir: /app
-    volumes:
-      - ./src:/app/src
-      - build:/app/build

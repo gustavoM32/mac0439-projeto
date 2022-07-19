@@ -1,62 +1,27 @@
 version: "3.8"
 
 services:
-  spring:
-    extends:
-      file: docker-compose-common.yml
-      service: spring
-    environment:
-      SPRING_PROFILES_ACTIVE: dev
-    ports:
-      - 8080:8080
-      - 35729:35729
-    container_name: lbd_spring
-    profiles:
-      - dev
-      - all
-    command: ./gradlew bootRun
-
-  dev:
-    extends:
-      file: docker-compose-common.yml
-      service: spring
-    container_name: lbd_dev
-    profiles:
-      - dev
-      - all
-    command: ./gradlew build --continuous -x test
-
   mongo:
     image: mongo
+    container_name: lbd_mongo
     ports:
       - 27017:27017
-    #    volumes:
-    #      - mongodb:/data/db
-    #      - mongodb_config:/data/configdb
-    container_name: lbd_mongo
-    profiles:
-      - dbs
-      - all
     volumes:
       - ./seeds/:/seeds/
 
   neo4j:
     image: neo4j
+    container_name: lbd_neo4j
     ports:
       - 7474:7474
       - 7687:7687
     environment:
       NEO4J_AUTH: none # development only
-    #    volumes:
-    #      - neo4j:/data
-    container_name: lbd_neo4j
-    profiles:
-      - dbs
-      - all
+
   postgres:
     image: postgres:14.4
-    restart: always
     container_name: lbd_postgres
+    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123
@@ -69,9 +34,3 @@ services:
     volumes:
       - ./seeds/populate_postgres.sql:/docker-entrypoint-initdb.d/populate_postgres.sql
       - ./seeds/:/seeds/
-
-volumes:
-  build:
-#  mongodb:
-#  mongodb_config:
-#  neo4j:
