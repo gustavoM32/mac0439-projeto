@@ -10,6 +10,9 @@ class TaskService(private val repository: TaskRepository) {
     fun findById(id: String): Optional<Task> {
         return repository.findById(id)
     }
+    fun addTask(task: Task): Task {
+        return repository.save(task)
+    }
 
     fun findAll(): List<Task> {
         return repository.findAll()

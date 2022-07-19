@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="inputs">
+
+  <label for="name">Nome</label>
+  <input type="text" class="form-control" th:field="*{name}" placeholder="Título do projeto" required>
+
+  <label for="description">Descrição</label>
+  <textarea class="form-control" th:field="*{description}" rows="10"
+            placeholder="Descrição do projeto"></textarea>
+
+  <a href="/projects"><button>Voltar</button></a>
+</th:block>
+
+<!--<div th:fragment="inputs">-->
+<!--  <p>Nome: <input type="text" th:field="*{name}" /></p>-->
+<!--  <p>Descrição:<br>-->
+<!--    <textarea rows="10" cols="60" th:field="*{description}">Texto</textarea>-->
+<!--  </p>-->
+<!--  &lt;!&ndash; <h1>TODO: Adicionar membros iniciais</h1> &ndash;&gt;-->
+<!--</div>-->
+
+<!--<div th:fragment="data">-->
+<!--  <h1 th:text="|Project / ${project.name}|">Projeto</h1>-->
+
+<!--  <p class="replace-nl" th:text="${project.description}">Descrição</p>-->
+<!--  -->
+
+<!--  <button th:onclick="deleteCommunity(this.dataset)"-->
+<!--          th:data-cid="${community.id}">Remover comunidade</button>-->
+<!--  -->
+<!--  <div class="box">-->
+<!--    <h2>Publicações</h2>-->
+<!--    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">-->
+<!--      <button>Adicionar publicação</button>-->
+<!--    </a>-->
+
+<!--    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">-->
+<!--      <div th:replace="~{communities/_publication :: data}"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

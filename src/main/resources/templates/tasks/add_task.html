@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Adicionar tarefa</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Adicionar tarefa</h1>
+<form action="#" th:action="@{/tasks}" th:object="${task}" method="post">
+  <div th:replace="~{tasks/_task :: inputs}"></div>
+
+  <a href="#" th:href="@{/tasks}">
+    <button type="button">Cancelar</button>
+  </a>
+  <button type="reset">Limpar</button>
+  <button type="submit">Adicionar</button>
+</form>
+</body>
+</html>

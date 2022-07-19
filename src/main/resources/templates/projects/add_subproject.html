@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Adicionar subprojeto</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Adicionar subprojeto</h1>
+<form action="#" th:action="@{/projects}" th:object="${project}" method="post">
+  <div th:replace="~{projects/_subproject :: inputs}"></div>
+
+  <a href="#" th:href="@{/projects}">
+    <button type="button">Cancelar</button>
+  </a>
+  <button type="reset">Limpar</button>
+  <button type="submit">Adicionar</button>
+</form>
+</body>
+</html>

@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Tarefas</h1>
+<a href="/tasks/add-task"><button>Adicionar tarefa</button></a>
 <ul th:each="t : ${tasks}">
   <li>
     <!--<a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->

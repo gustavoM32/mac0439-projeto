@@ -9,11 +9,12 @@
     <div class="box">
         <h1 th:text="|Projeto / ${project.name}|">Projeto</h1>
         <h3 th:text="${project.description}">Descrição</h3>
-        <p th:text="|Criada por ${project.creator.name} em ${project.created}|">Criado por alguém em 00/00/0000 às 00:00</p>
+        <p th:if="${project.creator}" th:text="|Criada por ${project.creator.name} em ${project.created}|">Criado por alguém em 00/00/0000 às 00:00</p>
         <p th:text="|Deadline: ${project.deadline}|">Deadline</p>
         <p th:text="|Status: ${(project.status == false) ? 'unfinished' : 'finished'}|">Status</p>
 <!--        <p th:text="|Time:|" th:each="u : ${user.name}>Members</p>-->
         <h2 th:text="|Subprojetos|"></h2>
+        <a href="/projects/add-subproject"><button>Adicionar subprojeto</button></a>
         <div class="box" th:each="p : ${project.subprojects}">
             <a th:text="${p.name}" th:href="|${p.id}|">Subprojeto</a>
             <p th:text="${p.description}">Descrição</p>

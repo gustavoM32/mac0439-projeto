@@ -25,9 +25,9 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		taskRepository.deleteAll()
 		userRepository.deleteAll()
 
-		var coolParty = Project("01", LocalDateTime.parse("2022-05-27T18:40"), "Stu Surprise Party" )
-		var makeCake = Project("02",LocalDateTime.parse("2022-05-30T21:42"), "Make Birthday Cake")
-		var singForHim = Project("03",LocalDateTime.parse("2022-06-03T15:13"),"Arrange singers for Stus Bday")
+		var coolParty = Project(created =  LocalDateTime.parse("2022-05-27T18:40"), name = "Stu Surprise Party" )
+		var makeCake = Project(created = LocalDateTime.parse("2022-05-30T21:42"), name = "Make Birthday Cake")
+		var singForHim = Project(created = LocalDateTime.parse("2022-06-03T15:13"), name = "Arrange singers for Stus Bday")
 //
 //		projectRepository.save(makeCake)
 //		projectRepository.save(singForHim)
@@ -45,10 +45,10 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		//projectRepository.save(coolParty)
 
 		// NEO4J -- Task
-		var bakeCake = Task("01","Bake a cake for Stu")
-		var buy4Cake = Task("02","Buy stuff for cake")
-		var hireSinger = Task("03","Call Singers")
-		var decidePlace = Task("04", "Decide Place")
+		var bakeCake = Task(name="Bake a cake for Stu")
+		var buy4Cake = Task(name="Buy stuff for cake")
+		var hireSinger = Task(name="Call Singers")
+		var decidePlace = Task(name="Decide Place")
 
 		decidePlace.description = "To have the party, we need to decide the place."
 		decidePlace.notes = listOf("Mcdonalds", "Cool Palace", "Pizza Place")
@@ -73,9 +73,6 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		coolParty.task_list = setOf(decidePlace)
 		makeCake.task_list = setOf(bakeCake, buy4Cake)
 		singForHim.task_list = setOf(hireSinger)
-
-		projectRepository.save(makeCake)
-		projectRepository.save(singForHim)
 
 		taskRepository.save(bakeCake)
 		taskRepository.save(buy4Cake)
@@ -109,11 +106,13 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		userRepository.save(deacon)
 		userRepository.save(vladislav)
 
+		projectRepository.save(makeCake)
+		projectRepository.save(singForHim)
 		projectRepository.save(coolParty)
 
 		deacon.projects = setOf(coolParty)
-//
-//		projectRepository.save(coolParty)
+
+		//projectRepository.save(coolParty)
 	}
 }
 
