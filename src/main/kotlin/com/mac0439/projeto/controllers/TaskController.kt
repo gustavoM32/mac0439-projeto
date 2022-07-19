@@ -80,21 +80,19 @@ class TaskController(private val service: TaskService,
         return "redirect:/project/${cid}/tasks"
     }
 
-    //     @DeleteMapping("/communities/{cid}/events/{eid}")
-
-    @DeleteMapping("/projects/{cid}/tasks/{tid}") // new
+    // Delete
+    @DeleteMapping("/tasks/{tid}") // new
     @ResponseBody
-    fun deleteTask(@PathVariable cid: String, @PathVariable tid: String) {
-        logger.info("delete /projects/${cid}/tasks/${tid}")
+    fun deleteTask(@PathVariable tid: String) {
+        logger.info("delete /tasks/${tid}")
         try {
-            //service.deleteTask(id)
-            //service.deleteTask(cid, tid)
-            projectService.deleteTask(cid, tid)
+            projectService.deleteTask(tid)
         } catch (e: Exception) {
             logger.error(e.toString())
             return
         }
     }
+
     @GetMapping("/projects/{cid}/tasks/{tid}/add-task")
     fun addTask(@PathVariable cid: String, @ModelAttribute new_task: Task): String {
         logger.info("get /projects/{cid}/tasks/{tid}/add-task")
@@ -102,13 +100,6 @@ class TaskController(private val service: TaskService,
         return "tasks/add_task_from_project"
 
     }
-//    @GetMapping("/projects/{cid}/tasks/{tid}/add-task")
-//    fun postProjects(@PathVariable cid: String, @ModelAttribute new_task: Task): String {
-//        logger.info("get /projects/{cid}/tasks/{tid}/add-task")
-//
-//        return "tasks/add_task_from_project"
-//
-//    }
 
     @GetMapping("tasks/{id}")
     fun getTasks(@PathVariable id: String, model: Model): String {
@@ -136,16 +127,4 @@ class TaskController(private val service: TaskService,
         val addedTask = service.addTask(task)
         return "redirect:/tasks/${addedTask.id}"
     }
-
-//    @DeleteMapping("/tasks/{id}")
-//    @ResponseBody
-//    fun deleteTask(@PathVariable id: String) {
-//        logger.info("delete /tasks/${id}")
-//        try {
-//            service.deleteTask(id)
-//        } catch (e: Exception) {
-//            logger.error(e.toString())
-//            return
-//        }
-//    }
 }

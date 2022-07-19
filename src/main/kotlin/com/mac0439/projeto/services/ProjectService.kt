@@ -18,26 +18,13 @@ class ProjectService(private val repository: ProjectRepository,
         return repository.findById(id)
     }
 
-    fun deleteTask(pid: String, tid: String) { // new
+    fun deleteTask(tid: String) { // new
         try {
-            // event deletion should delete it from their context list
-            repository.deleteTask(pid, tid)
+            repository.deleteTask(tid)
         } catch (e: Exception) {
             logger.error(e.toString())
             throw Exception("Task to delete not found")
         }
-
-        //taskService.deleteTask(tid)
-
-//        try {
-//            // event deletion should delete it from their context list
-//            repository.deleteEvent(cid, eid)
-//        } catch (e: Exception) {
-//            logger.error(e.toString())
-//            logger.error("Event reference in community not deleted")
-//        }
-//
-//        eventService.deleteById(eid)
     }
 
     fun addProject(project: Project): Project {

@@ -16,25 +16,19 @@ function deleteItem(url, confirmationMessage, redirectUrl) {
 }
 
 function deleteTask(data) {
-    //console.info(data);
-
     deleteItem(
-        `/projects/${data.pid}/tasks/${data.id}`,
-        "Você tem certeza que deseja remover esta tarefa?",
+        `/tasks/${data.id}`,
+        "Você tem certeza que deseja remover tarefa?",
         `/tasks`
     );
-
 }
 
 function deleteProject(data) {
-    //console.info(data);
-
     deleteItem(
         `/projects/${data.id}`,
         "Você tem certeza que deseja remover projeto?",
         `/projects`
     );
-
 }
 
 //

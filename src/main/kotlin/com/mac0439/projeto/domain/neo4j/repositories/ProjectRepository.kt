@@ -12,8 +12,8 @@ interface ProjectRepository : Neo4jRepository<Project, String> {
 
     fun findByName(@Param("name") name: String): Optional<Project>
 
-    @Query("MATCH ((proj:Project {id:\$pid})-[:HAS_TASKS]->(task:Task {id: \$tid})) DETACH DELETE task")
-    fun deleteTask(pid: String?, tid: String?): String?
+    @Query("MATCH (task:Task {id: \$tid}) DETACH DELETE task")
+    fun deleteTask(tid: String?): String?
 //
 //    MATCH (a:Person {name: $value1}),
 //    (b:Person {name: $value2})
