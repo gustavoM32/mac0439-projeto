@@ -1,7 +1,7 @@
 package com.mac0439.projeto.controllers
 
 import com.mac0439.projeto.domain.neo4j.project.Project
-import com.mac0439.projeto.domain.neo4j.repositories.UserRepository
+import com.mac0439.projeto.domain.neo4j.repositories.UserNeoRepository
 import com.mac0439.projeto.domain.neo4j.task.Task
 import com.mac0439.projeto.services.ProjectService
 import com.mac0439.projeto.services.TaskService
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*
 @Controller
 class TaskController(private val service: TaskService,
                      private val projectService: ProjectService,
-                     private val user_repository: UserRepository) {
+                     private val user_repository: UserNeoRepository) {
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
     @GetMapping("/tasks")
     fun getTasks(model: Model): String {

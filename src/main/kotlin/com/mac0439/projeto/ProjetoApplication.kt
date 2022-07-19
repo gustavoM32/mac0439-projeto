@@ -4,9 +4,8 @@ import com.mac0439.projeto.domain.neo4j.user.FriendsWith
 import com.mac0439.projeto.domain.neo4j.project.Project
 import com.mac0439.projeto.domain.neo4j.repositories.ProjectRepository
 import com.mac0439.projeto.domain.neo4j.repositories.TaskRepository
-import com.mac0439.projeto.domain.neo4j.repositories.UserRepository
+import com.mac0439.projeto.domain.neo4j.repositories.UserNeoRepository
 import com.mac0439.projeto.domain.neo4j.task.Task
-import com.mac0439.projeto.domain.neo4j.user.MemberOf
 import com.mac0439.projeto.domain.neo4j.user.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -18,13 +17,13 @@ import java.time.LocalDateTime
 @SpringBootApplication
 class ProjetoApplication(private val projectRepository: ProjectRepository,
 						 private val taskRepository: TaskRepository,
-						 private val userRepository: UserRepository): CommandLineRunner {
+						 private val userNeoRepository: UserNeoRepository): CommandLineRunner {
 
 	private val logger: Logger = LoggerFactory.getLogger(javaClass)
 	override fun run(vararg args: String?) {
 		projectRepository.deleteAll()
 		taskRepository.deleteAll()
-		userRepository.deleteAll()
+		userNeoRepository.deleteAll()
 
 		val coolParty = projectRepository.save(
 			Project(
@@ -108,9 +107,9 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		projectRepository.save(singForHim)
 
 		// Neo4j - User
-		val viago = userRepository.save(User("Viago"))
-		val deacon = userRepository.save(User("Deacon"))
-		val vladislav = userRepository.save(User("Vladislav"))
+		val viago = userNeoRepository.save(User("Viago"))
+		val deacon = userNeoRepository.save(User("Deacon"))
+		val vladislav = userNeoRepository.save(User("Vladislav"))
 
 //		var morrissey = userRepository.save(User("Morrissey"))
 //		var siouxsie = userRepository.save(User("Siouxsie"))
@@ -140,7 +139,7 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 			FriendsWith(user = viago),
 			FriendsWith(user = vladislav)
 		)
-		userRepository.save(deacon)
+		userNeoRepository.save(deacon)
 	}
 }
 

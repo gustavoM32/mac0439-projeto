@@ -2,7 +2,7 @@ package com.mac0439.projeto.controllers
 
 import com.mac0439.projeto.domain.neo4j.project.Project
 import com.mac0439.projeto.domain.neo4j.repositories.ProjectRepository
-import com.mac0439.projeto.domain.neo4j.repositories.UserRepository
+import com.mac0439.projeto.domain.neo4j.repositories.UserNeoRepository
 import com.mac0439.projeto.services.ProjectService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 @Controller
 class ProjectController(private val service: ProjectService,
                         private val repository: ProjectRepository,
-                        private val user_repository: UserRepository) {
+                        private val user_repository: UserNeoRepository) {
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
     @GetMapping("/projects")
     fun getProjects(model: Model): String {
