@@ -5,14 +5,13 @@
   layout:decorate="~{layout}"
   th:with="title='Usuários'"
 >
-  <th:block layout:fragment="content">
-    <ul th:each="u : ${users}">
-      <li>
-        <a th:text="${u.nome}" th:href="|users/${u.nome_usuario}|"
-          >Nome do usuario</a
-        >
-      </li>
-    </ul>
-    <p><a href="/" class="btn btn-primary" role="button">Back</a></p>
-  </th:block>
+<th:block layout:fragment="content">
+  <ul th:each="u : ${users}">
+    <li>
+      <a th:text="${u.nome}" th:href="|users/${u.nome_usuario}|"
+        >Nome do usuario</a
+      >
+    </li>
+  </ul>
+</th:block>
 </html>
