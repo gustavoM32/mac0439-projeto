@@ -37,6 +37,8 @@ services:
     profiles:
       - dbs
       - all
+    volumes:
+      - ./seeds/:/seeds/
 
   neo4j:
     image: neo4j
