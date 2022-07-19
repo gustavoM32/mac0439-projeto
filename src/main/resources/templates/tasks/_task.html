@@ -1,37 +1,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="inputs">
-  <p>Nome: <input type="text" th:field="*{name}" /></p>
-  <p>Descrição:<br>
-    <textarea rows="10" cols="60" th:field="*{description}">Texto</textarea>
-  </p>
-  <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
-</div>
+<th:block th:fragment="inputs">
+  <label for="name">Nome</label>
+  <input type="text" class="form-control" th:field="*{name}" placeholder="Nome da tarefa" required>
 
+  <label for="description">Descrição</label>
+  <textarea class="form-control" th:field="*{description}" rows="10"
+            placeholder="Descrição da tarefa"></textarea>
+</th:block>
 
 <div th:fragment="data">
+  <h1 th:text="${task.name}">Tarefa</h1>
 
-  <h1 th:text="|Tarefa / ${task.name}|">Tarefa</h1>
   <p th:text="${task.description}">Descrição</p>
-  <p th:text="|Status: ${(task.status == false) ? 'unfinished' : 'finished'}|">Status</p>
-  <p th:text="|Deadline: ${task.deadline}|">Deadline</p>
-  <p th:text="|Membros do time: ${task.team_members}|"></p>
+  <p th:text="|Estado: ${(task.status == false) ? 'pendente' : 'finalizada'}|">Estado</p>
+  <p th:text="|Prazo: ${#temporals.format(task.deadline, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Prazo</p>
+
+<!--  <h2>Membros do time</h2>-->
+<!--  <div th:if="${#lists.isEmpty(task.team_members)}">Nenhum membro</div>-->
+<!--  <div class="box" th:each="tm : ${task.team_members}">-->
+<!--    <a th:text="${tm}">Subtarefa</a>-->
+<!--  </div>-->
+
   <h2 th:text="|Subtarefas|"></h2>
+  <div th:if="${#lists.isEmpty(task.subtasks)}">Nenhuma subtarefa</div>
   <div class="box" th:each="t : ${task.subtasks}">
     <a th:text="${t.name}" th:href="|${t.id}|">Subtarefa</a>
     <p th:text="${t.description}">Descrição</p>
   </div>
-  <h3 th:text="|Anotações|"></h3>
-  <div class="box" th:each="t : ${task.notes}">
-    <p th:text="${t}">anotação</p>
+
+  <h3>Anotações</h3>
+  <ul>
+    <li class="box" th:each="t : ${task.notes}">
+      <p th:text="${t}">anotação</p>
+    </li>
+  </ul>
+
+  <div>
+    <a class="btn btn-secondary" role="button"
+       th:onclick="deleteTask(this.dataset)"
+       th:data-id="${task.id}"
+       th:data-pid="${cid}">
+      Remover tarefa</a>
+    <a class="btn btn-secondary" role="button" href="/tasks">Voltar</a>
   </div>
-
-
-
-  <button th:onclick="deleteTask(this.dataset)"
-          th:data-id="${task.id}", th:data-pid="${cid}">Remover tarefa</button>
-
-  <a href="/tasks"><button>Voltar</button></a>
 
   <!--  <button th:onclick="deleteCommunity(this.dataset)"-->
   <!--          th:data-cid="${community.id}">Remover comunidade</button>-->

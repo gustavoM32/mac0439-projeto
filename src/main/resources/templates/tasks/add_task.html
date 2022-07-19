@@ -1,19 +1,17 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Adicionar tarefa</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<h1>Adicionar tarefa</h1>
-<form action="#" th:action="@{/tasks}" th:object="${task}" method="post">
-  <div th:replace="~{tasks/_task :: inputs}"></div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Adicionar tarefa'">
+<th:block layout:fragment="content">
+  <form action="#" th:action="@{/tasks}" th:object="${task}" method="post">
+    <div th:replace="~{tasks/_task :: inputs}"></div>
 
-  <a href="#" th:href="@{/tasks}">
-    <button type="button">Cancelar</button>
-  </a>
-  <button type="reset">Limpar</button>
-  <button type="submit">Adicionar</button>
-</form>
-</body>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a href="#" th:href="@{/tasks}">
+      <button type="button" class="btn btn-secondary">Cancelar</button>
+    </a>
+
+  </form>
+</th:block>
 </html>

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Tarefa</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-
-<div th:replace="~{tasks/_task :: data}"></div>
-<script type="text/javascript" src="/js/project.js"></script>
-</body>
-</html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Tarefa'">
+<th:block layout:fragment="content">
+    <div th:replace="~{tasks/_task :: data}"></div>
+</th:block>
+<th:block layout:fragment="custom_scripts">
+    <script type="text/javascript" src="/js/project.js"></script>
+</th:block>
