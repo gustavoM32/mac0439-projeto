@@ -30,6 +30,7 @@
   </div>
 
   <h3>Anotações</h3>
+  <div th:if="${#lists.isEmpty(task.notes)}">Nenhuma anotação</div>
   <ul>
     <li class="box" th:each="t : ${task.notes}">
       <p th:text="${t}">anotação</p>
@@ -42,19 +43,5 @@
        th:data-id="${task.id}"
        th:data-pid="${cid}">
       Remover tarefa</a>
-    <a class="btn btn-secondary" role="button" href="/tasks">Voltar</a>
   </div>
-
-  <!--  <button th:onclick="deleteCommunity(this.dataset)"-->
-  <!--          th:data-cid="${community.id}">Remover comunidade</button>-->
-  <!--  -->
-  <!--  <div class="box">-->
-  <!--    <h2>Publicações</h2>-->
-  <!--    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">-->
-  <!--      <button>Adicionar publicação</button>-->
-  <!--    </a>-->
-
-  <!--    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">-->
-  <!--      <div th:replace="~{communities/_publication :: data}"></div>-->
-  <!--    </div>-->
 </div>
