@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Usuários</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
-  <body>
-    <h1>Usuários</h1>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+  th:with="title='Usuários'"
+>
+  <th:block layout:fragment="content">
     <ul th:each="u : ${users}">
       <li>
         <a th:text="${u.nome}" th:href="|users/${u.nome_usuario}|"
@@ -13,6 +13,6 @@
         >
       </li>
     </ul>
-    <p><a href="/">Back</a></p>
-  </body>
+    <p><a href="/users" class="btn btn-primary" role="button">Back</a></p>
+  </th:block>
 </html>
