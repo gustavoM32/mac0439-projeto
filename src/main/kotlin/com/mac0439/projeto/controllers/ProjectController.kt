@@ -45,8 +45,8 @@ class ProjectController(private val service: ProjectService,
     @GetMapping("/projects/add-project")
     fun addProject(@ModelAttribute new_project: Project): String {
         logger.info("get /projects/add-project")
-        val user = user_repository.findByName("Viago").get()
-        new_project.creator = user
+//        val user = user_repository.findByName("Viago").get()
+//        new_project.creator = user
 
         return "projects/add_project"
         //return repository.save(new_project)
@@ -55,16 +55,10 @@ class ProjectController(private val service: ProjectService,
     @GetMapping("/projects/{id}/add-project")
     fun addSubproject(@PathVariable id: String, @ModelAttribute new_subproject: Project, model : Model): String {
         logger.info("get /projects/${id}/add-project")
-        //val parentId = repository.findById(id).get()
-        val user = user_repository.findByName("Viago").get()
-        new_subproject.creator = user
 
-        //parent_id.subprojects.add()
-        //parentProject.subprojects.add(new_subproject)
         model.addAttribute("parent_id", id)
         model.addAttribute("new_project", new_subproject)
         return "projects/add_subproject"
-        //return repository.save(new_project)
     }
 
     @PostMapping("/projects/{id}")
@@ -74,7 +68,8 @@ class ProjectController(private val service: ProjectService,
         logger.info("parent ${parent.name}")
         logger.info("parent ${parent.subprojects}")
         logger.info("filho ${project.name}")
-        var novo_gambiarra = Project(name=project.name, description = project.description)
+        val user = user_repository.findByName("Viago").get()
+        var novo_gambiarra = Project(name=project.name, description = project.description, creator = user)
 
         logger.info("parent ${parent.name}")
         //project.creator
@@ -84,7 +79,7 @@ class ProjectController(private val service: ProjectService,
 
         var p = service.addToSubprojectList(added, parent)
 
-        return "redirect:/projects/${added.id}"
+        return "redirect:/projects/${p.id}"
     }
 
     @PostMapping("/projects")

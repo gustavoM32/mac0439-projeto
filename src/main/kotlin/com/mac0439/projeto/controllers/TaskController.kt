@@ -68,7 +68,7 @@ class TaskController(private val service: TaskService,
 //        return "projects/tasks/add_event"
 //        //return repository.save(new_project)
 //    }
-//
+
 
     @PostMapping("/projects/{cid}/tasks") // new
     fun postProjects(@PathVariable cid: String, @ModelAttribute task: Task): String {
@@ -102,13 +102,13 @@ class TaskController(private val service: TaskService,
         return "tasks/add_task_from_project"
 
     }
-    @GetMapping("/projects/{cid}/tasks/{tid}/add-task")
-    fun postProjects(@PathVariable cid: String, @ModelAttribute new_task: Task): String {
-        logger.info("get /projects/{cid}/tasks/{tid}/add-task")
-
-        return "tasks/add_task_from_project"
-
-    }
+//    @GetMapping("/projects/{cid}/tasks/{tid}/add-task")
+//    fun postProjects(@PathVariable cid: String, @ModelAttribute new_task: Task): String {
+//        logger.info("get /projects/{cid}/tasks/{tid}/add-task")
+//
+//        return "tasks/add_task_from_project"
+//
+//    }
 
     @GetMapping("tasks/{id}")
     fun getTasks(@PathVariable id: String, model: Model): String {
