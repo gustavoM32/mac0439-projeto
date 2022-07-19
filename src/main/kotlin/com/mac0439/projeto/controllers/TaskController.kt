@@ -23,27 +23,78 @@ class TaskController(private val service: TaskService,
         return "tasks/index"
     }
 
-//    @GetMapping("/projects/{cid}/tasks")
-//    fun getTaskas(@PathVariable cid: String, model: Model): String {
-//        logger.info("get /projects/$cid/tasks")
+    @GetMapping("/projects/{cid}/tasks") // new
+    fun getProjectTasks(@PathVariable cid: String, model: Model): String {
+        logger.info("get /projects/$cid/tasks")
+        val project : Project
+
+        try {
+            project = projectService.findById(cid).get()
+            //community = communityService.findById(cid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return "redirect:/projects"
+        }
+        model.addAttribute("tasks", project.task_list ?: listOf<Task>())
+        model.addAttribute("project", project)
+
+        return "projects/tasks/index"
+    }
+
+    @GetMapping("/projects/{cid}/tasks/{tid}") // new
+    fun getTask(@PathVariable cid: String, @PathVariable tid: String, model: Model): String {
+        val task = service.findById(tid)
+        if (task.isEmpty) {
+            return "error"
+        }
+        model.addAttribute("task", task.get())
+        model.addAttribute("cid", cid)
+        return "tasks/task"
+    }
+//
+//    @GetMapping("/projects/{cid}/tasks/add-task") // new
+//    fun addTask(@PathVariable cid: String, @ModelAttribute new_task: Task): String {
+//        logger.info("get /projects/{cid}/tasks/add-task")
 //        val project : Project
 //
 //        try {
 //            project = projectService.findById(cid).get()
-//            //community = communityService.findById(cid)
 //        } catch (e: Exception) {
 //            logger.error(e.toString())
-//            return "redirect:/projects"
+//            return "redirect:/projects/$cid/tasks"
 //        }
-//        model.addAttribute("tasks", project.task_list?.sortedByDescending { it.date } ?: listOf<Task>())
+//
 //        model.addAttribute("project", project)
-//        //model.addAttribute("taskStatus", taskStatus)
-////        model.addAttribute("events", community.events?.sortedByDescending { it.date } ?: listOf<Event>())
-////        model.addAttribute("community", community)
-////        model.addAttribute("eventStatus", eventStatus)
-//        return "projects/tasks/index"
+//        return "projects/tasks/add_event"
+//        //return repository.save(new_project)
 //    }
+//
 
+    @PostMapping("/projects/{cid}/tasks") // new
+    fun postProjects(@PathVariable cid: String, @ModelAttribute task: Task): String {
+        logger.info("post /projects/{cid}/tasks")
+        //project.creator
+        val addedTask = service.addTask(task)
+
+        //return "redirect:/communities/${cid}/events"
+        return "redirect:/project/${cid}/tasks"
+    }
+
+    //     @DeleteMapping("/communities/{cid}/events/{eid}")
+
+    @DeleteMapping("/projects/{cid}/tasks/{tid}") // new
+    @ResponseBody
+    fun deleteTask(@PathVariable cid: String, @PathVariable tid: String) {
+        logger.info("delete /projects/${cid}/tasks/${tid}")
+        try {
+            //service.deleteTask(id)
+            //service.deleteTask(cid, tid)
+            projectService.deleteTask(cid, tid)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return
+        }
+    }
 
     @GetMapping("tasks/{id}")
     fun getTasks(@PathVariable id: String, model: Model): String {
@@ -72,15 +123,15 @@ class TaskController(private val service: TaskService,
         return "redirect:/tasks/${addedTask.id}"
     }
 
-    @DeleteMapping("/tasks/{id}")
-    @ResponseBody
-    fun deleteTask(@PathVariable id: String) {
-        logger.info("delete /tasks/${id}")
-        try {
-            service.deleteTask(id)
-        } catch (e: Exception) {
-            logger.error(e.toString())
-            return
-        }
-    }
+//    @DeleteMapping("/tasks/{id}")
+//    @ResponseBody
+//    fun deleteTask(@PathVariable id: String) {
+//        logger.info("delete /tasks/${id}")
+//        try {
+//            service.deleteTask(id)
+//        } catch (e: Exception) {
+//            logger.error(e.toString())
+//            return
+//        }
+//    }
 }

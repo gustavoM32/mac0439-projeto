@@ -19,100 +19,122 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 						 private val userRepository: UserRepository): CommandLineRunner {
 
 	private val logger: Logger = LoggerFactory.getLogger(javaClass)
-
 	override fun run(vararg args: String?) {
 		projectRepository.deleteAll()
 		taskRepository.deleteAll()
 		userRepository.deleteAll()
 
-		var coolParty = Project(created =  LocalDateTime.parse("2022-05-27T18:40"), name = "Stu Surprise Party" )
-		var makeCake = Project(created = LocalDateTime.parse("2022-05-30T21:42"), name = "Make Birthday Cake")
-		var singForHim = Project(created = LocalDateTime.parse("2022-06-03T15:13"), name = "Arrange singers for Stus Bday")
-//
-//		projectRepository.save(makeCake)
-//		projectRepository.save(singForHim)
+		val coolParty = projectRepository.save(
+			Project(
+				created =  LocalDateTime.parse("2022-05-27T18:40"),
+				name = "Stu Surprise Party",
+				deadline = LocalDateTime.parse("2022-06-12T18:40"),
+				description = "It is Stu's birthday. We are arranging a surprise bday for him!",
+				notes = setOf("It needs to be a secret!", "No dogs allowed")
+			)
+		)
+
+		val makeCake = projectRepository.save(
+			Project(
+				created = LocalDateTime.parse("2022-05-30T21:42"),
+				name = "Make Birthday Cake",
+				deadline = LocalDateTime.parse("2022-06-12T18:40"),
+				description = "We need to make a cake for Stu. Preferrably strawberry jam."
+			)
+		)
+
+		val singForHim = projectRepository.save(
+			Project(
+				created = LocalDateTime.parse("2022-06-03T15:13"),
+				name = "Arrange singers for Stus Bday",
+				deadline = LocalDateTime.parse("2022-06-12T18:40"),
+				description = "We want the party to be entertaining. We need to arrange singers for that."
+			)
+		)
+
 		coolParty.subprojects = setOf(makeCake, singForHim)
-		coolParty.deadline = LocalDateTime.parse("2022-06-12T18:40")
-		makeCake.deadline = LocalDateTime.parse("2022-06-12T18:40")
-		singForHim.deadline = LocalDateTime.parse("2022-06-12T18:40")
-
-		coolParty.description = "It is Stu's birthday. We are arranging a surprise bday for him!"
-		makeCake.description = "We need to make a cake for Stu. Preferrably strawberry jam."
-		singForHim.description = "We want the party to be entertaining. We need to arrange singers for that."
-
-		coolParty.notes = setOf("It needs to be a secret!", "No dogs allowed")
-
-		//projectRepository.save(coolParty)
+		projectRepository.save(coolParty)
 
 		// NEO4J -- Task
-		var bakeCake = Task(name="Bake a cake for Stu")
-		var buy4Cake = Task(name="Buy stuff for cake")
-		var hireSinger = Task(name="Call Singers")
-		var decidePlace = Task(name="Decide Place")
+		val bakeCake = taskRepository.save(
+			Task(
+				name="Bake a cake for Stu",
+				description = "In order to have a cake, we need to bake it",
+				notes = listOf("Bake cake"),
+				status = true,
+				deadline = LocalDateTime.parse("2022-06-11T18:40")
+			)
+		)
 
-		decidePlace.description = "To have the party, we need to decide the place."
-		decidePlace.notes = listOf("Mcdonalds", "Cool Palace", "Pizza Place")
-		decidePlace.deadline = LocalDateTime.parse("2022-06-11T18:40")
+		val buy4Cake = taskRepository.save(
+			Task(
+				name="Buy stuff for cake",
+				description = "In order to bake a cake, we need to buy the ingredients",
+				notes = listOf("eggs", "milk", "flour", "sugar"),
+				status = true,
+				deadline = LocalDateTime.parse("2022-06-05T18:40")
+			)
+		)
 
-		bakeCake.description = "In order to have a cake, we need to bake it"
-		bakeCake.notes = listOf("Bake cake")
-		bakeCake.status = true
-		bakeCake.deadline = LocalDateTime.parse("2022-06-11T18:40")
+		val hireSinger = taskRepository.save(
+			Task(
+				name="Call Singers",
+				description = "To hire singers, we need to call them.",
+				notes = listOf("11-9999-9999"),
+				status = true,
+				deadline = LocalDateTime.parse("2022-06-09T18:40")
+			)
+		)
 
-		buy4Cake.description = "In order to bake a cake, we need to buy the ingredients"
-		buy4Cake.notes = listOf("eggs", "milk", "flour", "sugar")
-		buy4Cake.status = true
-		buy4Cake.deadline = LocalDateTime.parse("2022-06-05T18:40")
-
-		hireSinger.description = "To hire singers, we need to call them."
-		hireSinger.notes = listOf("11-9999-9999")
-		hireSinger.status = true
-		hireSinger.deadline = LocalDateTime.parse("2022-06-09T18:40")
+		val decidePlace = taskRepository.save(
+			Task(
+				name="Decide Place",
+				description = "To have the party, we need to decide the place.",
+				notes = listOf("Mcdonalds", "Cool Palace", "Pizza Place"),
+				deadline = LocalDateTime.parse("2022-06-11T18:40")
+			)
+		)
 
 		// TASK & PROJECT
 		coolParty.task_list = setOf(decidePlace)
 		makeCake.task_list = setOf(bakeCake, buy4Cake)
 		singForHim.task_list = setOf(hireSinger)
 
-		taskRepository.save(bakeCake)
-		taskRepository.save(buy4Cake)
-		taskRepository.save(hireSinger)
+		projectRepository.save(coolParty)
+		projectRepository.save(makeCake)
+		projectRepository.save(singForHim)
 
 		// Neo4j - User
-		var viago = User("Viago")
-		var deacon = User("Deacon")
-		var vladislav = User("Vladislav")
-//		var morrissey = User("Morrissey")
-//		var siouxsie = User("Siouxsie")
-//		var nick = User("Nick")
-//		var shinji = User("Shinji")
-//		var asuka = User("Asuka")
-//		var rei = User("Rei")
-//		var kaworu = User("Kaworu")
-//		var misato = User("Misato")
-//		var chicoBento = User("Chico_Bento")
-//		var rosinha = User("Rosinha")
-//		var zeLele = User("Ze_Lele")
-//		var miku = User("Miku")
-//		var meiko = User("Meiko")
-//		var kaito = User("Kaito")
+		var viago = userRepository.save(User("Viago"))
+		var deacon = userRepository.save(User("Deacon"))
+		var vladislav = userRepository.save(User("Vladislav"))
+//		var morrissey = userRepository.save(User("Morrissey"))
+//		var siouxsie = userRepository.save(User("Siouxsie"))
+//		var nick = userRepository.save(User("Nick"))
+//		var shinji = userRepository.save(User("Shinji"))
+//		var asuka = userRepository.save(User("Asuka"))
+//		var rei = userRepository.save(User("Rei"))
+//		var kaworu = userRepository.save(User("Kaworu"))
+//		var misato = userRepository.save(User("Misato"))
+//		var chicoBento = userRepository.save(User("Chico_Bento"))
+//		var rosinha = userRepository.save(User("Rosinha"))
+//		var zeLele = userRepository.save(User("Ze_Lele"))
+//		var miku = userRepository.save(User("Miku"))
+//		var meiko = userRepository.save(User("Meiko"))
+//		var kaito = userRepository.save(User("Kaito"))
 
-		deacon.friends = setOf(viago, vladislav)
 		coolParty.creator = deacon
 		makeCake.creator = deacon
 		singForHim.creator = deacon
 
-		userRepository.save(viago)
-		userRepository.save(deacon)
-		userRepository.save(vladislav)
-
+		projectRepository.save(coolParty)
 		projectRepository.save(makeCake)
 		projectRepository.save(singForHim)
-		projectRepository.save(coolParty)
 
+		deacon.friends = setOf(viago, vladislav)
+		userRepository.save(deacon)
 		deacon.projects = setOf(coolParty)
-
-		//projectRepository.save(coolParty)
+		//userRepository.save(deacon)
 	}
 }
 

@@ -19,7 +19,7 @@ function deleteTask(data) {
     //console.info(data);
 
     deleteItem(
-        `/tasks/${data.id}`,
+        `/projects/${data.pid}/tasks/${data.id}`,
         "Você tem certeza que deseja remover esta tarefa?",
         `/tasks`
     );

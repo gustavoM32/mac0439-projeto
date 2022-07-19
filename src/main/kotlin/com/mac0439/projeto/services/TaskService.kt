@@ -23,6 +23,10 @@ class TaskService(private val repository: TaskRepository) {
         repository.deleteById(id)
     }
 
+    fun deleteById(cid: String, tid: String) {
+        repository.deleteById(tid)
+    }
+
     fun findAll(): List<Task> {
         return repository.findAll()
     }

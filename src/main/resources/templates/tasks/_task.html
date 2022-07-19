@@ -29,7 +29,7 @@
 
 
   <button th:onclick="deleteTask(this.dataset)"
-          th:data-id="${task.id}">Remover tarefa</button>
+          th:data-id="${task.id}", th:data-pid="${cid}">Remover tarefa</button>
 
   <a href="/tasks"><button>Voltar</button></a>
 

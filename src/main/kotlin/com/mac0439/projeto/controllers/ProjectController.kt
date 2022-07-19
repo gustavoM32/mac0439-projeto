@@ -32,15 +32,15 @@ class ProjectController(private val service: ProjectService,
         return "projects/project"
     }
 
-    @RequestMapping("/projects/names", method = [RequestMethod.GET]) //"/projects?name={name}"
-    fun getProjectFromNames(@RequestParam(value = "name") name: String, model: Model): String {
-        val project = service.findByName(name)
-        if (project.isEmpty) {
-            return "error"
-        }
-        model.addAttribute("project", project.get())
-        return "projects/project"
-    }
+//    @RequestMapping("/projects/names", method = [RequestMethod.GET]) //"/projects?name={name}"
+//    fun getProjectFromNames(@RequestParam(value = "name") name: String, model: Model): String {
+//        val project = service.findByName(name)
+//        if (project.isEmpty) {
+//            return "error"
+//        }
+//        model.addAttribute("project", project.get())
+//        return "projects/project"
+//    }
 
     @GetMapping("/projects/add-project")
     fun addProject(@ModelAttribute new_project: Project): String {
@@ -52,18 +52,29 @@ class ProjectController(private val service: ProjectService,
         //return repository.save(new_project)
     }
 
-    @GetMapping("/projects/add-subproject")
-    fun addSubproject(@ModelAttribute new_subproject: Project, parentProject: Project): String {
-        logger.info("get /projects/add-subproject")
+    @GetMapping("/projects/{id}/add-project")
+    fun addSubproject(@PathVariable id: String, @ModelAttribute new_subproject: Project, model : Model): String {
+        logger.info("get /projects/${id}/add-project")
+        //val parentId = repository.findById(id).get()
         val user = user_repository.findByName("Viago").get()
-        new_subproject.creator = user
-        //parentProject.subprojects.add(new_subproject)
+        //new_subproject.creator = user
 
+        //parent_id.subprojects.add()
+        //parentProject.subprojects.add(new_subproject)
+        model.addAttribute("parent_id", id)
         return "projects/add_subproject"
         //return repository.save(new_project)
     }
 
-    // Delete
+    @PostMapping("/projects/{id}")
+    fun postProjects(@PathVariable id: String, @ModelAttribute project: Project): String {
+        logger.info("post /projects/${id}")
+        val parent = repository.findById(id).get()
+        //project.creator
+        val addedProject = service.addProject(project, parent)
+        return "redirect:/projects/${addedProject.id}"
+    }
+
     @PostMapping("/projects")
     fun postProjects(@ModelAttribute project: Project): String {
         logger.info("post /projects")

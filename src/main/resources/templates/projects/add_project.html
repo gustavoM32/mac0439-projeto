@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Adicionar projeto</h1>
-  <form action="#" th:action="@{/projects}" th:object="${project}" method="post">
+  <form action="#" th:action="@{/projects/}" th:object="${project}" method="post">
     <div th:replace="~{projects/_project :: inputs}"></div>
 
     <a href="#" th:href="@{/projects}">
