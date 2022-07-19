@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Usuário'">
+<th:block layout:fragment="content">
+  <div class="box">
+    <h1 th:text="|${user.nome}|">Usuário</h1>
+    <p th:text="|Nascido em ${user.nascimento}|"><i>Nascimento</i></p>
+    <p th:text="|${user.email}|"><i>Email</i></p>
+    <p th:text="|${user.biografia}|">Biografia</p>
+
+    <h2>Habilidades</h2>
+    <li th:each="skill : ${user.skills}" th:text="|${skill.nome} - ${skill.descricao}|"></li>
+
+    <p></p>
+
+    <p><a href="/users" class="btn btn-primary" role="button">Back</a></p>
+    </li>
+  </div>
+</th:block>
+</html>
