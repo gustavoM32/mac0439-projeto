@@ -1,3 +1,5 @@
+DELETE FROM Usuario;
+
 INSERT INTO Usuario
   (nome_usuario, nome, senha, email, nascimento, biografia)
 VALUES
