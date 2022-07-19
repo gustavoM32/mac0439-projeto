@@ -9,12 +9,15 @@
 <a href="/projects/add-project"><button>Adicionar projeto</button></a>
 <ul th:each="p : ${projects}">
     <li>
-        <!--<a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->
-        <a th:text="${p.name}"  th:href="|projects/${p.id}|">Nome Projeto</a>
+<!--        <a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->
+        <a th:text="${p.name}"  th:href="@{/projects/{cid}(cid=${p.id})}">Nome Projeto</a>
+<!--
+        |projects/${p.id}(id=${p.id})|-->
         </br>
-        <a th:text="${p.name}"  th:href="|projects/names?name=${p.name}|">Nome Projeto</a>
+<!--        <a th:text="${p.name}"  th:href="|projects/names?name=${p.name}|">Nome Projeto</a>-->
     </li>
 </ul>
+
 <p><a href="/">Back</a></p>
 </body>
 </html>
