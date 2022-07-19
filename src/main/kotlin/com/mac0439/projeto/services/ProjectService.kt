@@ -44,14 +44,27 @@ class ProjectService(private val repository: ProjectRepository,
         project.created = LocalDateTime.now()
         return repository.save(project)
     }
+//
+//    fun addProject(project: Project, parent : Project): Project {
+//
+//        project.created = LocalDateTime.now()
+//        //repository.addProjectToParent(parent.id, project.id)
+//        //return repository.save(project)
+//        return repository.save(project)
+//    }
 
-    fun addProject(project: Project, parent : Project): Project {
+    fun addToSubprojectList(project: Project, parent : Project) {
+        //project.created = LocalDateTime.now()
+        try {
+            // event deletion should delete it from their context list
+            repository.addProjectToParent(parent.id, project.id)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            throw Exception("Project to add not found")
+        }
 
-        project.created = LocalDateTime.now()
-        repository.addProjectToParent(parent.id, project.id)
-        //return repository.save(project)
-        return repository.save(parent)
     }
+
 
     fun findByName(name: String): Optional<Project> {
         return repository.findByName(name)

@@ -57,11 +57,12 @@ class ProjectController(private val service: ProjectService,
         logger.info("get /projects/${id}/add-project")
         //val parentId = repository.findById(id).get()
         val user = user_repository.findByName("Viago").get()
-        //new_subproject.creator = user
+        new_subproject.creator = user
 
         //parent_id.subprojects.add()
         //parentProject.subprojects.add(new_subproject)
         model.addAttribute("parent_id", id)
+        //model.addAttribute("project", new_subproject)
         return "projects/add_subproject"
         //return repository.save(new_project)
     }
@@ -70,9 +71,12 @@ class ProjectController(private val service: ProjectService,
     fun postProjects(@PathVariable id: String, @ModelAttribute project: Project): String {
         logger.info("post /projects/${id}")
         val parent = repository.findById(id).get()
+        logger.info("parent ${parent.name}")
         //project.creator
-        val addedProject = service.addProject(project, parent)
-        return "redirect:/projects/${addedProject.id}"
+        val added = service.addProject(project)
+        service.addToSubprojectList(added, parent)
+        repository.save(parent)
+        return "redirect:/projects/${added.id}"
     }
 
     @PostMapping("/projects")

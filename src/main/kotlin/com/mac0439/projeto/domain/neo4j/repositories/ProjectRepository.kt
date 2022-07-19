@@ -18,7 +18,10 @@ interface ProjectRepository : Neo4jRepository<Project, String> {
 //    MATCH (a:Person {name: $value1}),
 //    (b:Person {name: $value2})
 //    MERGE (a)-[r:LOVES]->(b)
-    @Query("MATCH (proj:Project {id:\$parent_id}), MATCH (sp:Project {id:\$pid}) MERGE (proj)-[:HAS_SUBPROJECT]->(sp)")
+//    @Query("MATCH (proj:Project {id:\$parent_id}), (sp:Project {id:\$pid}) MERGE (proj)-[:HAS_SUBPROJECT]->(sp)")
+//    fun addProjectToParent(parent_id: String?, pid: String?): String?
+
+    @Query("MATCH (proj:Project {id:\$parent_id}), (sp:Project {id:\$pid}) MERGE (proj)-[:HAS_SUBPROJECT]->(sp)")
     fun addProjectToParent(parent_id: String?, pid: String?): String?
 
 }
