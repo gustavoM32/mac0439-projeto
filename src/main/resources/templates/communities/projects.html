@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}"
-      th:with="title='Projetos da comunidade'">
+      layout:decorate="~{layout}">
 <th:block layout:fragment="content">
   <div class="box">
-    <h1 th:text="|Projetos da comunidade '${community.name}'|">Projetos da comunidade</h1>
+    <div class="page-header">
+      <h1 th:text="|Projetos da comunidade '${community.name}'|">Projetos da comunidade</h1>
+    </div>
 
     <div>
-      <a class="btn btn-primary" role="button"
-         th:href="@{/projects/add-project}">
+      <a class="btn btn-primary disabled" role="button"
+         href="javascript:void(0)">
          Adicionar projeto</a>
+         <!-- th:href="@{/projects/add-project}"> -->
       <a class="btn btn-secondary" role="button"
          th:href="@{/communities/{cid}(cid=${community.id})}">
          Voltar</a>
     </div>
 
-    <ul>
-      <li th:each="p : ${community.projects}">
-        <a th:text="${p.name}" th:href="@{/projects/{pid}(pid=${p.id})}">Nome do projeto</a>
-      </li>
-    </ul>
+    <div class="list-group">
+      <a class="list-group-item d-flex justify-content-between align-items-start"
+         th:each="p : ${community.projects}"
+         th:href="@{/projects/{pid}(pid=${p.id})}">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold" th:text="${p.name}">Nome do projeto</div>
+        </div>
+      </a>
+    </div>
+
   </div>
 </th:block>
 </html>
