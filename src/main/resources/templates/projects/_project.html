@@ -12,7 +12,7 @@
 <th:block th:fragment="data">
   <h1 th:text="${project.name}">Projeto</h1>
   <p th:text="${project.description}">Descrição</p>
-  <p th:text="|Prazo: ${#temporals.format(project.deadline, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Prazo</p>
+  <p th:if="${project.deadline}" th:text="|Prazo: ${#temporals.format(project.deadline, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Prazo</p>
 
   <p><small>Criada por <a th:href="@{/users/{uid}(uid=${project.creator.name})}" th:text="${project.creator.name}">alguém</a> em <span th:text="${#temporals.format(project.created, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></small></p>
 </th:block>
