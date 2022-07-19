@@ -8,10 +8,15 @@
   <body>
     <div class="box">
       <h1 th:text="|Usuário / ${user.nome}|">Usuário</h1>
+      <p th:text="Nascido em ${user.nascimento}"><i>Nascimento</i></p>
       <p th:text="${user.biografia}">Biografia</p>
-      <p th:text="|${user.email}|">Email</p>
+      <p th:text="|${user.email}|"><i>Email</i></p>
 
-      <p><a href="/users">Back</a></p>
+      <h2>Habilidades</h2>
+      <li th:each="skill : ${user.skills}" th:text="|${skill.nome} - ${skill.descricao}|"></li>
+
+        <p><a href="/users">Back</a></p>
+      </li>
     </div>
   </body>
 </html>

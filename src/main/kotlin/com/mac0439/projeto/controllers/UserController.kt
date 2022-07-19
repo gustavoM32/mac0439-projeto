@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
 @Controller
-class UserController(private val service: UserService) {
+class UserController(
+    private val service: UserService
+) {
     @GetMapping("/users")
     fun getUsers(model: Model): String {
         model.addAttribute("users", service.findAll())
