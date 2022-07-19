@@ -1,19 +1,16 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Adicionar projeto</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<h1>Adicionar projeto</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Adicionar projeto'">
+<th:block layout:fragment="content">
   <form action="#" th:action="@{/projects/}" th:object="${project}" method="post">
     <div th:replace="~{projects/_project :: inputs}"></div>
 
+    <button type="submit" class="btn btn-primary">Adicionar</button>
     <a href="#" th:href="@{/projects}">
-      <button type="button">Cancelar</button>
+      <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
-    <button type="reset">Limpar</button>
-    <button type="submit">Adicionar</button>
   </form>
-</body>
+</th:block>
 </html>

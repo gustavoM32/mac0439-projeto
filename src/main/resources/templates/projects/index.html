@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Projetos</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<h1>Projetos</h1>
-<a href="/projects/add-project"><button>Adicionar projeto</button></a>
-<ul th:each="p : ${projects}">
-    <li>
-<!--        <a th:text="${p.name}" th:href="|projects/${p.id}|">Nome de projeto</a>-->
-        <a th:text="${p.name}"  th:href="@{/projects/{cid}(cid=${p.id})}">Nome Projeto</a>
-<!--
-        |projects/${p.id}(id=${p.id})|-->
-        </br>
-<!--        <a th:text="${p.name}"  th:href="|projects/names?name=${p.name}|">Nome Projeto</a>-->
-    </li>
-</ul>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Projetos'">
+<th:block layout:fragment="content">
 
-<p><a href="/">Back</a></p>
-</body>
+  <div class="row">
+    <div class="col">
+      <div>
+        <a href="/projects/add-project" class="btn btn-primary" role="button">Adicionar projeto</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="list-group">
+        <a th:each="p : ${projects}"
+           th:href="@{/projects/{cid}(cid=${p.id})}"
+           th:text="${p.name}"
+           class="list-group-item list-group-item-action">Nome do projeto</a>
+      </div>
+    </div>
+  </div>
+
+</th:block>
 </html>

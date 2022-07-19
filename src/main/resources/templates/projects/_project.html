@@ -1,90 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <th:block th:fragment="inputs">
-
   <label for="name">Nome</label>
-  <input type="text" class="form-control" th:field="*{name}" placeholder="Título do projeto" required>
+  <input type="text" class="form-control" th:field="*{name}" placeholder="Nome do projeto" required>
 
   <label for="description">Descrição</label>
   <textarea class="form-control" th:field="*{description}" rows="10"
-            placeholder="Descrição do evento"></textarea>
-
-<!--  <label for="date">Data</label>-->
-<!--  <input type="datetime-local" class="form-control date-input" th:field="*{date}" placeholder="Título do evento" required>-->
-
-<!--  <label for="estimatedDuration">Duração estimada</label>-->
-<!--  <input type="text" class="form-control" th:field="*{estimatedDuration}" placeholder="2 horas">-->
-  <!--TODO: Notes-->
-  <a href="/projects"><button>Voltar</button></a>
+            placeholder="Descrição do projeto"></textarea>
 </th:block>
-
 
 <th:block th:fragment="data">
-  <h1 th:text="|Projeto / ${project.name}|">Projeto</h1>
-  <h3 th:text="${project.description}">Descrição</h3>
+  <h1 th:text="${project.name}">Projeto</h1>
+  <p th:text="${project.description}">Descrição</p>
+  <p th:text="|Prazo: ${#temporals.format(project.deadline, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Prazo</p>
 
-  <p th:if="${project.creator}" th:text="|Criada por ${project.creator.name} em ${project.created}|">Criado por alguém em 00/00/0000 às 00:00</p>
-  <p th:text="|Deadline: ${project.deadline}|">Deadline</p>
-
-<!--  <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}">-->
-<!--    <button>Editar informações</button>-->
-<!--  </a>-->
-
-<!--  <h2 th:text="|Subprojetos|"></h2>-->
-<!--  <a href="/projects/add-subproject"><button>Adicionar subprojeto</button></a>-->
-<!--  <div class="box" th:each="p : ${project.subprojects}">-->
-<!--    <a th:text="${p.name}" th:href="|${p.id}|">Subprojeto</a>-->
-<!--    <p th:text="${p.description}">Descrição</p>-->
-<!--  </div>-->
-
-<!--  <h2 th:text="|Tarefas|"></h2>-->
-<!--  <a href="/tasks/add-task"><button>Adicionar tarefa</button></a>-->
-<!--  <div class="box" th:each="t : ${project.task_list}">-->
-<!--    <a th:text="${t.name}" th:href="|/tasks/${t.id}|">Tarefa</a>-->
-<!--    <p th:text="${t.description}">Descrição</p>-->
-<!--  </div>-->
-
-<!--  <h3 th:text="|Anotações|"></h3>-->
-<!--  <div class="box" th:each="t : ${project.notes}">-->
-<!--    <p th:text="${t}">Descrição</p>-->
-<!--  </div>-->
-<!--  <div class="box">-->
-<!--    <h2>Publicações</h2>-->
-<!--    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">-->
-<!--      <button>Adicionar publicação</button>-->
-<!--    </a>-->
-
-<!--    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">-->
-<!--      <div th:replace="~{communities/_publication :: data}"></div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <p><small>Criada por <a th:href="@{/users/{uid}(uid=${project.creator.name})}" th:text="${project.creator.name}">alguém</a> em <span th:text="${#temporals.format(project.created, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></small></p>
 </th:block>
-
-<!--<div th:fragment="inputs">-->
-<!--  <p>Nome: <input type="text" th:field="*{name}" /></p>-->
-<!--  <p>Descrição:<br>-->
-<!--    <textarea rows="10" cols="60" th:field="*{description}">Texto</textarea>-->
-<!--  </p>-->
-<!--  &lt;!&ndash; <h1>TODO: Adicionar membros iniciais</h1> &ndash;&gt;-->
-<!--</div>-->
-
-<!--<div th:fragment="data">-->
-<!--  <h1 th:text="|Project / ${project.name}|">Projeto</h1>-->
-
-<!--  <p class="replace-nl" th:text="${project.description}">Descrição</p>-->
-<!--  -->
-
-<!--  <button th:onclick="deleteCommunity(this.dataset)"-->
-<!--          th:data-cid="${community.id}">Remover comunidade</button>-->
-<!--  -->
-<!--  <div class="box">-->
-<!--    <h2>Publicações</h2>-->
-<!--    <a th:href="@{/communities/{cid}/add-publication(cid=${community.id})}">-->
-<!--      <button>Adicionar publicação</button>-->
-<!--    </a>-->
-
-<!--    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">-->
-<!--      <div th:replace="~{communities/_publication :: data}"></div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
