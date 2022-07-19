@@ -1,10 +1,12 @@
 package com.mac0439.projeto
 
+import com.mac0439.projeto.domain.neo4j.user.FriendsWith
 import com.mac0439.projeto.domain.neo4j.project.Project
 import com.mac0439.projeto.domain.neo4j.repositories.ProjectRepository
 import com.mac0439.projeto.domain.neo4j.repositories.TaskRepository
 import com.mac0439.projeto.domain.neo4j.repositories.UserRepository
 import com.mac0439.projeto.domain.neo4j.task.Task
+import com.mac0439.projeto.domain.neo4j.user.MemberOf
 import com.mac0439.projeto.domain.neo4j.user.User
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -52,9 +54,6 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 			)
 		)
 
-		coolParty.subprojects = setOf(makeCake, singForHim)
-		projectRepository.save(coolParty)
-
 		// NEO4J -- Task
 		val bakeCake = taskRepository.save(
 			Task(
@@ -95,6 +94,10 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 			)
 		)
 
+		// SUBPROJECTS
+		coolParty.subprojects = setOf(makeCake, singForHim)
+		projectRepository.save(coolParty)
+
 		// TASK & PROJECT
 		coolParty.task_list = setOf(decidePlace)
 		makeCake.task_list = setOf(bakeCake, buy4Cake)
@@ -105,9 +108,10 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		projectRepository.save(singForHim)
 
 		// Neo4j - User
-		var viago = userRepository.save(User("Viago"))
-		var deacon = userRepository.save(User("Deacon"))
-		var vladislav = userRepository.save(User("Vladislav"))
+		val viago = userRepository.save(User("Viago"))
+		val deacon = userRepository.save(User("Deacon"))
+		val vladislav = userRepository.save(User("Vladislav"))
+
 //		var morrissey = userRepository.save(User("Morrissey"))
 //		var siouxsie = userRepository.save(User("Siouxsie"))
 //		var nick = userRepository.save(User("Nick"))
@@ -131,10 +135,12 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		projectRepository.save(makeCake)
 		projectRepository.save(singForHim)
 
-		deacon.friends = setOf(viago, vladislav)
+		deacon.projects = setOf(MemberOf(project = coolParty))
+		deacon.friends = setOf(
+			FriendsWith(user = viago),
+			FriendsWith(user = vladislav)
+		)
 		userRepository.save(deacon)
-		deacon.projects = setOf(coolParty)
-		//userRepository.save(deacon)
 	}
 }
 
