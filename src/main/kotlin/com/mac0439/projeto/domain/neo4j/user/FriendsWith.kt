@@ -7,5 +7,5 @@ class FriendsWith(
     @RelationshipId
     var id: Long? = null,
     @TargetNode
-    var user: User
+    var user: User? = null
 )

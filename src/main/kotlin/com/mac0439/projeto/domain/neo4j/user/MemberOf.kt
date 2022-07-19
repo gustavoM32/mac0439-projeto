@@ -8,5 +8,5 @@ class MemberOf(
     @RelationshipId
     var id: Long? = null,
     @TargetNode
-    var project: Project
+    var project: Project? = null
 )

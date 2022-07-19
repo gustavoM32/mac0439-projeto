@@ -135,7 +135,7 @@ class ProjetoApplication(private val projectRepository: ProjectRepository,
 		projectRepository.save(makeCake)
 		projectRepository.save(singForHim)
 
-		deacon.projects = setOf(MemberOf(project = coolParty))
+//		deacon.projects = setOf(MemberOf(project = coolParty))
 		deacon.friends = setOf(
 			FriendsWith(user = viago),
 			FriendsWith(user = vladislav)
