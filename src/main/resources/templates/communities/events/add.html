@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Adicionar evento'">
+<th:block layout:fragment="content">
+  <form action="#" th:action="@{/communities/{cid}/events/{eid}(cid=${community.id},eid=${event.id})}" th:object="${event}" method="post">
+    <th:block th:replace="~{communities/events/_event :: inputs}"/>
+
+    <button type="submit" class="btn btn-primary">Criar evento</button>
+    <a href="#" th:href="@{/communities/{cid}/events(cid=${community.id})}">
+      <button type="button" class="btn btn-secondary">Cancelar</button>
+    </a>
+  </form>
+</th:block>
+</html>

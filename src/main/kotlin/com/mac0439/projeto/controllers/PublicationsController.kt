@@ -19,9 +19,9 @@ class PublicationsController(
 
     // Community publication
     // Create
-    @GetMapping("/communities/{cid}/add-publication")
+    @GetMapping("/communities/{cid}/publications/add")
     fun getPublicationAdd(@PathVariable cid: String, model: Model, @ModelAttribute publication: Publication): String {
-        logger.info("get /communities/${cid}/add-publication")
+        logger.info("get /communities/${cid}/publications/add")
         val community: Community
 
         try {
@@ -32,7 +32,7 @@ class PublicationsController(
         }
 
         model.addAttribute("community", community)
-        return "communities/add_publication"
+        return "communities/publications/add"
     }
 
     @PostMapping("/communities/{cid}")
@@ -44,9 +44,9 @@ class PublicationsController(
     }
 
     // Edit
-    @GetMapping("/communities/{cid}/publications/{pid}/edit-publication")
+    @GetMapping("/communities/{cid}/publications/{pid}/publications/edit")
     fun getPublicationEdit(@PathVariable cid: String, @PathVariable pid: String, model: Model): String {
-        logger.info("get /communities/${cid}/publications/${pid}/edit-publication")
+        logger.info("get /communities/${cid}/publications/${pid}/publications/edit")
         val community: Community
         val publication: Publication
 
@@ -66,7 +66,7 @@ class PublicationsController(
 
         model.addAttribute("community", community)
         model.addAttribute("publication", publication)
-        return "communities/edit_publication"
+        return "communities/publications/edit"
     }
 
     @PostMapping("/communities/{cid}/publications/{pid}", params = ["update"])

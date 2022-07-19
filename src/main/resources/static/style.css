@@ -1,5 +1,30 @@
-.box {
+/* .box {
     border: 1px solid black;
     padding: 5px;
     margin: 10px 0px;
+} */
+
+body {
+    background-color: rgb(211, 218, 245);
+}
+
+.form-control {
+    background-color: rgb(227, 232, 253);
+}
+
+.form-control:focus {
+    background-color: rgb(233, 237, 250);
+}
+.btn-primary {
+    background-color:rgb(0, 41, 223);
+    border-color: rgb(0, 34, 206);;
+}
+
+.btn-secondary {
+    background-color:rgb(23, 40, 120);
+    border-color: rgb(3, 17, 80);;
+}
+
+.card {
+    background-color: rgb(194, 202, 235);
 }

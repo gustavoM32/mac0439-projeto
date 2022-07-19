@@ -1,11 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="inputs">
-  <p>Título: <input type="text" th:field="*{title}" /></p>
-  <p>Descrição:<br>
-    <textarea rows="10" cols="60" th:field="*{description}">Descrição</textarea>
-  </p>
-  <p>Data: <input class="date-input" type="datetime-local" th:field="*{date}"/></p>
-  <p>Duração estimada: <input type="text" th:field="*{estimatedDuration}" /></p>
+<th:block th:fragment="inputs">
+
+  <label for="title">Título</label>
+  <input type="text" class="form-control" th:field="*{title}" placeholder="Título do evento" required>
+  
+  <label for="description">Descrição</label>
+  <textarea class="form-control" th:field="*{description}" rows="10"
+    placeholder="Descrição do evento"></textarea>
+    
+  <label for="date">Data</label>
+  <input type="datetime-local" class="form-control date-input" th:field="*{date}" placeholder="Título do evento" required>
+
+  <label for="estimatedDuration">Duração estimada</label>
+  <input type="text" class="form-control" th:field="*{estimatedDuration}" placeholder="2 horas">
   <!--TODO: Notes-->
-</div>
+</th:block>

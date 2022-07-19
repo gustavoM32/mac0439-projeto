@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Editar publicação'">
+<th:block layout:fragment="content">
+  <form action="#" th:action="@{/communities/{cid}/publications/{pid}(cid=${community.id},pid=${publication.id})}" th:object="${publication}" method="post">
+    <th:block th:replace="~{communities/publications/_publication :: inputs}"/>
+
+    <input type="hidden" name="id" th:value="${publication.id}">
+
+    <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
+    <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
+      <button type="button" class="btn btn-secondary">Cancelar</button>
+    </a>
+  </form>
+</th:block>
+</html>

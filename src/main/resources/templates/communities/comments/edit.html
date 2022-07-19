@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Editar comentário'">
+<th:block layout:fragment="content">
+  <form action="#" th:action="@{/communities/{cid}/publications/{pid}/comments/{cmid}(cid=${community.id},pid=${publication.id},cmid=${comment.id})}" th:object="${comment}" method="post">
+    <th:block th:replace="~{communities/comments/_comment :: inputs}"/>
+
+    <input type="hidden" name="id" th:value="${comment.id}">
+
+    <button type="submit" class="btn btn-primary" name="update">Atualizar</button>
+    <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
+      <button type="button" class="btn btn-secondary">Cancelar</button>
+    </a>
+
+  </form>
+</th:block>
+</html>

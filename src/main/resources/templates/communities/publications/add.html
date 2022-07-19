@@ -2,17 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
-      th:with="title='Editar comunidade'">
+      th:with="title='Adicionar publicação'">
 <th:block layout:fragment="content">
-  <form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${community}" method="post">
-    <th:block th:replace="~{communities/_community :: inputs}"/>
+	<form action="#" th:action="@{/communities/{cid}(cid=${community.id})}" th:object="${publication}" method="post">
+    <th:block th:replace="~{communities/publications/_publication :: inputs}"/>
 
-    <input type="hidden" name="update">
-
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary">Publicar</button>
     <a href="#" th:href="@{/communities/{cid}(cid=${community.id})}">
       <button type="button" class="btn btn-secondary">Cancelar</button>
     </a>
+
   </form>
 </th:block>
 </html>

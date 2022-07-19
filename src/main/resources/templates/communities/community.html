@@ -1,65 +1,69 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Comunidade</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-<div class="box">
-  <div th:replace="~{communities/_community :: data}"></div>
-<!---->
-  <div class="box">
-    <h2>Projetos</h2>
-    <ul>
-      <!--TODO: project page-->
-      <li th:each="p : ${projects}"><a th:href="@{/projects/{pjid}(pjid=${p.id})}" th:text="${p.name}">Projeto</a></li>
-    </ul>
-    <!--TODO: project creation page-->
-    <a th:href="@{/projects/add-project}">
-      <button>Adicionar projeto</button>
-    </a>
-    <a th:href="@{/communities/{cid}/projects(cid=${community.id})}">
-      <button>Ver todos</button>
-    </a>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="title='Comunidade'">
+<th:block layout:fragment="content">
+  <div class="row">
+    <div class="col-8">
+      <th:block th:replace="~{communities/_community :: data}"/>
+    </div>
+    <!---->
+    <div class="col-4">
+      <div class="box">
+        <h2>Projetos</h2>
+        <ul>
+          <!--TODO: project page-->
+          <li th:each="p : ${projects}"><a th:href="@{/projects/{pjid}(pjid=${p.id})}" th:text="${p.name}">Projeto</a></li>
+        </ul>
+        <!--TODO: project creation page-->
+        <div>
+          <a class="btn btn-primary" role="button"
+              th:href="@{/projects/add-project}">
+              Adicionar projeto</a>
+          <a class="btn btn-secondary" role="button"
+              th:href="@{/communities/{cid}/projects(cid=${community.id})}">
+              Ver todos</a>
+        </div>
+      </div>
+    
+      <div class="box">
+        <h2>Membros</h2>
+        <ul>
+          <!--TODO: user page-->
+          <li th:each="m : ${members}"><a th:href="@{/users/{uid}(uid=${m.id})}" th:text="${m.id}">Membro</a></li>
+        </ul>
+        <!--TODO: member addition page-->
+        <div>
+          <a class="btn btn-primary" role="button"
+              th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
+              Adicionar membros</a>
+          <a class="btn btn-secondary" role="button"
+              th:href="@{/communities/{cid}/members(cid=${community.id})}">
+              Ver todos</a>
+        </div>
+      </div>
+    
+      <div class="box">
+        <h2>Eventos</h2>
+        <ul>
+          <li class="replace-nl" th:each="e : ${events}" th:text="|${e.title}${nl}${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">
+          </li>
+        </ul>
+        <!--TODO: event addition page-->
+        <div>
+          <a class="btn btn-primary" role="button"
+              th:href="@{/communities/{cid}/events/add(cid=${community.id})}">
+              Adicionar evento</a>
+          <a class="btn btn-secondary" role="button"
+              th:href="@{/communities/{cid}/events(cid=${community.id})}">
+              Ver todos</a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="box">
-    <h2>Membros</h2>
-    <ul>
-      <!--TODO: user page-->
-      <li th:each="m : ${members}"><a th:href="@{/users/{uid}(uid=${m.id})}" th:text="${m.id}">Membro</a></li>
-    </ul>
-    <!--TODO: member addition page-->
-    <a th:href="@{/communities/{cid}/add-members(cid=${community.id})}">
-      <button>Adicionar membros</button>
-    </a>
-    <a th:href="@{/communities/{cid}/members(cid=${community.id})}">
-      <button>Ver todos</button>
-    </a>
-  </div>
-
-  <div class="box">
-    <h2>Eventos</h2>
-    <ul>
-      <li class="replace-nl" th:each="e : ${events}" th:text="|${e.title}${nl}${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">
-      </li>
-    </ul>
-    <!--TODO: event addition page-->
-    <a th:href="@{/communities/{cid}/events/add-event(cid=${community.id})}">
-      <button>Adicionar evento</button>
-    </a>
-    <a th:href="@{/communities/{cid}/events(cid=${community.id})}">
-      <button>Ver todos</button>
-    </a>
-  </div>
-</div>
-  </div>
-</div>
-</body>
-<script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
-<script type="text/javascript" src="/js/community.js"></script>
+</th:block>
+<th:block layout:fragment="custom_scripts">
+  <script type="text/javascript" src="/js/community.js"></script>
+</th:block>
 </html>
