@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}"
-      th:with="title='Eventos da comunidade'">
+      layout:decorate="~{layout}">
 <th:block layout:fragment="content">
   <div class="box">
-    <h1 th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</h1>
+    <div class="page-header">
+      <h1 th:text="|Eventos da comunidade '${community.name}'|">Eventos da comunidade</h1>
+    </div>
 
     <div>
       <a class="btn btn-primary" role="button"
-         th:href="@{/communities/{cid}/events/add(cid=${community.id})}">
+      th:href="@{/communities/{cid}/events/add(cid=${community.id})}">
          Adicionar evento</a>
       <a class="btn btn-secondary" role="button"
          th:href="@{/communities/{cid}(cid=${community.id})}">
          Voltar</a>
     </div>
 
-    <div class="box">
-      <div class="box" th:each="e : ${events}">
-        <b><p th:text="${e.title}">Título</p></b>
+    <div class="card" th:each="e : ${events}">
+      <div class="card-body">
+        <h3 th:text="${e.title}">Título</h3>
         <p th:text="${e.description}">Descrição</p>
         <p th:text="|Estado: ${eventStatus.getOrDefault(e.status, 'indefinido')}|">Estado: indefinido</p>
-        <p th:text="|Criado por ${e.creator}|">Criado por alguma coisa</p>
         <p>Notas: <span th:each="n, nStat : ${e.notes}"><span th:text="${n}"></span><span th:unless="${nStat.count} == ${nStat.size}" th:text="|; |">; </span></span></p>
         <p th:text="|Agendado para ${#temporals.format(e.date, 'dd/MM/yyyy, HH:mm', 'pt_BR')}, com duração estimada de ${e.estimatedDuration}|">Agendado para 00/00/0000 às 00:00, com duração estimada de 0 horas</p>
-
+        <p><small th:text="|Criado por ${e.creator}|">Criado por alguma coisa</small></p>
+      
         <div>
           <a class="btn btn-primary" role="button"
-             th:href="@{/communities/{cid}/events/{eid}/edit(cid=${community.id},eid=${e.id})}">
-             Editar evento</a>
+            th:href="@{/communities/{cid}/events/{eid}/edit(cid=${community.id},eid=${e.id})}">
+            Editar evento</a>
           <a class="btn btn-secondary" role="button"
-             th:onclick="deleteEvent(this.dataset)"
-             th:data-cid="${community.id}"
-             th:data-eid="${e.id}">
-             Remover evento</a>
+            th:onclick="deleteEvent(this.dataset)"
+            th:data-cid="${community.id}"
+            th:data-eid="${e.id}">
+            Remover evento</a>
         </div>
+        
+        <div class="card">
+          <div class="card-body">
+            <h4>Participantes</h4>
+            <div class="list-group">
+              <a class="list-group-item d-flex justify-content-between align-items-start"
+                th:each="v : ${e.participants}"
+                th:href="@{/users/{uid}(uid=${v.id})}">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold" th:text="${v.id}">Nome do usuário</div>
+                  <span th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${#temporals.format(v.confirmationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Participante confirmado em 00/00/0000 às 00:00</span>
+                  <span th:unless="${v.confirmationDate}" th:text="|${v.id} não confirmado|">Participante não confirmado</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <div class="box">
-          <h3>Participantes</h3>
-          <ul>
-            <li th:each="v : ${e.participants}">
-              <span th:if="${v.confirmationDate}" th:text="|${v.id} confirmado em ${#temporals.format(v.confirmationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}|">Participante confirmado em 00/00/0000 às 00:00</span>
-              <span th:unless="${v.confirmationDate}" th:text="|${v.id} não confirmado|">Participante não confirmado</span>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>

@@ -15,6 +15,13 @@ body {
 .form-control:focus {
     background-color: rgb(233, 237, 250);
 }
+
+.btn {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
 .btn-primary {
     background-color:rgb(0, 41, 223);
     border-color: rgb(0, 34, 206);;
@@ -27,4 +34,9 @@ body {
 
 .card {
     background-color: rgb(194, 202, 235);
+    margin-bottom: 10px;
+}
+
+.list-group-item {
+    background-color: rgb(214, 220, 247);
 }

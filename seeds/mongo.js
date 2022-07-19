@@ -24,7 +24,7 @@ let publications = db.publications.insertMany([
 	{
 		"title": "Novos membros",
 		"text": "Hoje nós recebemos novos membros para a nossa equipe! Sejam bem-vindos à DevGam, Kaworu e Misato.",
-		"author": "Shinju",
+		"author": "Shinji",
 		"creationDate": new Date("2022-03-02T14:23:44"),
 		"comments": [
 			{
@@ -64,7 +64,7 @@ let publications = db.publications.insertMany([
 			},
 			{
 				"_id": create_UUID(),
-				"author": "Chico_bento",
+				"author": "Chico_Bento",
 				"creationDate": new Date("2022-05-30T18:21:14"),
 				"text": "Obrigado, pessoal! Já adicionei vocês no projeto",
 				"likes": ["Rosinha", "Ze_Lele"]
@@ -102,10 +102,10 @@ let events = db.events.insertMany([
 		"date": new Date("2022-06-10T18:00:00"),
 		"estimatedDuration": "3 horas",
 		"notes": ["Vai ter bolo!"],
-		"viewers": [
+		"participants": [
 			{
 				"_id":  "Chico_Bento",
-				"confirmation_date": new Date("2022-05-290T17:12:34")
+				"confirmationDate": new Date("2022-05-290T17:12:34")
 			},
 			{
 				"_id":  "Rosinha",
@@ -127,26 +127,26 @@ let events = db.events.insertMany([
 		"date": new Date("2021-07-26T19:00:00"),
 		"estimatedDuration": "2 horas",
 		"notes": ["Tragam comida"],
-		"viewers": [
+		"participants": [
 			{
 				"_id":  "Kaworu",
-				"confirmation_date": new Date("2021-07-25T14:25:24")
+				"confirmationDate": new Date("2021-07-25T14:25:24")
 			},
 			{
 				"_id":  "Viago",
-				"confirmation_date": new Date("2021-07-25T12:55:27")
+				"confirmationDate": new Date("2021-07-25T12:55:27")
 			},
 			{
 				"_id":  "Asuka",
-				"confirmation_date": new Date("2021-07-25T12:27:49")
+				"confirmationDate": new Date("2021-07-25T12:27:49")
 			},
 			{
 				"_id":  "Chico_Bento",
-				"confirmation_date": new Date("2021-07-25T18:30:18")
+				"confirmationDate": new Date("2021-07-25T18:30:18")
 			},
 			{ 
 				"_id":  "Siouxsie",
-				"confirmation_date": new Date("2021-07-25T15:41:32")
+				"confirmationDate": new Date("2021-07-25T15:41:32")
 			}
 		],
 	}
