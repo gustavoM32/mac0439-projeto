@@ -4,9 +4,9 @@
 //import org.neo4j.driver.Query
 //import org.springframework.stereotype.Repository
 //
-////@Repository
-////class ProjectCustomRepositoryImpl() : ProjectCustomRepository {
-////
+//@Repository
+//class ProjectCustomRepositoryImpl() : ProjectCustomRepository {
+//
 ////    override fun updateProject(project: Project) {
 ////        val update = Update()
 ////            .set("name", community.name)
@@ -16,4 +16,6 @@
 ////            throw Exception("Community update had ${result.matchedCount} matches")
 ////        }
 ////    }
-////}
+//
+//
+//}

@@ -6,22 +6,8 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div class="box">
-    <h1 th:text="|Tarefa / ${task.name}|">Tarefa</h1>
-    <p th:text="${task.description}">Descrição</p>
-    <p th:text="|Status: ${(task.status == false) ? 'unfinished' : 'finished'}|">Status</p>
-    <p th:text="|Deadline: ${task.deadline}|">Deadline</p>
-    <p th:text="|Membros do time: ${task.team_members}|"></p>
-    <h2 th:text="|Subtarefas|"></h2>
-    <div class="box" th:each="t : ${task.subtasks}">
-        <a th:text="${t.name}" th:href="|${t.id}|">Subtarefa</a>
-        <p th:text="${t.description}">Descrição</p>
-    </div>
-    <h3 th:text="|Anotações|"></h3>
-    <div class="box" th:each="t : ${task.notes}">
-        <p th:text="${t}">anotação</p>
-    </div>
-    <p><a href="/tasks">Back</a></p>
-</div>
+
+<div th:replace="~{tasks/_task :: data}"></div>
+<script type="text/javascript" src="/js/project.js"></script>
 </body>
 </html>

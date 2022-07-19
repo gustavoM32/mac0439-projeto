@@ -5,5 +5,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface TaskRepository : Neo4jRepository<Task, String> {
+interface TaskRepository : Neo4jRepository<Task, String>, TaskCustomRepository {
+
 }

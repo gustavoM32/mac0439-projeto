@@ -63,6 +63,7 @@ class ProjectController(private val service: ProjectService,
         //return repository.save(new_project)
     }
 
+    // Delete
     @PostMapping("/projects")
     fun postProjects(@ModelAttribute project: Project): String {
         logger.info("post /projects")
@@ -71,10 +72,18 @@ class ProjectController(private val service: ProjectService,
         return "redirect:/projects/${addedProject.id}"
     }
 
-    @DeleteMapping("/projects/remove")
+    @DeleteMapping("/projects/{id}")
+    @ResponseBody
     fun deleteProject(@PathVariable id: String) {
-        return repository.deleteById(id)
+        logger.info("delete /projects/${id}")
+        try {
+            service.deleteProject(id)
+        } catch (e: Exception) {
+            logger.error(e.toString())
+            return
+        }
     }
+
 }
 
 //

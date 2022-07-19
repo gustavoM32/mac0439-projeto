@@ -6,30 +6,9 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="box">
-        <h1 th:text="|Projeto / ${project.name}|">Projeto</h1>
-        <h3 th:text="${project.description}">Descrição</h3>
-        <p th:if="${project.creator}" th:text="|Criada por ${project.creator.name} em ${project.created}|">Criado por alguém em 00/00/0000 às 00:00</p>
-        <p th:text="|Deadline: ${project.deadline}|">Deadline</p>
-        <p th:text="|Status: ${(project.status == false) ? 'unfinished' : 'finished'}|">Status</p>
-<!--        <p th:text="|Time:|" th:each="u : ${user.name}>Members</p>-->
-        <h2 th:text="|Subprojetos|"></h2>
-        <a href="/projects/add-subproject"><button>Adicionar subprojeto</button></a>
-        <div class="box" th:each="p : ${project.subprojects}">
-            <a th:text="${p.name}" th:href="|${p.id}|">Subprojeto</a>
-            <p th:text="${p.description}">Descrição</p>
-        </div>
-        <h2 th:text="|Tarefas|"></h2>
-        <div class="box" th:each="t : ${project.task_list}">
-            <a th:text="${t.name}" th:href="|/tasks/${t.id}|">Tarefa</a>
-            <p th:text="${t.description}">Descrição</p>
-        </div>
-        <h3 th:text="|Anotações|"></h3>
-        <div class="box" th:each="t : ${project.notes}">
-            <p th:text="${t}">Descrição</p>
-        </div>
-        <p><a href="/projects">Back</a></p>
-    </div>
+
+<div th:replace="~{projects/_project :: data}"></div>
+<script type="text/javascript" src="/js/project.js"></script>
 </body>
 </html>
 

@@ -8,17 +8,30 @@
   <!-- <h1>TODO: Adicionar membros iniciais</h1> -->
 </div>
 
+
 <div th:fragment="data">
-  <h1 th:text="|Tarefa / ${task.name}|">Projeto</h1>
 
-  <p class="replace-nl" th:text="${task.description}">Descrição</p>
-  <!--  <p>Criada por <a th:href="@{/users/{uid}(uid=${community.creator})}" th:text="${community.creator}">alguém</a> em <span th:text="${#temporals.format(community.creationDate, 'dd/MM/yyyy, HH:mm', 'pt_BR')}">00/00/0000, 00:00</span></p>-->
+  <h1 th:text="|Tarefa / ${task.name}|">Tarefa</h1>
+  <p th:text="${task.description}">Descrição</p>
+  <p th:text="|Status: ${(task.status == false) ? 'unfinished' : 'finished'}|">Status</p>
+  <p th:text="|Deadline: ${task.deadline}|">Deadline</p>
+  <p th:text="|Membros do time: ${task.team_members}|"></p>
+  <h2 th:text="|Subtarefas|"></h2>
+  <div class="box" th:each="t : ${task.subtasks}">
+    <a th:text="${t.name}" th:href="|${t.id}|">Subtarefa</a>
+    <p th:text="${t.description}">Descrição</p>
+  </div>
+  <h3 th:text="|Anotações|"></h3>
+  <div class="box" th:each="t : ${task.notes}">
+    <p th:text="${t}">anotação</p>
+  </div>
 
-  <!--  <a th:href="@{/communities/{cid}/edit-community(cid=${community.id})}">-->
-  <!--    <button>Editar informações</button>-->
-  <!--  </a>-->
 
-  <a href="/projects"><button>Voltar</button></a>
+
+  <button th:onclick="deleteTask(this.dataset)"
+          th:data-id="${task.id}">Remover tarefa</button>
+
+  <a href="/tasks"><button>Voltar</button></a>
 
   <!--  <button th:onclick="deleteCommunity(this.dataset)"-->
   <!--          th:data-cid="${community.id}">Remover comunidade</button>-->
@@ -32,5 +45,4 @@
   <!--    <div class="box" th:each="p : ${#lists.sort(community.publications, recentPublicationComparator)}">-->
   <!--      <div th:replace="~{communities/_publication :: data}"></div>-->
   <!--    </div>-->
-</div>
 </div>
